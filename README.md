@@ -1,31 +1,7 @@
 # FSO Cloud Consulting
 
-Site institucional da FSO Cloud Consulting, desenvolvido com Next.js, Tailwind CSS e export estatico para GitHub Pages.
+Site institucional da FSO Cloud Consulting, criado para apresentar serviços de consultoria em DevOps, SRE, Cloud, Observabilidade, Kubernetes, automação e confiabilidade operacional.
 
-## Desenvolvimento local
+Este repositório contém o código-fonte do site público da marca e serve como material de presença digital profissional.
 
-```bash
-npm install
-npm run dev
-```
-
-Abra `http://localhost:3000`.
-
-## Validacao
-
-```bash
-npm run lint
-npm run build
-```
-
-## Build para GitHub Pages
-
-```bash
-npm run build:pages
-```
-
-O output estatico e gerado na pasta `out/`.
-
-## Publicacao
-
-O workflow `.github/workflows/deploy.yml` publica automaticamente no GitHub Pages quando houver push na branch `main`.
+Todos os textos, identidade visual, estrutura e composição visual são de uso próprio da FSO Cloud Consulting.
