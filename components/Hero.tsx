@@ -1,6 +1,15 @@
 "use client";
 
 import { useState, type ComponentType, type MouseEvent, type SVGProps } from "react";
+import { FaAws } from "react-icons/fa6";
+import {
+  SiDocker,
+  SiGithubactions,
+  SiGrafana,
+  SiKubernetes,
+  SiPrometheus,
+  SiTerraform,
+} from "react-icons/si";
 import { heroStats } from "@/data/content";
 import { ArrowIcon, AutomationIcon, CloudIcon, InfrastructureIcon, ObservabilityIcon } from "@/components/icons/CustomIcons";
 
@@ -13,11 +22,30 @@ type HeroPillar = {
   accent: "blue" | "violet" | "cyan";
 };
 
+type HeroTool = {
+  name: string;
+  layer: string;
+  icon: ComponentType<{ className?: string }>;
+  color: string;
+  position: string;
+  animation: string;
+  depth: number;
+};
+
 const heroPillars: HeroPillar[] = [
   { title: "Cloud", icon: CloudIcon, position: "left-[8%] top-[7%]", animation: "float-a", depth: 0.9, accent: "blue" },
   { title: "Infraestrutura", icon: InfrastructureIcon, position: "right-[4%] top-[13%]", animation: "float-b", depth: 1, accent: "violet" },
   { title: "Automação", icon: AutomationIcon, position: "left-[6%] bottom-[9%]", animation: "float-c", depth: 0.8, accent: "cyan" },
   { title: "Observabilidade", icon: ObservabilityIcon, position: "right-[2%] bottom-[7%]", animation: "float-a", depth: 1.05, accent: "blue" },
+];
+
+const heroTools: HeroTool[] = [
+  { name: "AWS", layer: "Cloud", icon: FaAws, color: "#FF9900", position: "left-[5%] top-[10%]", animation: "float-a", depth: 1.05 },
+  { name: "Kubernetes", layer: "Platform", icon: SiKubernetes, color: "#326CE5", position: "right-[3%] top-[12%]", animation: "float-b", depth: 0.9 },
+  { name: "Terraform", layer: "IaC", icon: SiTerraform, color: "#844FBA", position: "left-[2%] top-[40%]", animation: "float-c", depth: 0.75 },
+  { name: "Docker", layer: "Containers", icon: SiDocker, color: "#2496ED", position: "right-[0%] top-[43%]", animation: "float-a", depth: 0.8 },
+  { name: "Grafana", layer: "Dashboards", icon: SiGrafana, color: "#F46800", position: "left-[8%] bottom-[8%]", animation: "float-b", depth: 0.95 },
+  { name: "Actions", layer: "CI/CD", icon: SiGithubactions, color: "#2088FF", position: "right-[7%] bottom-[7%]", animation: "float-c", depth: 1.05 },
 ];
 
 function HexagonPillarCard({
@@ -58,6 +86,38 @@ function HexagonPillarCard({
   );
 }
 
+function ToolLogoCard({
+  name,
+  layer,
+  icon: Icon,
+  color,
+  position,
+  animation,
+  depth,
+  cursorX,
+  cursorY,
+}: HeroTool & { cursorX: number; cursorY: number }) {
+  return (
+    <div
+      className={`hero-tool-card absolute ${position} ${animation} z-20 flex min-w-[136px] items-center gap-3 rounded-2xl border border-white/90 bg-white/88 px-4 py-3 shadow-[0_16px_40px_rgba(15,23,42,0.08)] backdrop-blur-xl transition duration-300 hover:z-30 hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-[0_22px_48px_rgba(37,99,235,0.14)]`}
+      style={{
+        translate: `${cursorX * depth}px ${cursorY * depth}px`,
+      }}
+    >
+      <span
+        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-50"
+        style={{ color }}
+      >
+        <Icon className="h-5 w-5" />
+      </span>
+      <span>
+        <span className="block text-[13px] font-bold leading-none text-slate-900">{name}</span>
+        <span className="mt-1 block text-[10px] font-bold uppercase tracking-[0.12em] text-slate-400">{layer}</span>
+      </span>
+    </div>
+  );
+}
+
 function HexagonHeroGraphic({ cursorX, cursorY }: { cursorX: number; cursorY: number }) {
   return (
     <div className="relative mx-auto hidden h-[560px] w-full max-w-[620px] lg:block">
@@ -92,15 +152,19 @@ function HexagonHeroGraphic({ cursorX, cursorY }: { cursorX: number; cursorY: nu
             <stop offset="100%" stopColor="#06B6D4" stopOpacity="0.08" />
           </linearGradient>
         </defs>
-        <path d="M310 280 L125 105" stroke="url(#line-blue)" strokeWidth="2" />
-        <path d="M310 280 L510 125" stroke="url(#line-violet)" strokeWidth="2" />
-        <path d="M310 280 L125 455" stroke="url(#line-cyan)" strokeWidth="2" />
-        <path d="M310 280 L515 445" stroke="url(#line-blue)" strokeWidth="2" />
+        <path d="M310 280 L115 95" stroke="url(#line-blue)" strokeWidth="2" />
+        <path d="M310 280 L514 104" stroke="url(#line-violet)" strokeWidth="2" />
+        <path d="M310 280 L80 281" stroke="url(#line-cyan)" strokeWidth="2" />
+        <path d="M310 280 L545 289" stroke="url(#line-blue)" strokeWidth="2" />
+        <path d="M310 280 L128 460" stroke="url(#line-violet)" strokeWidth="2" />
+        <path d="M310 280 L500 456" stroke="url(#line-cyan)" strokeWidth="2" />
         <circle cx="310" cy="280" r="4" fill="#3B82F6" opacity="0.7" />
-        <circle cx="125" cy="105" r="3" fill="#60A5FA" opacity="0.65" />
-        <circle cx="510" cy="125" r="3" fill="#8B5CF6" opacity="0.65" />
-        <circle cx="125" cy="455" r="3" fill="#06B6D4" opacity="0.65" />
-        <circle cx="515" cy="445" r="3" fill="#3B82F6" opacity="0.65" />
+        <circle cx="115" cy="95" r="3" fill="#60A5FA" opacity="0.65" />
+        <circle cx="514" cy="104" r="3" fill="#8B5CF6" opacity="0.65" />
+        <circle cx="80" cy="281" r="3" fill="#06B6D4" opacity="0.65" />
+        <circle cx="545" cy="289" r="3" fill="#3B82F6" opacity="0.65" />
+        <circle cx="128" cy="460" r="3" fill="#8B5CF6" opacity="0.65" />
+        <circle cx="500" cy="456" r="3" fill="#06B6D4" opacity="0.65" />
       </svg>
 
       <div
@@ -111,11 +175,12 @@ function HexagonHeroGraphic({ cursorX, cursorY }: { cursorX: number; cursorY: nu
           transform: `translate(-50%, -50%) translate3d(${cursorX * 0.28}px, ${cursorY * 0.28}px, 0)`,
         }}
       >
-        <div className="relative flex h-28 w-28 items-center justify-center">
+        <div className="relative flex h-32 w-32 items-center justify-center">
           <div className="core-ring core-ring-outer absolute h-28 w-28 rounded-full border border-blue-200/80" />
           <div className="core-ring core-ring-inner absolute h-20 w-20 rounded-full border border-violet-200/80" />
           <div className="core-glow absolute h-14 w-14 rounded-full bg-gradient-to-br from-blue-500 via-cyan-400 to-violet-500 shadow-[0_0_40px_rgba(59,130,246,0.38)]" />
           <div className="absolute h-4 w-4 rounded-full bg-white shadow-[0_0_18px_rgba(255,255,255,1)]" />
+          <SiPrometheus className="absolute bottom-0 right-0 h-6 w-6 rounded-lg bg-white p-1 text-[#E6522C] shadow-[0_8px_18px_rgba(15,23,42,0.10)]" />
           <div className="pulse-node absolute left-[-5px] top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-blue-500 shadow-[0_0_16px_rgba(37,99,235,0.42)]" />
           <div className="pulse-node delay-one absolute right-[-5px] top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-violet-500 shadow-[0_0_16px_rgba(124,58,237,0.42)]" />
           <div className="pulse-node delay-two absolute bottom-[-5px] left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-cyan-500 shadow-[0_0_16px_rgba(6,182,212,0.42)]" />
@@ -123,8 +188,12 @@ function HexagonHeroGraphic({ cursorX, cursorY }: { cursorX: number; cursorY: nu
         </div>
       </div>
 
-      {heroPillars.map((pillar) => (
-        <HexagonPillarCard key={pillar.title} {...pillar} cursorX={cursorX} cursorY={cursorY} />
+      <div className="pointer-events-none absolute left-1/2 top-[60%] z-20 -translate-x-1/2 rounded-full border border-blue-100 bg-white/80 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-blue-600 shadow-sm backdrop-blur">
+        Observe • Automate • Scale
+      </div>
+
+      {heroTools.map((tool) => (
+        <ToolLogoCard key={tool.name} {...tool} cursorX={cursorX} cursorY={cursorY} />
       ))}
     </div>
   );
