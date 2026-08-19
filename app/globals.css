@@ -1,0 +1,259 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8fafd;
+  --foreground: #101828;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.section-label {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #2563eb;
+}
+
+.section-title {
+  margin-top: 1rem;
+  max-width: 52rem;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: #101828;
+}
+
+.section-description {
+  margin-top: 1.5rem;
+  max-width: 45rem;
+  font-size: 1.125rem;
+  line-height: 2rem;
+  color: #5f6b7f;
+}
+
+.light-card {
+  transition:
+    transform 350ms ease,
+    border-color 350ms ease,
+    background-color 350ms ease,
+    box-shadow 350ms ease;
+}
+
+.light-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(96, 165, 250, 0.65);
+  box-shadow: 0 24px 65px rgba(15, 23, 42, 0.11);
+}
+
+.technology-item:hover .technology-icon {
+  color: var(--technology-color);
+}
+
+.technology-item:hover .technology-icon-container {
+  border-color: var(--technology-color);
+}
+
+.hero-content {
+  animation: hero-enter 800ms ease both;
+}
+
+.central-hexagon {
+  animation: central-breathe 5.8s ease-in-out infinite;
+}
+
+.core-ring-outer {
+  animation: core-ring-rotate 12s linear infinite;
+}
+
+.core-ring-inner {
+  animation: core-ring-rotate-reverse 9s linear infinite;
+}
+
+.core-glow {
+  animation: core-glow-pulse 3.8s ease-in-out infinite;
+}
+
+.float-a {
+  animation: float-a 6s ease-in-out infinite;
+}
+
+.float-b {
+  animation: float-b 7.5s ease-in-out infinite;
+}
+
+.float-c {
+  animation: float-c 8.5s ease-in-out infinite;
+}
+
+.pulse-dot,
+.pulse-node {
+  animation: point-pulse 2.6s ease-in-out infinite;
+}
+
+.delay-one {
+  animation-delay: 0.65s;
+}
+
+.delay-two {
+  animation-delay: 1.3s;
+}
+
+.delay-three {
+  animation-delay: 1.95s;
+}
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes central-breathe {
+  0%,
+  100% {
+    box-shadow: 0 28px 70px rgba(37, 99, 235, 0.14);
+  }
+
+  50% {
+    box-shadow: 0 34px 85px rgba(99, 102, 241, 0.19);
+  }
+}
+
+@keyframes core-ring-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes core-ring-rotate-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes core-glow-pulse {
+  0%,
+  100% {
+    opacity: 0.85;
+    transform: scale(0.92);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes float-a {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-9px) rotate(1deg);
+  }
+}
+
+@keyframes float-b {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+
+  50% {
+    transform: translateY(7px) translateX(3px);
+  }
+}
+
+@keyframes float-c {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+
+  50% {
+    transform: translateY(-6px) translateX(-4px);
+  }
+}
+
+@keyframes point-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.85);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .technology-category:first-child,
+  .technology-category:nth-child(2) {
+    grid-column: span 1;
+  }
+
+  .technology-category:nth-child(3),
+  .technology-category:nth-child(4),
+  .technology-category:nth-child(5) {
+    grid-column: span 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .hero-pillar {
+    translate: none !important;
+  }
+}
