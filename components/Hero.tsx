@@ -221,10 +221,14 @@ function HexagonHeroGraphic({ cursorX, cursorY }: { cursorX: number; cursorY: nu
           <div className="core-ring core-ring-outer absolute h-28 w-28 rounded-full border border-blue-200/80" />
           <div className="core-ring core-ring-inner absolute h-20 w-20 rounded-full border border-violet-200/80" />
           <div
-            className="core-glow absolute h-[74px] w-[74px] rounded-2xl bg-white shadow-[0_0_42px_rgba(59,130,246,0.30)] transition duration-300"
-            style={activeTool ? { boxShadow: `0 0 46px ${activeTool.color}55` } : undefined}
+            className="core-glow absolute h-24 w-24 rounded-full bg-gradient-to-br from-blue-400 via-cyan-300 to-violet-400 opacity-30 blur-xl transition duration-300"
+            style={activeTool ? { background: activeTool.color } : undefined}
           />
-          <Image src={brandIcon} alt="" className="relative h-14 w-14 object-contain" />
+          <Image
+            src={brandIcon}
+            alt=""
+            className="relative h-20 w-20 object-contain drop-shadow-[0_10px_18px_rgba(37,99,235,0.20)]"
+          />
           <div className="pulse-node absolute left-[-5px] top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-blue-500 shadow-[0_0_16px_rgba(37,99,235,0.42)]" />
           <div className="pulse-node delay-one absolute right-[-5px] top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-violet-500 shadow-[0_0_16px_rgba(124,58,237,0.42)]" />
           <div className="pulse-node delay-two absolute bottom-[-5px] left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-cyan-500 shadow-[0_0_16px_rgba(6,182,212,0.42)]" />
@@ -299,8 +303,12 @@ function MobileHexagonHeroBackground() {
           <div className="relative flex h-28 w-28 items-center justify-center">
             <div className="core-ring core-ring-outer absolute h-28 w-28 rounded-full border border-blue-200/80" />
             <div className="core-ring core-ring-inner absolute h-20 w-20 rounded-full border border-violet-200/80" />
-            <div className="core-glow absolute h-[74px] w-[74px] rounded-2xl bg-white shadow-[0_0_40px_rgba(59,130,246,0.30)]" />
-            <Image src={brandIcon} alt="" className="relative h-14 w-14 object-contain" />
+            <div className="core-glow absolute h-24 w-24 rounded-full bg-gradient-to-br from-blue-400 via-cyan-300 to-violet-400 opacity-30 blur-xl" />
+            <Image
+              src={brandIcon}
+              alt=""
+              className="relative h-20 w-20 object-contain drop-shadow-[0_10px_18px_rgba(37,99,235,0.20)]"
+            />
           </div>
         </div>
 
