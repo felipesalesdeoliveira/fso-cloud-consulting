@@ -169,10 +169,10 @@ export const processSteps = [
 ];
 
 export const highlights = [
-  "Atuação com ambientes de produção",
-  "Experiência em DevOps e SRE desde 2023",
-  "Foco em observabilidade e confiabilidade",
-  "Experiência com cloud, Kubernetes e automação",
+  "Mais de 3 anos de experiência em DevOps e SRE",
+  "Atuação prática em ambientes de produção",
+  "AWS, Terraform, Kubernetes, CI/CD e GitOps",
+  "Observabilidade, troubleshooting e confiabilidade",
 ];
 
 export const projects = [
