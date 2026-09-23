@@ -172,12 +172,22 @@ export function Projects() {
                 </span>
                 <span className="absolute bottom-6 right-7 text-5xl font-bold text-blue-950/[0.08]">0{index + 1}</span>
               </div>
-              <div className="p-7">
+              <div className="flex h-[calc(100%-12rem)] flex-col p-7">
                 <h3 className="text-xl font-bold text-slate-900">{project.title}</h3>
                 <p className="mt-4 leading-7 text-slate-600">{project.description}</p>
-                <span className="mt-7 inline-flex rounded-full bg-blue-50 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-blue-600">
-                  Em breve
-                </span>
+                {project.slug ? (
+                  <Link
+                    href={`/projetos/${project.slug}`}
+                    className="mt-7 inline-flex w-fit items-center gap-2 rounded-full bg-blue-600 px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:gap-3 hover:bg-blue-700"
+                  >
+                    Ver projeto
+                    <ArrowIcon />
+                  </Link>
+                ) : (
+                  <span className="mt-7 inline-flex w-fit rounded-full bg-blue-50 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-blue-600">
+                    {project.status}
+                  </span>
+                )}
               </div>
             </article>
           ))}
