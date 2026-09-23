@@ -281,4 +281,8 @@ html {
   .hero-pillar {
     translate: none !important;
   }
+
+  .connection-particle {
+    display: none;
+  }
 }

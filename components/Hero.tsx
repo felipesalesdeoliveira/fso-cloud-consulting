@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, type ComponentType, type MouseEvent, type SVGProps } from "react";
 import { FaAws } from "react-icons/fa6";
 import {
@@ -12,6 +13,7 @@ import {
 } from "react-icons/si";
 import { heroStats } from "@/data/content";
 import { ArrowIcon, AutomationIcon, CloudIcon, InfrastructureIcon, ObservabilityIcon } from "@/components/icons/CustomIcons";
+import brandIcon from "@/app/icon.png";
 
 type HeroPillar = {
   title: string;
@@ -25,11 +27,15 @@ type HeroPillar = {
 type HeroTool = {
   name: string;
   layer: string;
+  description: string;
   icon: ComponentType<{ className?: string }>;
+  secondaryIcon?: ComponentType<{ className?: string }>;
   color: string;
   position: string;
   animation: string;
   depth: number;
+  path: string;
+  gradient: "blue" | "violet" | "cyan";
 };
 
 const heroPillars: HeroPillar[] = [
@@ -40,12 +46,12 @@ const heroPillars: HeroPillar[] = [
 ];
 
 const heroTools: HeroTool[] = [
-  { name: "AWS", layer: "Cloud", icon: FaAws, color: "#FF9900", position: "left-[5%] top-[10%]", animation: "float-a", depth: 1.05 },
-  { name: "Kubernetes", layer: "Platform", icon: SiKubernetes, color: "#326CE5", position: "right-[3%] top-[12%]", animation: "float-b", depth: 0.9 },
-  { name: "Terraform", layer: "IaC", icon: SiTerraform, color: "#844FBA", position: "left-[2%] top-[40%]", animation: "float-c", depth: 0.75 },
-  { name: "Docker", layer: "Containers", icon: SiDocker, color: "#2496ED", position: "right-[0%] top-[43%]", animation: "float-a", depth: 0.8 },
-  { name: "Grafana", layer: "Dashboards", icon: SiGrafana, color: "#F46800", position: "left-[8%] bottom-[8%]", animation: "float-b", depth: 0.95 },
-  { name: "Actions", layer: "CI/CD", icon: SiGithubactions, color: "#2088FF", position: "right-[7%] bottom-[7%]", animation: "float-c", depth: 1.05 },
+  { name: "AWS", layer: "Cloud", description: "Serviços cloud escaláveis e seguros", icon: FaAws, color: "#FF9900", position: "left-[5%] top-[10%]", animation: "float-a", depth: 1.05, path: "M310 280 L115 95", gradient: "blue" },
+  { name: "Kubernetes", layer: "Platform", description: "Orquestração e confiabilidade de workloads", icon: SiKubernetes, color: "#326CE5", position: "right-[3%] top-[12%]", animation: "float-b", depth: 0.9, path: "M310 280 L514 104", gradient: "violet" },
+  { name: "Terraform", layer: "IaC", description: "Infraestrutura versionada e reproduzível", icon: SiTerraform, color: "#844FBA", position: "left-[2%] top-[40%]", animation: "float-c", depth: 0.75, path: "M310 280 L80 281", gradient: "cyan" },
+  { name: "Docker", layer: "Containers", description: "Aplicações portáveis e padronizadas", icon: SiDocker, color: "#2496ED", position: "right-[0%] top-[43%]", animation: "float-a", depth: 0.8, path: "M310 280 L545 289", gradient: "blue" },
+  { name: "Grafana + Prometheus", layer: "Observabilidade", description: "Métricas, alertas e dashboards operacionais", icon: SiGrafana, secondaryIcon: SiPrometheus, color: "#F46800", position: "left-[3%] bottom-[7%]", animation: "float-b", depth: 0.95, path: "M310 280 L128 460", gradient: "violet" },
+  { name: "GitHub Actions", layer: "CI/CD", description: "Pipelines automatizados e entregas consistentes", icon: SiGithubactions, color: "#2088FF", position: "right-[4%] bottom-[7%]", animation: "float-c", depth: 1.05, path: "M310 280 L500 456", gradient: "cyan" },
 ];
 
 function HexagonPillarCard({
@@ -89,36 +95,60 @@ function HexagonPillarCard({
 function ToolLogoCard({
   name,
   layer,
+  description,
   icon: Icon,
+  secondaryIcon: SecondaryIcon,
   color,
   position,
   animation,
   depth,
   cursorX,
   cursorY,
-}: HeroTool & { cursorX: number; cursorY: number }) {
+  active,
+  onActivate,
+  onDeactivate,
+}: HeroTool & {
+  cursorX: number;
+  cursorY: number;
+  active: boolean;
+  onActivate: () => void;
+  onDeactivate: () => void;
+}) {
   return (
-    <div
-      className={`hero-tool-card absolute ${position} ${animation} z-20 flex min-w-[136px] items-center gap-3 rounded-2xl border border-white/90 bg-white/88 px-4 py-3 shadow-[0_16px_40px_rgba(15,23,42,0.08)] backdrop-blur-xl transition duration-300 hover:z-30 hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-[0_22px_48px_rgba(37,99,235,0.14)]`}
+    <button
+      type="button"
+      aria-label={`${name}: ${description}`}
+      onMouseEnter={onActivate}
+      onMouseLeave={onDeactivate}
+      onFocus={onActivate}
+      onBlur={onDeactivate}
+      onClick={onActivate}
+      className={`hero-tool-card absolute ${position} ${animation} z-20 flex min-w-[136px] items-center gap-3 rounded-2xl border bg-white/90 px-4 py-3 text-left backdrop-blur-xl transition duration-300 ${active ? "z-30 -translate-y-1 border-blue-300 shadow-[0_24px_55px_rgba(37,99,235,0.20)]" : "border-white/90 shadow-[0_16px_40px_rgba(15,23,42,0.08)] hover:z-30 hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-[0_22px_48px_rgba(37,99,235,0.14)]"}`}
       style={{
         translate: `${cursorX * depth}px ${cursorY * depth}px`,
       }}
     >
       <span
-        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-50"
+        className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-50"
         style={{ color }}
       >
         <Icon className="h-5 w-5" />
+        {SecondaryIcon && (
+          <SecondaryIcon className="absolute -bottom-1 -right-1 h-4 w-4 rounded-md bg-white p-0.5 text-[#E6522C] shadow-sm" />
+        )}
       </span>
       <span>
         <span className="block text-[13px] font-bold leading-none text-slate-900">{name}</span>
         <span className="mt-1 block text-[10px] font-bold uppercase tracking-[0.12em] text-slate-400">{layer}</span>
       </span>
-    </div>
+    </button>
   );
 }
 
 function HexagonHeroGraphic({ cursorX, cursorY }: { cursorX: number; cursorY: number }) {
+  const [activeToolName, setActiveToolName] = useState<string | null>(null);
+  const activeTool = heroTools.find((tool) => tool.name === activeToolName);
+
   return (
     <div className="relative mx-auto hidden h-[560px] w-full max-w-[620px] lg:block">
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-[430px] w-[430px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-200/25 blur-[100px]" />
@@ -152,12 +182,24 @@ function HexagonHeroGraphic({ cursorX, cursorY }: { cursorX: number; cursorY: nu
             <stop offset="100%" stopColor="#06B6D4" stopOpacity="0.08" />
           </linearGradient>
         </defs>
-        <path d="M310 280 L115 95" stroke="url(#line-blue)" strokeWidth="2" />
-        <path d="M310 280 L514 104" stroke="url(#line-violet)" strokeWidth="2" />
-        <path d="M310 280 L80 281" stroke="url(#line-cyan)" strokeWidth="2" />
-        <path d="M310 280 L545 289" stroke="url(#line-blue)" strokeWidth="2" />
-        <path d="M310 280 L128 460" stroke="url(#line-violet)" strokeWidth="2" />
-        <path d="M310 280 L500 456" stroke="url(#line-cyan)" strokeWidth="2" />
+        {heroTools.map((tool, index) => {
+          const isActive = activeToolName === tool.name;
+          const isDimmed = activeToolName !== null && !isActive;
+
+          return (
+            <g key={tool.name} className="transition-opacity duration-300" opacity={isDimmed ? 0.2 : 1}>
+              <path
+                d={tool.path}
+                stroke={`url(#line-${tool.gradient})`}
+                strokeWidth={isActive ? 4 : 2}
+                className="transition-all duration-300"
+              />
+              <circle className="connection-particle" r={isActive ? 5 : 3.5} fill={tool.color}>
+                <animateMotion dur={isActive ? "1.6s" : "3.8s"} begin={`${index * -0.55}s`} repeatCount="indefinite" path={tool.path} />
+              </circle>
+            </g>
+          );
+        })}
         <circle cx="310" cy="280" r="4" fill="#3B82F6" opacity="0.7" />
         <circle cx="115" cy="95" r="3" fill="#60A5FA" opacity="0.65" />
         <circle cx="514" cy="104" r="3" fill="#8B5CF6" opacity="0.65" />
@@ -178,9 +220,11 @@ function HexagonHeroGraphic({ cursorX, cursorY }: { cursorX: number; cursorY: nu
         <div className="relative flex h-32 w-32 items-center justify-center">
           <div className="core-ring core-ring-outer absolute h-28 w-28 rounded-full border border-blue-200/80" />
           <div className="core-ring core-ring-inner absolute h-20 w-20 rounded-full border border-violet-200/80" />
-          <div className="core-glow absolute h-14 w-14 rounded-full bg-gradient-to-br from-blue-500 via-cyan-400 to-violet-500 shadow-[0_0_40px_rgba(59,130,246,0.38)]" />
-          <div className="absolute h-4 w-4 rounded-full bg-white shadow-[0_0_18px_rgba(255,255,255,1)]" />
-          <SiPrometheus className="absolute bottom-0 right-0 h-6 w-6 rounded-lg bg-white p-1 text-[#E6522C] shadow-[0_8px_18px_rgba(15,23,42,0.10)]" />
+          <div
+            className="core-glow absolute h-[74px] w-[74px] rounded-2xl bg-white shadow-[0_0_42px_rgba(59,130,246,0.30)] transition duration-300"
+            style={activeTool ? { boxShadow: `0 0 46px ${activeTool.color}55` } : undefined}
+          />
+          <Image src={brandIcon} alt="" className="relative h-14 w-14 object-contain" />
           <div className="pulse-node absolute left-[-5px] top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-blue-500 shadow-[0_0_16px_rgba(37,99,235,0.42)]" />
           <div className="pulse-node delay-one absolute right-[-5px] top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-violet-500 shadow-[0_0_16px_rgba(124,58,237,0.42)]" />
           <div className="pulse-node delay-two absolute bottom-[-5px] left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-cyan-500 shadow-[0_0_16px_rgba(6,182,212,0.42)]" />
@@ -188,12 +232,24 @@ function HexagonHeroGraphic({ cursorX, cursorY }: { cursorX: number; cursorY: nu
         </div>
       </div>
 
-      <div className="pointer-events-none absolute left-1/2 top-[60%] z-20 -translate-x-1/2 rounded-full border border-blue-100 bg-white/80 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-blue-600 shadow-sm backdrop-blur">
-        Observe • Automate • Scale
+      <div className="pointer-events-none absolute left-1/2 top-[60%] z-20 -translate-x-1/2 whitespace-nowrap rounded-full border border-blue-100 bg-white/90 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-blue-600 shadow-sm backdrop-blur">
+        Observar • Automatizar • Escalar
+      </div>
+
+      <div className={`pointer-events-none absolute left-1/2 top-[68%] z-20 w-[270px] -translate-x-1/2 rounded-xl border border-white/90 bg-white/85 px-4 py-2 text-center text-[11px] font-semibold leading-4 text-slate-600 shadow-sm backdrop-blur transition duration-300 ${activeTool ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"}`}>
+        {activeTool?.description ?? ""}
       </div>
 
       {heroTools.map((tool) => (
-        <ToolLogoCard key={tool.name} {...tool} cursorX={cursorX} cursorY={cursorY} />
+        <ToolLogoCard
+          key={tool.name}
+          {...tool}
+          cursorX={cursorX}
+          cursorY={cursorY}
+          active={activeToolName === tool.name}
+          onActivate={() => setActiveToolName(tool.name)}
+          onDeactivate={() => setActiveToolName(null)}
+        />
       ))}
     </div>
   );
@@ -243,8 +299,8 @@ function MobileHexagonHeroBackground() {
           <div className="relative flex h-28 w-28 items-center justify-center">
             <div className="core-ring core-ring-outer absolute h-28 w-28 rounded-full border border-blue-200/80" />
             <div className="core-ring core-ring-inner absolute h-20 w-20 rounded-full border border-violet-200/80" />
-            <div className="core-glow absolute h-14 w-14 rounded-full bg-gradient-to-br from-blue-500 via-cyan-400 to-violet-500 shadow-[0_0_40px_rgba(59,130,246,0.38)]" />
-            <div className="absolute h-4 w-4 rounded-full bg-white shadow-[0_0_18px_rgba(255,255,255,1)]" />
+            <div className="core-glow absolute h-[74px] w-[74px] rounded-2xl bg-white shadow-[0_0_40px_rgba(59,130,246,0.30)]" />
+            <Image src={brandIcon} alt="" className="relative h-14 w-14 object-contain" />
           </div>
         </div>
 
