@@ -243,7 +243,7 @@ function HexagonHeroGraphic({ cursorX, cursorY }: { cursorX: number; cursorY: nu
 
     const interval = window.setInterval(() => {
       setRotationStep((current) => current + 1);
-    }, 4500);
+    }, 2000);
 
     return () => window.clearInterval(interval);
   }, [activeSlotId]);
