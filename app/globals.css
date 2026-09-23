@@ -107,10 +107,6 @@ html {
   animation: core-ring-rotate-reverse 9s linear infinite;
 }
 
-.core-glow {
-  animation: core-glow-pulse 3.8s ease-in-out infinite;
-}
-
 .float-a {
   animation: float-a 6s ease-in-out infinite;
 }
@@ -169,19 +165,6 @@ html {
 
   to {
     transform: rotate(0deg);
-  }
-}
-
-@keyframes core-glow-pulse {
-  0%,
-  100% {
-    opacity: 0.85;
-    transform: scale(0.92);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.08);
   }
 }
 
