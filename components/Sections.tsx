@@ -105,16 +105,16 @@ export function About() {
       <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[1.08fr_0.92fr]">
         <div>
           <p className="section-label">Sobre</p>
-          <h2 className="section-title">Engenharia aplicada à infraestrutura digital.</h2>
+          <h2 className="section-title">DevOps e SRE aplicados a ambientes de produção.</h2>
           <div className="mt-8 max-w-3xl space-y-5 text-lg leading-8 text-slate-600">
             <p>
-              Minha trajetória profissional começou na Engenharia Civil, atuando com planejamento, execução e resolução de problemas em ambientes onde estabilidade, segurança e eficiência são essenciais.
+              Sou DevOps Engineer/SRE com mais de 3 anos de experiência em infraestrutura cloud, automação, Kubernetes, CI/CD e observabilidade, atuando na construção, operação e evolução de ambientes de produção.
             </p>
             <p>
-              Ao migrar para tecnologia, levei essa mesma visão de engenharia para a construção e operação de infraestruturas digitais. Hoje, atuo com DevOps, SRE, Cloud e Observabilidade.
+              Tenho experiência prática com AWS, Terraform, Docker, Kubernetes, Helm, GitHub Actions, Jenkins e Argo CD, além da implementação de soluções de observabilidade com Prometheus, Grafana, Loki, Elastic Stack e OpenTelemetry. Minha atuação também envolve troubleshooting, investigação de incidentes e colaboração com equipes de desenvolvimento e infraestrutura.
             </p>
             <p>
-              À frente da FSO Cloud Consulting, combino conhecimento técnico, análise estruturada e proximidade com o cliente para transformar desafios operacionais em soluções sustentáveis e bem documentadas.
+              Minha formação anterior em Engenharia Civil contribuiu para uma visão estruturada de planejamento, riscos, custos e resolução de problemas. À frente da FSO Cloud Consulting, aplico essa experiência para desenvolver soluções confiáveis, automatizadas e alinhadas às necessidades de cada ambiente.
             </p>
           </div>
           <a
