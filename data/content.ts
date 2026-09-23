@@ -28,9 +28,9 @@ export const services = [
       "Estruturação de métricas, logs, traces, dashboards, alertas, health checks e monitoramento sintético.",
   },
   {
-    title: "Estruturação de SRE e confiabilidade",
+    title: "Práticas de SRE e gestão da confiabilidade",
     description:
-      "Definição de SLIs, SLOs, error budgets e práticas para tornar a operação mais previsível.",
+      "Definição de indicadores e objetivos de confiabilidade, gestão de incidentes e práticas de evolução contínua orientadas por dados.",
   },
   {
     title: "Automação de infraestrutura e CI/CD",
