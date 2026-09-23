@@ -149,22 +149,22 @@ export const processSteps = [
   {
     step: "01",
     title: "Diagnóstico",
-    text: "Entendimento do ambiente, dos desafios, das limitações e dos objetivos do negócio.",
+    text: "Entendimento do ambiente, dos desafios técnicos, das limitações e dos objetivos do negócio.",
   },
   {
     step: "02",
     title: "Planejamento",
-    text: "Definição das prioridades, da abordagem técnica, dos riscos e dos entregáveis.",
+    text: "Definição de prioridades, abordagem técnica, riscos, responsabilidades e entregáveis.",
   },
   {
     step: "03",
     title: "Implementação",
-    text: "Execução das melhorias com validação, documentação e acompanhamento técnico.",
+    text: "Execução controlada das melhorias, com validação, documentação e acompanhamento técnico.",
   },
   {
     step: "04",
-    title: "Evolução",
-    text: "Análise dos resultados e definição dos próximos passos para evolução contínua.",
+    title: "Evolução contínua",
+    text: "Avaliação dos resultados, transferência de conhecimento e definição dos próximos passos.",
   },
 ];
 
