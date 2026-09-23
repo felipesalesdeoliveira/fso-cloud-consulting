@@ -39,10 +39,10 @@ export const services = [
     ],
   },
   {
-    slug: "implementacao-de-observabilidade",
-    title: "Implementação de observabilidade",
+    slug: "observabilidade-e-monitoramento",
+    title: "Observabilidade e monitoramento",
     description:
-      "Estruturação de métricas, logs, traces, dashboards, alertas, health checks e monitoramento sintético.",
+      "Implementação de métricas, logs, traces, dashboards e alertas para ampliar a visibilidade do ambiente e acelerar a identificação de problemas.",
     introduction:
       "Construção de visibilidade técnica sobre aplicações e infraestrutura para detectar comportamentos anormais, investigar incidentes e acompanhar a experiência dos serviços em produção.",
     idealFor:
