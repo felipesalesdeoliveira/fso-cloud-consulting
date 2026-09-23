@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { siteConfig, siteImage } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,9 +14,45 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FSO Cloud Consulting | DevOps & Reliability Engineering",
-  description:
-    "Consultoria em DevOps, SRE, Cloud, Observabilidade, Kubernetes, automação e confiabilidade para ambientes de produção.",
+  metadataBase: new URL(siteConfig.url),
+  title: siteConfig.title,
+  description: siteConfig.description,
+  keywords: [
+    "DevOps",
+    "SRE",
+    "Cloud Computing",
+    "Observabilidade",
+    "Kubernetes",
+    "Automação",
+    "Consultoria em Cloud",
+  ],
+  authors: [{ name: "Felipe Sales" }],
+  creator: "Felipe Sales",
+  alternates: {
+    canonical: `${siteConfig.url}/`,
+  },
+  openGraph: {
+    type: "website",
+    locale: siteConfig.locale,
+    url: `${siteConfig.url}/`,
+    siteName: siteConfig.name,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [
+      {
+        url: siteImage,
+        width: 1280,
+        height: 640,
+        alt: "FSO Cloud Consulting",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [siteImage],
+  },
 };
 
 export default function RootLayout({
