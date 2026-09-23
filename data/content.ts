@@ -177,10 +177,10 @@ export const highlights = [
 
 export const projects = [
   {
-    category: "Observabilidade",
-    title: "Monitoramento de disponibilidade",
+    category: "AWS & CDN",
+    title: "Frontend estático na AWS com S3 e CloudFront",
     description:
-      "Estruturação de health checks, monitores sintéticos, alertas e dashboards para acompanhamento de serviços críticos.",
+      "Hospedagem segura de frontend estático em S3 privado, com distribuição pelo CloudFront, HTTPS e domínio gerenciado pelo Route 53.",
   },
   {
     category: "Kubernetes",
