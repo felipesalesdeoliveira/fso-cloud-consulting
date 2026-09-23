@@ -1,17 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useState, type ComponentType, type MouseEvent, type SVGProps } from "react";
-import { FaAws } from "react-icons/fa6";
-import {
-  SiDocker,
-  SiGithubactions,
-  SiGrafana,
-  SiKubernetes,
-  SiPrometheus,
-  SiTerraform,
-} from "react-icons/si";
+import { useEffect, useState, type ComponentType, type MouseEvent, type SVGProps } from "react";
 import { heroStats } from "@/data/content";
+import { technologyCategories, type Technology } from "@/data/technologies";
 import { ArrowIcon, AutomationIcon, CloudIcon, InfrastructureIcon, ObservabilityIcon } from "@/components/icons/CustomIcons";
 import brandIcon from "@/app/icon.png";
 
@@ -24,13 +16,11 @@ type HeroPillar = {
   accent: "blue" | "violet" | "cyan";
 };
 
-type HeroTool = {
-  name: string;
+type HeroSlot = {
+  id: string;
   layer: string;
   description: string;
-  icon: ComponentType<{ className?: string }>;
-  secondaryIcon?: ComponentType<{ className?: string }>;
-  color: string;
+  technologies: Technology[];
   position: string;
   animation: string;
   depth: number;
@@ -45,13 +35,108 @@ const heroPillars: HeroPillar[] = [
   { title: "Observabilidade", icon: ObservabilityIcon, position: "right-[2%] bottom-[7%]", animation: "float-a", depth: 1.05, accent: "blue" },
 ];
 
-const heroTools: HeroTool[] = [
-  { name: "AWS", layer: "Cloud", description: "Serviços cloud escaláveis e seguros", icon: FaAws, color: "#FF9900", position: "left-[5%] top-[10%]", animation: "float-a", depth: 1.05, path: "M310 280 L115 95", gradient: "blue" },
-  { name: "Kubernetes", layer: "Platform", description: "Orquestração e confiabilidade de workloads", icon: SiKubernetes, color: "#326CE5", position: "right-[3%] top-[12%]", animation: "float-b", depth: 0.9, path: "M310 280 L514 104", gradient: "violet" },
-  { name: "Terraform", layer: "IaC", description: "Infraestrutura versionada e reproduzível", icon: SiTerraform, color: "#844FBA", position: "left-[2%] top-[40%]", animation: "float-c", depth: 0.75, path: "M310 280 L80 281", gradient: "cyan" },
-  { name: "Docker", layer: "Containers", description: "Aplicações portáveis e padronizadas", icon: SiDocker, color: "#2496ED", position: "right-[0%] top-[43%]", animation: "float-a", depth: 0.8, path: "M310 280 L545 289", gradient: "blue" },
-  { name: "Grafana + Prometheus", layer: "Observabilidade", description: "Métricas, alertas e dashboards operacionais", icon: SiGrafana, secondaryIcon: SiPrometheus, color: "#F46800", position: "left-[3%] bottom-[7%]", animation: "float-b", depth: 0.95, path: "M310 280 L128 460", gradient: "violet" },
-  { name: "GitHub Actions", layer: "CI/CD", description: "Pipelines automatizados e entregas consistentes", icon: SiGithubactions, color: "#2088FF", position: "right-[4%] bottom-[7%]", animation: "float-c", depth: 1.05, path: "M310 280 L500 456", gradient: "cyan" },
+const technologiesByName = new Map(
+  technologyCategories.flatMap((category) =>
+    category.technologies.map((technology) => [technology.name, technology] as const),
+  ),
+);
+
+function selectTechnologies(names: string[]) {
+  return names.map((name) => {
+    const technology = technologiesByName.get(name);
+
+    if (!technology) {
+      throw new Error(`Tecnologia não encontrada: ${name}`);
+    }
+
+    return technology;
+  });
+}
+
+const heroSlots: HeroSlot[] = [
+  {
+    id: "cloud",
+    layer: "Cloud",
+    description: "Plataformas cloud seguras, escaláveis e disponíveis",
+    technologies: selectTechnologies(["AWS", "Azure", "Google Cloud", "Oracle Cloud"]),
+    position: "left-[5%] top-[10%]",
+    animation: "float-a",
+    depth: 1.05,
+    path: "M310 280 L115 95",
+    gradient: "blue",
+  },
+  {
+    id: "platform",
+    layer: "Plataforma",
+    description: "Orquestração, empacotamento e entrega de aplicações",
+    technologies: selectTechnologies(["Kubernetes", "Helm", "Argo CD"]),
+    position: "right-[3%] top-[12%]",
+    animation: "float-b",
+    depth: 0.9,
+    path: "M310 280 L514 104",
+    gradient: "violet",
+  },
+  {
+    id: "automation",
+    layer: "Automação",
+    description: "Infraestrutura, configuração e operações automatizadas",
+    technologies: selectTechnologies(["Terraform", "Ansible", "Linux", "Bash", "Python"]),
+    position: "left-[2%] top-[40%]",
+    animation: "float-c",
+    depth: 0.75,
+    path: "M310 280 L80 281",
+    gradient: "cyan",
+  },
+  {
+    id: "containers",
+    layer: "Containers",
+    description: "Aplicações portáveis, isoladas e padronizadas",
+    technologies: selectTechnologies(["Docker"]),
+    position: "right-[0%] top-[43%]",
+    animation: "float-a",
+    depth: 0.8,
+    path: "M310 280 L545 289",
+    gradient: "blue",
+  },
+  {
+    id: "observability",
+    layer: "Observabilidade",
+    description: "Métricas, logs, traces, alertas e investigação de incidentes",
+    technologies: selectTechnologies([
+      "Prometheus",
+      "Grafana",
+      "Loki",
+      "Elastic Stack",
+      "OpenTelemetry",
+      "OpenSearch",
+      "Datadog",
+      "Dynatrace",
+      "Zabbix",
+    ]),
+    position: "left-[3%] bottom-[7%]",
+    animation: "float-b",
+    depth: 0.95,
+    path: "M310 280 L128 460",
+    gradient: "violet",
+  },
+  {
+    id: "delivery",
+    layer: "CI/CD",
+    description: "Versionamento, validação e entrega contínua de software",
+    technologies: selectTechnologies([
+      "GitHub Actions",
+      "GitLab CI",
+      "Jenkins",
+      "Git",
+      "GitHub",
+      "GitLab",
+    ]),
+    position: "right-[4%] bottom-[7%]",
+    animation: "float-c",
+    depth: 1.05,
+    path: "M310 280 L500 456",
+    gradient: "cyan",
+  },
 ];
 
 function HexagonPillarCard({
@@ -93,12 +178,8 @@ function HexagonPillarCard({
 }
 
 function ToolLogoCard({
-  name,
   layer,
   description,
-  icon: Icon,
-  secondaryIcon: SecondaryIcon,
-  color,
   position,
   animation,
   depth,
@@ -107,17 +188,21 @@ function ToolLogoCard({
   active,
   onActivate,
   onDeactivate,
-}: HeroTool & {
+  technology,
+}: HeroSlot & {
   cursorX: number;
   cursorY: number;
   active: boolean;
   onActivate: () => void;
   onDeactivate: () => void;
+  technology: Technology;
 }) {
+  const Icon = technology.icon;
+
   return (
     <button
       type="button"
-      aria-label={`${name}: ${description}`}
+      aria-label={`${technology.name}, ${layer}: ${description}`}
       onMouseEnter={onActivate}
       onMouseLeave={onDeactivate}
       onFocus={onActivate}
@@ -130,15 +215,12 @@ function ToolLogoCard({
     >
       <span
         className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-50"
-        style={{ color }}
+        style={{ color: technology.color }}
       >
-        <Icon className="h-5 w-5" />
-        {SecondaryIcon && (
-          <SecondaryIcon className="absolute -bottom-1 -right-1 h-4 w-4 rounded-md bg-white p-0.5 text-[#E6522C] shadow-sm" />
-        )}
+        <Icon key={technology.name} className="hero-tool-icon h-5 w-5" />
       </span>
-      <span>
-        <span className="block text-[13px] font-bold leading-none text-slate-900">{name}</span>
+      <span key={technology.name} className="hero-tool-copy">
+        <span className="block whitespace-nowrap text-[13px] font-bold leading-none text-slate-900">{technology.name}</span>
         <span className="mt-1 block text-[10px] font-bold uppercase tracking-[0.12em] text-slate-400">{layer}</span>
       </span>
     </button>
@@ -146,8 +228,25 @@ function ToolLogoCard({
 }
 
 function HexagonHeroGraphic({ cursorX, cursorY }: { cursorX: number; cursorY: number }) {
-  const [activeToolName, setActiveToolName] = useState<string | null>(null);
-  const activeTool = heroTools.find((tool) => tool.name === activeToolName);
+  const [activeSlotId, setActiveSlotId] = useState<string | null>(null);
+  const [rotationStep, setRotationStep] = useState(0);
+  const activeSlot = heroSlots.find((slot) => slot.id === activeSlotId);
+
+  function currentTechnology(slot: HeroSlot) {
+    return slot.technologies[rotationStep % slot.technologies.length];
+  }
+
+  useEffect(() => {
+    if (activeSlotId || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setRotationStep((current) => current + 1);
+    }, 4500);
+
+    return () => window.clearInterval(interval);
+  }, [activeSlotId]);
 
   return (
     <div className="relative mx-auto hidden h-[560px] w-full max-w-[620px] lg:block">
@@ -182,20 +281,21 @@ function HexagonHeroGraphic({ cursorX, cursorY }: { cursorX: number; cursorY: nu
             <stop offset="100%" stopColor="#06B6D4" stopOpacity="0.08" />
           </linearGradient>
         </defs>
-        {heroTools.map((tool, index) => {
-          const isActive = activeToolName === tool.name;
-          const isDimmed = activeToolName !== null && !isActive;
+        {heroSlots.map((slot, index) => {
+          const technology = currentTechnology(slot);
+          const isActive = activeSlotId === slot.id;
+          const isDimmed = activeSlotId !== null && !isActive;
 
           return (
-            <g key={tool.name} className="transition-opacity duration-300" opacity={isDimmed ? 0.2 : 1}>
+            <g key={slot.id} className="transition-opacity duration-300" opacity={isDimmed ? 0.2 : 1}>
               <path
-                d={tool.path}
-                stroke={`url(#line-${tool.gradient})`}
+                d={slot.path}
+                stroke={`url(#line-${slot.gradient})`}
                 strokeWidth={isActive ? 4 : 2}
                 className="transition-all duration-300"
               />
-              <circle className="connection-particle" r={isActive ? 5 : 3.5} fill={tool.color}>
-                <animateMotion dur={isActive ? "1.6s" : "3.8s"} begin={`${index * -0.55}s`} repeatCount="indefinite" path={tool.path} />
+              <circle className="connection-particle" r={isActive ? 5 : 3.5} fill={technology.color}>
+                <animateMotion dur={isActive ? "1.6s" : "3.8s"} begin={`${index * -0.55}s`} repeatCount="indefinite" path={slot.path} />
               </circle>
             </g>
           );
@@ -236,19 +336,20 @@ function HexagonHeroGraphic({ cursorX, cursorY }: { cursorX: number; cursorY: nu
         Observar • Automatizar • Escalar
       </div>
 
-      <div className={`pointer-events-none absolute left-1/2 top-[68%] z-20 w-[270px] -translate-x-1/2 rounded-xl border border-white/90 bg-white/85 px-4 py-2 text-center text-[11px] font-semibold leading-4 text-slate-600 shadow-sm backdrop-blur transition duration-300 ${activeTool ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"}`}>
-        {activeTool?.description ?? ""}
+      <div className={`pointer-events-none absolute left-1/2 top-[68%] z-20 w-[270px] -translate-x-1/2 rounded-xl border border-white/90 bg-white/85 px-4 py-2 text-center text-[11px] font-semibold leading-4 text-slate-600 shadow-sm backdrop-blur transition duration-300 ${activeSlot ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"}`}>
+        {activeSlot?.description ?? ""}
       </div>
 
-      {heroTools.map((tool) => (
+      {heroSlots.map((slot) => (
         <ToolLogoCard
-          key={tool.name}
-          {...tool}
+          key={slot.id}
+          {...slot}
+          technology={currentTechnology(slot)}
           cursorX={cursorX}
           cursorY={cursorY}
-          active={activeToolName === tool.name}
-          onActivate={() => setActiveToolName(tool.name)}
-          onDeactivate={() => setActiveToolName(null)}
+          active={activeSlotId === slot.id}
+          onActivate={() => setActiveSlotId(slot.id)}
+          onDeactivate={() => setActiveSlotId(null)}
         />
       ))}
     </div>

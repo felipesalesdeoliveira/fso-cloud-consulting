@@ -99,6 +99,11 @@ html {
   animation: hero-enter 800ms ease both;
 }
 
+.hero-tool-icon,
+.hero-tool-copy {
+  animation: tool-swap 350ms ease both;
+}
+
 .core-ring-outer {
   animation: core-ring-rotate 12s linear infinite;
 }
@@ -145,6 +150,18 @@ html {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes tool-swap {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
