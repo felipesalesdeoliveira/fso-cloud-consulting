@@ -99,10 +99,6 @@ html {
   animation: hero-enter 800ms ease both;
 }
 
-.central-hexagon {
-  animation: central-breathe 5.8s ease-in-out infinite;
-}
-
 .core-ring-outer {
   animation: core-ring-rotate 12s linear infinite;
 }
@@ -153,17 +149,6 @@ html {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes central-breathe {
-  0%,
-  100% {
-    box-shadow: 0 28px 70px rgba(37, 99, 235, 0.14);
-  }
-
-  50% {
-    box-shadow: 0 34px 85px rgba(99, 102, 241, 0.19);
   }
 }
 
