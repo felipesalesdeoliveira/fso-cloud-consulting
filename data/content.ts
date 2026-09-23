@@ -60,27 +60,6 @@ export const services = [
     ],
   },
   {
-    slug: "praticas-de-sre-e-gestao-da-confiabilidade",
-    title: "Práticas de SRE e gestão da confiabilidade",
-    description:
-      "Definição de indicadores e objetivos de confiabilidade, gestão de incidentes e práticas de evolução contínua orientadas por dados.",
-    introduction:
-      "Aplicação progressiva de práticas de Site Reliability Engineering para transformar dados operacionais em objetivos claros, decisões de engenharia e melhoria contínua da confiabilidade.",
-    idealFor:
-      "Equipes que já possuem algum nível de monitoramento, mas precisam definir metas de confiabilidade, melhorar a resposta a incidentes e equilibrar estabilidade com evolução do produto.",
-    deliverables: [
-      "Definição de SLIs, SLOs e critérios de medição",
-      "Estruturação de error budgets e indicadores de confiabilidade",
-      "Processos de resposta a incidentes e post-mortems sem culpabilização",
-      "Backlog de melhorias orientado por risco, recorrência e impacto",
-    ],
-    benefits: [
-      "Expectativas de confiabilidade mensuráveis e compartilhadas",
-      "Decisões mais equilibradas entre velocidade e estabilidade",
-      "Aprendizado contínuo a partir de incidentes e dados operacionais",
-    ],
-  },
-  {
     slug: "automacao-de-infraestrutura-e-cicd",
     title: "Automação de infraestrutura e CI/CD",
     description:
@@ -102,10 +81,31 @@ export const services = [
     ],
   },
   {
-    slug: "kubernetes-e-ambientes-de-containers",
-    title: "Kubernetes e ambientes de containers",
+    slug: "cloud-e-otimizacao-de-custos",
+    title: "Cloud e otimização de custos",
     description:
-      "Implantação, evolução e troubleshooting de clusters e workloads voltados para ambientes de produção.",
+      "Análise de arquitetura, consumo e desperdícios para otimizar recursos cloud sem comprometer desempenho e confiabilidade.",
+    introduction:
+      "Análise técnica e financeira do consumo em nuvem para aumentar a transparência dos gastos e identificar otimizações sustentáveis, preservando desempenho e confiabilidade.",
+    idealFor:
+      "Empresas com crescimento de custos cloud, dificuldade de atribuir gastos ou recursos superdimensionados e pouco utilizados.",
+    deliverables: [
+      "Mapeamento de custos, recursos, contas, tags e centros de responsabilidade",
+      "Identificação de desperdícios, ociosidade e oportunidades de rightsizing",
+      "Dashboards, alertas de orçamento e indicadores de acompanhamento",
+      "Plano priorizado de otimização com riscos e economia potencial",
+    ],
+    benefits: [
+      "Maior previsibilidade e transparência sobre os gastos",
+      "Redução de desperdícios sem decisões isoladas de corte",
+      "Cultura de responsabilidade compartilhada sobre custos cloud",
+    ],
+  },
+  {
+    slug: "kubernetes-e-plataformas-de-containers",
+    title: "Kubernetes e plataformas de containers",
+    description:
+      "Implantação, evolução e troubleshooting de clusters e workloads, com foco em segurança, estabilidade e operação em produção.",
     introduction:
       "Planejamento e evolução de plataformas de containers considerando disponibilidade, segurança, capacidade, observabilidade e a real necessidade do ambiente.",
     idealFor:
@@ -123,24 +123,24 @@ export const services = [
     ],
   },
   {
-    slug: "finops-e-otimizacao-de-custos-cloud",
-    title: "FinOps e otimização de custos cloud",
+    slug: "praticas-de-sre-e-gestao-da-confiabilidade",
+    title: "Práticas de SRE e gestão da confiabilidade",
     description:
-      "Análise de consumo, desperdícios e oportunidades de economia sem comprometer a confiabilidade.",
+      "Definição de indicadores e objetivos de confiabilidade, gestão de incidentes e práticas de evolução contínua orientadas por dados.",
     introduction:
-      "Análise técnica e financeira do consumo em nuvem para aumentar a transparência dos gastos e identificar otimizações sustentáveis, preservando desempenho e confiabilidade.",
+      "Aplicação progressiva de práticas de Site Reliability Engineering para transformar dados operacionais em objetivos claros, decisões de engenharia e melhoria contínua da confiabilidade.",
     idealFor:
-      "Empresas com crescimento de custos cloud, dificuldade de atribuir gastos ou recursos superdimensionados e pouco utilizados.",
+      "Equipes que já possuem algum nível de monitoramento, mas precisam definir metas de confiabilidade, melhorar a resposta a incidentes e equilibrar estabilidade com evolução do produto.",
     deliverables: [
-      "Mapeamento de custos, recursos, contas, tags e centros de responsabilidade",
-      "Identificação de desperdícios, ociosidade e oportunidades de rightsizing",
-      "Dashboards, alertas de orçamento e indicadores de acompanhamento",
-      "Plano priorizado de otimização com riscos e economia potencial",
+      "Definição de SLIs, SLOs e critérios de medição",
+      "Estruturação de error budgets e indicadores de confiabilidade",
+      "Processos de resposta a incidentes e post-mortems sem culpabilização",
+      "Backlog de melhorias orientado por risco, recorrência e impacto",
     ],
     benefits: [
-      "Maior previsibilidade e transparência sobre os gastos",
-      "Redução de desperdícios sem decisões isoladas de corte",
-      "Cultura de responsabilidade compartilhada sobre custos cloud",
+      "Expectativas de confiabilidade mensuráveis e compartilhadas",
+      "Decisões mais equilibradas entre velocidade e estabilidade",
+      "Aprendizado contínuo a partir de incidentes e dados operacionais",
     ],
   },
 ];
