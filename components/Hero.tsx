@@ -210,7 +210,7 @@ function HexagonHeroGraphic({ cursorX, cursorY }: { cursorX: number; cursorY: nu
       </svg>
 
       <div
-        className="central-hexagon absolute left-1/2 top-1/2 z-10 flex h-[210px] w-[210px] items-center justify-center border border-blue-200/90 bg-white/90 shadow-[0_28px_75px_rgba(37,99,235,0.14)] backdrop-blur-xl"
+        className="central-hexagon absolute left-1/2 top-1/2 z-10 flex h-[210px] w-[210px] items-center justify-center border border-blue-200/90 bg-white/90 backdrop-blur-xl"
         style={{
           clipPath:
             "polygon(25% 6.7%,75% 6.7%,100% 50%,75% 93.3%,25% 93.3%,0% 50%)",
@@ -294,7 +294,7 @@ function MobileHexagonHeroBackground() {
         </svg>
 
         <div
-          className="central-hexagon absolute left-1/2 top-1/2 z-10 flex h-[210px] w-[210px] -translate-x-1/2 -translate-y-1/2 items-center justify-center border border-blue-200/90 bg-white/90 shadow-[0_28px_75px_rgba(37,99,235,0.14)] backdrop-blur-xl"
+          className="central-hexagon absolute left-1/2 top-1/2 z-10 flex h-[210px] w-[210px] -translate-x-1/2 -translate-y-1/2 items-center justify-center border border-blue-200/90 bg-white/90 backdrop-blur-xl"
           style={{
             clipPath:
               "polygon(25% 6.7%,75% 6.7%,100% 50%,75% 93.3%,25% 93.3%,0% 50%)",
