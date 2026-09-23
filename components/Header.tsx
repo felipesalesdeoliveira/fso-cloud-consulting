@@ -2,21 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { navItems } from "@/data/content";
 import { publicAsset } from "@/lib/paths";
 
 export function Header() {
-  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
   function closeMenu() {
     setMenuOpen(false);
-  }
-
-  function isActive(pageHref: string) {
-    return pathname === pageHref;
   }
 
   return (
@@ -38,7 +32,7 @@ export function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className={`transition hover:text-blue-600 ${isActive(item.pageHref) ? "text-blue-600" : ""}`}
+              className="transition hover:text-blue-600"
             >
               {item.label}
             </Link>
@@ -71,10 +65,10 @@ export function Header() {
         <div className="mx-auto grid w-full max-w-7xl gap-2">
           {navItems.map((item) => (
             <Link
-              key={item.pageHref}
-              href={item.pageHref}
+              key={item.href}
+              href={item.href}
               onClick={closeMenu}
-              className={`rounded-xl px-4 py-3 text-sm font-semibold transition ${isActive(item.pageHref) ? "bg-blue-50 text-blue-700" : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"}`}
+              className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 hover:text-blue-600"
             >
               {item.label}
             </Link>

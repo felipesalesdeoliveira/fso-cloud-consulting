@@ -1,12 +1,12 @@
 export const navItems = [
-  { label: "Início", href: "/", pageHref: "/" },
-  { label: "Serviços", href: "/#servicos", pageHref: "/servicos" },
-  { label: "Como funciona", href: "/#processo", pageHref: "/processo" },
-  { label: "Sobre", href: "/#sobre", pageHref: "/sobre" },
-  { label: "Projetos", href: "/#projetos", pageHref: "/projetos" },
-  { label: "Artigos", href: "/#artigos", pageHref: "/artigos" },
-  { label: "Tecnologias", href: "/#tecnologias", pageHref: "/tecnologias" },
-  { label: "Contato", href: "/#contato", pageHref: "/contato" },
+  { label: "Início", href: "/" },
+  { label: "Serviços", href: "/#servicos" },
+  { label: "Como funciona", href: "/#processo" },
+  { label: "Sobre", href: "/#sobre" },
+  { label: "Projetos", href: "/#projetos" },
+  { label: "Artigos", href: "/#artigos" },
+  { label: "Tecnologias", href: "/#tecnologias" },
+  { label: "Contato", href: "/#contato" },
 ];
 
 export const heroStats = [
