@@ -11,6 +11,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  const projectPages: MetadataRoute.Sitemap = [
+    {
+      url: `${siteConfig.url}/projetos/frontend-cdn-s3-tls-dominio/`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+  ];
+
   return [
     {
       url: `${siteConfig.url}/`,
@@ -18,5 +26,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     ...servicePages,
+    ...projectPages,
   ];
 }

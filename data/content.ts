@@ -177,22 +177,26 @@ export const highlights = [
 
 export const projects = [
   {
+    slug: "frontend-cdn-s3-tls-dominio",
     category: "AWS & CDN",
-    title: "Frontend estático na AWS com S3 e CloudFront",
+    title: "Frontend com CDN, S3, TLS e domínio customizado",
     description:
-      "Hospedagem segura de frontend estático em S3 privado, com distribuição pelo CloudFront, HTTPS e domínio gerenciado pelo Route 53.",
+      "SPA React hospedada em S3 privado e distribuída globalmente pelo CloudFront, com HTTPS via ACM e DNS gerenciado pelo Route 53.",
+    status: "Concluído",
   },
   {
     category: "Kubernetes",
     title: "Observabilidade em ambientes distribuídos",
     description:
       "Centralização de métricas, logs e indicadores operacionais para melhorar a investigação de incidentes.",
+    status: "Em breve",
   },
   {
     category: "Cloud & IaC",
     title: "Infraestrutura cloud automatizada",
     description:
       "Provisionamento e padronização de ambientes utilizando infraestrutura como código e práticas de automação.",
+    status: "Em breve",
   },
 ];
 
