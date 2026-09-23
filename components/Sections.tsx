@@ -167,10 +167,9 @@ export function Projects() {
               <div className="p-7">
                 <h3 className="text-xl font-bold text-slate-900">{project.title}</h3>
                 <p className="mt-4 leading-7 text-slate-600">{project.description}</p>
-                <div className="mt-7 flex items-center gap-2 text-sm font-semibold text-blue-600">
-                  Ver caso técnico
-                  <ArrowIcon />
-                </div>
+                <span className="mt-7 inline-flex rounded-full bg-blue-50 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-blue-600">
+                  Em breve
+                </span>
               </div>
             </article>
           ))}
