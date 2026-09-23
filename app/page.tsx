@@ -1,9 +1,9 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
+import { Contact } from "@/components/Contact";
 import {
   About,
   Articles,
-  Contact,
   Footer,
   Process,
   Projects,
