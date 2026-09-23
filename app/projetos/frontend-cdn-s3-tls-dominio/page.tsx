@@ -83,8 +83,36 @@ export default function AwsFrontendProjectPage() {
             <p className="section-label">Arquitetura</p>
             <h2 className="section-title">Como os recursos se conectam</h2>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">O usuário resolve o domínio no Route 53 e acessa a distribuição CloudFront por HTTPS. A CDN utiliza o certificado do ACM e busca os arquivos no S3 por meio do OAC, sem tornar o bucket público.</p>
-            <div className="mt-10 overflow-hidden rounded-[32px] border border-slate-200 bg-slate-50 p-3 shadow-sm md:p-6">
-              <Image src={publicAsset("/diagrams/frontend-cdn-s3-tls.svg")} alt="Diagrama da arquitetura com Route 53, CloudFront, ACM, OAC e S3 privado" width={1440} height={760} className="h-auto w-full" priority />
+            <div className="mt-10 overflow-hidden rounded-[32px] border border-slate-300 bg-slate-50 shadow-sm">
+              <div className="bg-[#232f3e] px-6 py-4 text-lg font-bold text-white">AWS Cloud</div>
+              <div className="p-5 md:p-10">
+                <div className="grid items-center gap-5 lg:grid-cols-[0.75fr_auto_1fr_auto_1fr_auto_1fr]">
+                  <div className="flex flex-col items-center text-center">
+                    <div className="relative h-24 w-20" aria-hidden="true">
+                      <span className="absolute left-1/2 top-0 h-10 w-10 -translate-x-1/2 rounded-full border-[5px] border-slate-600 bg-white" />
+                      <span className="absolute bottom-0 left-1/2 h-14 w-20 -translate-x-1/2 rounded-t-full border-[5px] border-b-0 border-slate-600 bg-white" />
+                    </div>
+                    <p className="mt-3 font-bold text-slate-900">Usuário</p>
+                    <p className="text-sm text-slate-500">Navegador</p>
+                  </div>
+                  <div className="text-center text-sm font-bold text-slate-500"><span className="block lg:hidden">↓</span><span className="hidden lg:block">1. GET →</span></div>
+                  <ArchitectureNode icon="route-53.svg" name="Amazon Route 53" detail="DNS público · Alias" />
+                  <div className="text-center text-sm font-bold text-violet-600"><span className="block lg:hidden">↓</span><span className="hidden lg:block">2. Alias →</span></div>
+                  <div className="relative">
+                    <ArchitectureNode icon="cloudfront.svg" name="Amazon CloudFront" detail="CDN global · HTTPS" />
+                    <div className="mx-auto mt-4 w-fit rounded-xl border border-rose-300 bg-rose-50 px-3 py-2 text-center text-xs font-bold text-rose-700">ACM · TLS · us-east-1</div>
+                  </div>
+                  <div className="text-center text-sm font-bold text-slate-500"><span className="block lg:hidden">↓</span><span className="hidden lg:block">3. OAC →</span></div>
+                  <div className="rounded-3xl border-2 border-rose-300 bg-rose-50/60 p-3">
+                    <p className="mb-3 text-center text-xs font-bold uppercase tracking-wide text-rose-700">Bucket privado</p>
+                    <ArchitectureNode icon="s3.svg" name="Amazon S3" detail="index.html + assets" />
+                  </div>
+                </div>
+                <div className="mt-8 grid gap-4 md:grid-cols-2">
+                  <div className="rounded-2xl border border-violet-200 bg-violet-50 p-5"><p className="font-bold text-violet-800">Cache HIT</p><p className="mt-2 text-sm leading-6 text-slate-600">O CloudFront responde diretamente da edge, sem consultar o S3.</p></div>
+                  <div className="rounded-2xl border border-orange-200 bg-orange-50 p-5"><p className="font-bold text-orange-800">Fallback da SPA</p><p className="mt-2 text-sm leading-6 text-slate-600">Erros 403 e 404 retornam /index.html com status 200.</p></div>
+                </div>
+              </div>
             </div>
             <p className="mt-4 text-sm text-slate-500">O arquivo-fonte editável do desenho também é mantido no repositório em <code>docs/diagrams</code>.</p>
           </div>
@@ -145,5 +173,15 @@ export default function AwsFrontendProjectPage() {
       </main>
       <Footer />
     </>
+  );
+}
+
+function ArchitectureNode({ icon, name, detail }: { icon: string; name: string; detail: string }) {
+  return (
+    <div className="flex min-h-48 flex-col items-center justify-center rounded-3xl border border-slate-200 bg-white p-5 text-center shadow-[0_12px_30px_rgba(15,23,42,0.08)]">
+      <Image src={publicAsset(`/aws-icons/${icon}`)} alt="" width={80} height={80} className="h-20 w-20" />
+      <p className="mt-4 font-bold text-slate-900">{name}</p>
+      <p className="mt-1 text-sm text-slate-500">{detail}</p>
+    </div>
   );
 }
