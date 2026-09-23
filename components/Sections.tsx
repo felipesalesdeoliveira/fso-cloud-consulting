@@ -315,7 +315,12 @@ export function Contact() {
             <p className="mt-7 max-w-xl text-lg leading-8 text-slate-300">
               Vamos conversar sobre os desafios do seu ambiente e identificar oportunidades de automação, observabilidade, estabilidade e redução de custos.
             </p>
-            <a href="#" className="mt-9 inline-flex items-center gap-3 rounded-xl bg-white px-6 py-4 text-sm font-bold text-blue-700 shadow-xl transition duration-300 hover:-translate-y-1 hover:bg-blue-50">
+            <a
+              href="https://wa.me/5548996297388?text=Ol%C3%A1%21%20Conheci%20a%20FSO%20Cloud%20Consulting%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20os%20servi%C3%A7os."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-9 inline-flex items-center gap-3 rounded-xl bg-white px-6 py-4 text-sm font-bold text-blue-700 shadow-xl transition duration-300 hover:-translate-y-1 hover:bg-blue-50"
+            >
               Falar pelo WhatsApp
               <ArrowIcon />
             </a>
