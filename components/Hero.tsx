@@ -275,7 +275,7 @@ export function Hero() {
       id="inicio"
       onMouseMove={handleHeroMouseMove}
       onMouseLeave={resetHeroPosition}
-      className="relative flex min-h-[calc(100vh-96px)] scroll-mt-24 items-center overflow-hidden px-6 py-16 lg:py-20"
+      className="relative flex min-h-[calc(100svh-96px)] scroll-mt-24 items-center overflow-hidden px-6 py-16 lg:py-20"
     >
       <MobileHexagonHeroBackground />
       <div className="pointer-events-none absolute -left-48 top-8 h-[480px] w-[480px] rounded-full bg-blue-200/25 blur-[120px]" />
@@ -292,11 +292,11 @@ export function Hero() {
         }}
       />
 
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.04fr_0.96fr]">
-        <div className="hero-content relative z-20">
-          <div className="mb-7 inline-flex items-center gap-3 rounded-full border border-blue-200/90 bg-white/80 px-4 py-2 shadow-sm backdrop-blur">
+      <div className="relative mx-auto grid min-w-0 w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.04fr_0.96fr]">
+        <div className="hero-content relative z-20 min-w-0 max-w-full">
+          <div className="mb-7 inline-flex max-w-full items-center gap-3 rounded-full border border-blue-200/90 bg-white/80 px-4 py-2 shadow-sm backdrop-blur">
             <span className="pulse-dot h-2 w-2 rounded-full bg-blue-500" />
-            <span className="text-xs font-bold uppercase tracking-[0.17em] text-slate-600">
+            <span className="text-center text-[11px] font-bold uppercase tracking-[0.12em] text-slate-600 sm:text-xs sm:tracking-[0.17em]">
               DevOps & Reliability Engineering
             </span>
           </div>
@@ -317,7 +317,7 @@ export function Hero() {
           <div className="mt-9 flex flex-col gap-4 sm:flex-row">
             <a
               href="#servicos"
-              className="inline-flex items-center justify-center gap-3 rounded-xl bg-blue-600 px-6 py-4 text-sm font-semibold text-white shadow-[0_14px_32px_rgba(37,99,235,0.25)] transition duration-300 hover:-translate-y-1 hover:bg-blue-700 hover:shadow-[0_18px_40px_rgba(37,99,235,0.32)]"
+              className="inline-flex w-full items-center justify-center gap-3 rounded-xl bg-blue-600 px-6 py-4 text-center text-sm font-semibold text-white shadow-[0_14px_32px_rgba(37,99,235,0.25)] transition duration-300 hover:-translate-y-1 hover:bg-blue-700 hover:shadow-[0_18px_40px_rgba(37,99,235,0.32)] sm:w-auto"
             >
               Conheça nossos serviços
               <ArrowIcon />
@@ -325,7 +325,7 @@ export function Hero() {
 
             <a
               href="#contato"
-              className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white/80 px-6 py-4 text-sm font-semibold text-slate-700 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:text-blue-700 hover:shadow-lg"
+              className="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 bg-white/80 px-6 py-4 text-center text-sm font-semibold text-slate-700 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:text-blue-700 hover:shadow-lg sm:w-auto"
             >
               Vamos conversar
             </a>

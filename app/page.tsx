@@ -13,17 +13,26 @@ import {
 
 export default function Home() {
   return (
-    <main className="overflow-x-hidden bg-[#F8FAFD] pt-24 text-[#101828]">
+    <>
+      <a href="#conteudo" className="skip-link">
+        Ir para o conteúdo principal
+      </a>
       <Header />
-      <Hero />
-      <Services />
-      <Process />
-      <About />
-      <Projects />
-      <Articles />
-      <Technologies />
-      <Contact />
+      <main
+        id="conteudo"
+        tabIndex={-1}
+        className="overflow-x-hidden bg-[#F8FAFD] pt-24 text-[#101828]"
+      >
+        <Hero />
+        <Services />
+        <Process />
+        <About />
+        <Projects />
+        <Articles />
+        <Technologies />
+        <Contact />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

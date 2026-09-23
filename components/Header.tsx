@@ -27,7 +27,7 @@ export function Header() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 lg:flex">
+        <nav aria-label="Navegação principal" className="hidden items-center gap-6 text-sm font-medium text-slate-600 lg:flex">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -41,8 +41,9 @@ export function Header() {
 
         <button
           type="button"
-          aria-label="Abrir menu de navegação"
+          aria-label={menuOpen ? "Fechar menu de navegação" : "Abrir menu de navegação"}
           aria-expanded={menuOpen}
+          aria-controls="menu-mobile"
           onClick={() => setMenuOpen((current) => !current)}
           className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-blue-200 hover:text-blue-600 lg:hidden"
         >
@@ -60,6 +61,9 @@ export function Header() {
       </div>
 
       <nav
+        id="menu-mobile"
+        aria-label="Navegação para dispositivos móveis"
+        aria-hidden={!menuOpen}
         className={`border-t border-slate-200/80 bg-white/95 px-6 py-4 shadow-[0_20px_40px_rgba(15,23,42,0.08)] backdrop-blur-xl lg:hidden ${menuOpen ? "grid" : "hidden"}`}
       >
         <div className="mx-auto grid w-full max-w-7xl gap-2">
