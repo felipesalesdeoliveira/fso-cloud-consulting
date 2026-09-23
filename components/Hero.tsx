@@ -220,10 +220,6 @@ function HexagonHeroGraphic({ cursorX, cursorY }: { cursorX: number; cursorY: nu
         <div className="relative flex h-32 w-32 items-center justify-center">
           <div className="core-ring core-ring-outer absolute h-28 w-28 rounded-full border border-blue-200/80" />
           <div className="core-ring core-ring-inner absolute h-20 w-20 rounded-full border border-violet-200/80" />
-          <div
-            className="core-glow absolute h-24 w-24 rounded-full bg-gradient-to-br from-blue-400 via-cyan-300 to-violet-400 opacity-30 blur-xl transition duration-300"
-            style={activeTool ? { background: activeTool.color } : undefined}
-          />
           <Image
             src={brandIcon}
             alt=""
@@ -303,7 +299,6 @@ function MobileHexagonHeroBackground() {
           <div className="relative flex h-28 w-28 items-center justify-center">
             <div className="core-ring core-ring-outer absolute h-28 w-28 rounded-full border border-blue-200/80" />
             <div className="core-ring core-ring-inner absolute h-20 w-20 rounded-full border border-violet-200/80" />
-            <div className="core-glow absolute h-24 w-24 rounded-full bg-gradient-to-br from-blue-400 via-cyan-300 to-violet-400 opacity-30 blur-xl" />
             <Image
               src={brandIcon}
               alt=""
