@@ -109,7 +109,11 @@ export function About() {
               À frente da FSO Cloud Consulting, combino conhecimento técnico, análise estruturada e proximidade com o cliente para transformar desafios operacionais em soluções sustentáveis e bem documentadas.
             </p>
           </div>
-          <a href="#" className="mt-9 inline-flex items-center gap-3 rounded-xl border border-slate-300 bg-white px-5 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:text-blue-600 hover:shadow-lg">
+          <a
+            href={publicAsset("/felipe-sales-devops-engineer.pdf")}
+            download="felipe-sales-devops-engineer.pdf"
+            className="mt-9 inline-flex items-center gap-3 rounded-xl border border-slate-300 bg-white px-5 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:text-blue-600 hover:shadow-lg"
+          >
             Baixar currículo
             <ArrowIcon />
           </a>
