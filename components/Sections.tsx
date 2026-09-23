@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowIcon } from "@/components/icons/CustomIcons";
 import { articles, highlights, processSteps, projects, services } from "@/data/content";
 import { technologyCategories, type Technology } from "@/data/technologies";
@@ -37,21 +38,28 @@ export function Services() {
 
         <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => (
-            <article key={service.title} className="light-card group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-7">
-              <div className="absolute -right-12 -top-14 h-36 w-36 rounded-full bg-blue-50 transition duration-500 group-hover:scale-125 group-hover:bg-blue-100/70" />
-              <div className="relative flex items-center justify-between">
-                <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-50 text-sm font-bold text-blue-600 transition group-hover:bg-blue-600 group-hover:text-white">
-                  0{index + 1}
-                </span>
-                <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-r from-blue-500 to-violet-500" />
-              </div>
-              <h3 className="relative mt-8 text-lg font-bold uppercase leading-7 tracking-[0.015em] text-slate-900">{service.title}</h3>
-              <p className="relative mt-4 leading-7 text-slate-600">{service.description}</p>
-              <div className="relative mt-7 flex items-center gap-2 text-sm font-semibold text-blue-600 opacity-0 transition duration-300 group-hover:translate-x-1 group-hover:opacity-100">
-                Saiba mais
-                <ArrowIcon />
-              </div>
-            </article>
+            <Link
+              key={service.slug}
+              href={`/servicos/${service.slug}/`}
+              aria-label={`Saiba mais sobre ${service.title}`}
+              className="group rounded-3xl"
+            >
+              <article className="light-card relative h-full overflow-hidden rounded-3xl border border-slate-200 bg-white p-7">
+                <div className="absolute -right-12 -top-14 h-36 w-36 rounded-full bg-blue-50 transition duration-500 group-hover:scale-125 group-hover:bg-blue-100/70" />
+                <div className="relative flex items-center justify-between">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-50 text-sm font-bold text-blue-600 transition group-hover:bg-blue-600 group-hover:text-white">
+                    0{index + 1}
+                  </span>
+                  <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-r from-blue-500 to-violet-500" />
+                </div>
+                <h3 className="relative mt-8 text-lg font-bold uppercase leading-7 tracking-[0.015em] text-slate-900">{service.title}</h3>
+                <p className="relative mt-4 leading-7 text-slate-600">{service.description}</p>
+                <div className="relative mt-7 flex items-center gap-2 text-sm font-semibold text-blue-600 opacity-100 transition duration-300 group-hover:translate-x-1 lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-visible:opacity-100">
+                  Saiba mais
+                  <ArrowIcon />
+                </div>
+              </article>
+            </Link>
           ))}
         </div>
       </div>
