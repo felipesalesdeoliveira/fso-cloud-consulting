@@ -476,15 +476,15 @@ export function Hero({ locale = "pt" }: { locale?: "pt" | "en" }) {
           </div>
 
           <h1 className="max-w-4xl text-4xl font-bold leading-[1.07] tracking-[-0.045em] text-slate-950 md:text-6xl lg:text-[58px]">
-            {english ? "I turn operational complexity into " : "Transformo complexidade operacional em "}
+            {english ? "Reliable cloud infrastructure, " : "Transformo complexidade operacional em "}
             <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600 bg-clip-text text-transparent">
-              {english ? "reliable, scalable infrastructure." : "infraestrutura confiável e escalável."}
+              {english ? "built for production." : "infraestrutura confiável e escalável."}
             </span>
           </h1>
 
           <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-600">
             {english
-              ? "DevOps, SRE, Cloud and Observability consulting for companies that need greater stability, automated operations and better visibility across their environments."
+              ? "I help teams build, automate, and operate cloud platforms that are reliable, observable, and ready to scale."
               : "Consultoria especializada em DevOps, SRE, Cloud e Observabilidade para empresas que precisam aumentar a estabilidade, automatizar operações e ter mais visibilidade sobre seus ambientes."}
           </p>
 
@@ -493,7 +493,7 @@ export function Hero({ locale = "pt" }: { locale?: "pt" | "en" }) {
               href={english ? "#services" : "#servicos"}
               className="inline-flex w-full items-center justify-center gap-3 rounded-xl bg-blue-600 px-6 py-4 text-center text-sm font-semibold text-white shadow-[0_14px_32px_rgba(37,99,235,0.25)] transition duration-300 hover:-translate-y-1 hover:bg-blue-700 hover:shadow-[0_18px_40px_rgba(37,99,235,0.32)] sm:w-auto"
             >
-              {english ? "Explore my services" : "Conheça meus serviços"}
+              {english ? "View services" : "Conheça meus serviços"}
               <ArrowIcon />
             </a>
 
@@ -519,7 +519,7 @@ export function Hero({ locale = "pt" }: { locale?: "pt" | "en" }) {
               <p className="mt-1 text-xs leading-5 text-slate-500">{english ? "3+ years of experience · Florianópolis, Brazil" : "Mais de 3 anos de experiência · Florianópolis, SC"}</p>
             </div>
             <a href={english ? "#about" : "#sobre"} className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-xs font-bold text-white shadow-[0_8px_20px_rgba(37,99,235,0.22)] transition hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-[0_12px_26px_rgba(37,99,235,0.3)] sm:w-auto">
-              {english ? "My background" : "Minha trajetória"} <span aria-hidden="true">→</span>
+              {english ? "About me" : "Minha trajetória"} <span aria-hidden="true">→</span>
             </a>
           </div>
 

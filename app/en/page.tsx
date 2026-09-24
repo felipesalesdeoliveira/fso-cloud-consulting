@@ -6,7 +6,7 @@ import { About, Articles, Footer, Process, Projects, Services, Technologies } fr
 import { siteConfig, siteImage } from "@/lib/site";
 
 const title = "FSO Cloud Consulting | DevOps & Reliability Engineering";
-const description = "DevOps, SRE, Cloud, Observability, Kubernetes and reliability consulting for production environments.";
+const description = "DevOps and SRE consulting for reliable cloud infrastructure, automation, Kubernetes, observability, and production operations.";
 
 export const metadata: Metadata = {
   title,

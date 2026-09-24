@@ -45,10 +45,10 @@ export function Contact({ locale = "pt" }: { locale?: "pt" | "en" }) {
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-300">{english ? "Contact" : "Contato"}</p>
             <h2 className="mt-5 max-w-2xl text-3xl font-bold leading-[1.1] tracking-[-0.035em] md:text-5xl">
-              {english ? "Is your infrastructure ready to scale reliably?" : "Sua infraestrutura está preparada para crescer com confiabilidade?"}
+              {english ? "Let's build a more reliable platform." : "Sua infraestrutura está preparada para crescer com confiabilidade?"}
             </h2>
             <p className="mt-7 max-w-xl text-lg leading-8 text-slate-300">
-              {english ? "I want to understand your environment and identify opportunities for automation, observability, stability and cost efficiency." : "Quero conhecer os desafios do seu ambiente e ajudar a identificar oportunidades de automação, observabilidade, estabilidade e redução de custos."}
+              {english ? "Tell me about your environment and the challenges you are facing. I can help identify practical ways to improve automation, observability, reliability, and cloud efficiency." : "Quero conhecer os desafios do seu ambiente e ajudar a identificar oportunidades de automação, observabilidade, estabilidade e redução de custos."}
             </p>
             <a
               href="https://wa.me/5548996297388?text=Ol%C3%A1%21%20Conheci%20a%20FSO%20Cloud%20Consulting%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20os%20servi%C3%A7os."

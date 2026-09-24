@@ -1,32 +1,32 @@
 export const servicesEn = [
-  { slug: "infrastructure-reliability-assessment", title: "Infrastructure and reliability assessment", description: "Technical assessment to identify risks, bottlenecks, recurring failures and improvement opportunities." },
-  { slug: "observability-monitoring", title: "Observability and monitoring", description: "Metrics, logs, traces, dashboards and actionable alerts for greater visibility and faster incident investigation." },
-  { slug: "infrastructure-automation-cicd", title: "Infrastructure automation and CI/CD", description: "Automated environments, pipelines, deployments and operational processes with greater consistency and safety." },
-  { slug: "cloud-cost-optimization", title: "Cloud and cost optimization", description: "Architecture and consumption analysis to optimize cloud resources without compromising performance or reliability." },
-  { slug: "kubernetes-container-platforms", title: "Kubernetes and container platforms", description: "Implementation, evolution and troubleshooting of clusters and workloads for stable production operations." },
-  { slug: "sre-reliability-management", title: "SRE practices and reliability management", description: "Reliability indicators and objectives, incident management and data-driven continuous improvement." },
+  { slug: "infrastructure-reliability-assessment", title: "Infrastructure & reliability assessment", description: "A focused review of your environment to uncover operational risks, performance bottlenecks, recurring failures, and opportunities to improve." },
+  { slug: "observability-monitoring", title: "Observability & monitoring", description: "Metrics, logs, traces, dashboards, and actionable alerts that make systems easier to understand and incidents faster to resolve." },
+  { slug: "infrastructure-automation-cicd", title: "Infrastructure automation & CI/CD", description: "Repeatable infrastructure, delivery pipelines, and operational workflows designed to make changes safer and more consistent." },
+  { slug: "cloud-cost-optimization", title: "Cloud architecture & cost optimization", description: "Architecture and usage reviews that reduce unnecessary cloud spend without trading away performance or reliability." },
+  { slug: "kubernetes-container-platforms", title: "Kubernetes & container platforms", description: "Design, improvement, and troubleshooting of clusters and workloads for dependable day-to-day production operations." },
+  { slug: "sre-reliability-management", title: "SRE & reliability management", description: "Service-level objectives, reliability indicators, incident practices, and continuous improvement grounded in operational data." },
 ];
 
 export const processEn = [
-  { step: "01", title: "Assessment", text: "Understanding the environment, technical challenges, constraints and business objectives." },
-  { step: "02", title: "Planning", text: "Defining priorities, technical approach, risks, responsibilities and deliverables." },
-  { step: "03", title: "Implementation", text: "Controlled execution with validation, documentation and technical follow-up." },
-  { step: "04", title: "Continuous evolution", text: "Reviewing outcomes, transferring knowledge and defining the next steps." },
+  { step: "01", title: "Discovery", text: "I learn how the environment works today, where the risks are, and what the business needs to achieve." },
+  { step: "02", title: "Planning", text: "I define the priorities, technical approach, responsibilities, risks, and expected deliverables." },
+  { step: "03", title: "Delivery", text: "I implement the solution in controlled stages, with validation, documentation, and clear communication throughout." },
+  { step: "04", title: "Handover", text: "I review the outcome, share the operational knowledge, and make sure the team is ready to own the solution." },
 ];
 
 export const projectsEn = [
   {
     slug: "frontend-cdn-s3-tls-custom-domain",
     category: "AWS & CDN",
-    title: "Frontend with CDN, S3, TLS and custom domain",
-    description: "React SPA hosted in a private S3 bucket and globally distributed through CloudFront, with ACM TLS and Route 53 DNS.",
-    challenge: "Publish a low-latency SPA on a custom domain while protecting the origin and preserving client-side routes.",
-    solution: "Private S3 origin, CloudFront, ACM, Route 53, OAC and SPA route fallback to index.html.",
-    result: "Global CDN delivery, enforced HTTPS, working SPA routes and blocked direct access to the bucket.",
+    title: "Secure frontend delivery on AWS",
+    description: "A React SPA served from a private S3 origin through CloudFront, with managed TLS and DNS in Route 53.",
+    challenge: "Deliver a low-latency SPA on a custom domain without exposing the origin or breaking client-side routing.",
+    solution: "A private S3 origin protected by OAC, fronted by CloudFront, ACM, and Route 53, with a dedicated SPA routing fallback.",
+    result: "Fast global delivery, HTTPS by default, reliable client-side routes, and no direct public access to the bucket.",
     status: "Completed", technologies: ["React", "Amazon S3", "CloudFront", "ACM", "Route 53", "OAC"],
   },
-  { slug: null, category: "Kubernetes", title: "Observability in distributed environments", description: "Centralized metrics, logs and operational indicators for faster incident investigation.", status: "Coming soon", challenge: null, solution: null, result: null, technologies: [] },
-  { slug: null, category: "Cloud & IaC", title: "Automated cloud infrastructure", description: "Provisioning and standardization through infrastructure as code and automation practices.", status: "Coming soon", challenge: null, solution: null, result: null, technologies: [] },
+  { slug: null, category: "Kubernetes", title: "Observability for distributed systems", description: "Centralized metrics, logs, and operational signals designed to speed up incident investigation.", status: "Coming soon", challenge: null, solution: null, result: null, technologies: [] },
+  { slug: null, category: "Cloud & IaC", title: "Cloud infrastructure as code", description: "Repeatable, standardized cloud environments delivered through infrastructure as code and automation.", status: "Coming soon", challenge: null, solution: null, result: null, technologies: [] },
 ];
 
 export const articlesEn = [
@@ -35,7 +35,7 @@ export const articlesEn = [
   { category: "Cloud & FinOps", title: "FinOps beyond cost reduction", description: "Optimizing cloud environments without compromising performance, stability or growth.", readingTime: "7 min read", status: "Coming soon" },
 ];
 
-export const highlightsEn = ["3+ years of experience in DevOps and SRE", "Hands-on work in production environments", "AWS, Terraform, Kubernetes, CI/CD and GitOps", "Observability, troubleshooting and reliability"];
+export const highlightsEn = ["3+ years in DevOps and SRE", "Hands-on production experience", "AWS, Terraform, Kubernetes, CI/CD, and GitOps", "Observability, incident response, and reliability"];
 
 export const technologyCopyEn: Record<string, { title: string; description: string }> = {
   Cloud: { title: "Cloud", description: "Platforms used to build and operate secure, scalable and highly available environments." },
