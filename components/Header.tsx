@@ -7,7 +7,7 @@ import { navItems } from "@/data/content";
 import { publicAsset } from "@/lib/paths";
 
 const englishNavItems = [
-  { label: "Home", href: "/en/" },
+  { label: "Home", href: "/en/#home" },
   { label: "Services", href: "/en/#services" },
   { label: "Process", href: "/en/#process" },
   { label: "About", href: "/en/#about" },
@@ -28,7 +28,7 @@ export function Header({ locale = "pt" }: { locale?: "pt" | "en" }) {
   return (
     <header className="fixed left-0 top-0 z-50 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
       <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-6">
-        <Link href={locale === "en" ? "/en/" : "/"} className="group" onClick={closeMenu}>
+        <Link href={locale === "en" ? "/en/#home" : "/#inicio"} className="group" onClick={closeMenu}>
           <Image
             src={publicAsset("/logo-fso-cloud-consulting.png")}
             alt="FSO Cloud Consulting"

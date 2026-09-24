@@ -446,7 +446,7 @@ export function Hero({ locale = "pt" }: { locale?: "pt" | "en" }) {
 
   return (
     <section
-      id="inicio"
+      id={english ? "home" : "inicio"}
       onMouseMove={handleHeroMouseMove}
       onMouseLeave={resetHeroPosition}
       className="relative flex min-h-[calc(100svh-96px)] scroll-mt-24 items-center overflow-hidden px-6 py-16 lg:py-20"
