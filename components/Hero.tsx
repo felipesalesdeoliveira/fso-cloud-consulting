@@ -480,7 +480,7 @@ export function Hero() {
               href="#servicos"
               className="inline-flex w-full items-center justify-center gap-3 rounded-xl bg-blue-600 px-6 py-4 text-center text-sm font-semibold text-white shadow-[0_14px_32px_rgba(37,99,235,0.25)] transition duration-300 hover:-translate-y-1 hover:bg-blue-700 hover:shadow-[0_18px_40px_rgba(37,99,235,0.32)] sm:w-auto"
             >
-              Conheça nossos serviços
+              Conheça meus serviços
               <ArrowIcon />
             </a>
 
@@ -488,7 +488,7 @@ export function Hero() {
               href="#contato"
               className="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 bg-white/80 px-6 py-4 text-center text-sm font-semibold text-slate-700 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:text-blue-700 hover:shadow-lg sm:w-auto"
             >
-              Vamos conversar
+              Fale comigo
             </a>
           </div>
 
