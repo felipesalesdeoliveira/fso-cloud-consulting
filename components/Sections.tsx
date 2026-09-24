@@ -144,6 +144,34 @@ export function About() {
   );
 }
 
+function ProjectMiniArchitecture() {
+  const nodes = [
+    { icon: "route-53.svg", label: "Route 53" },
+    { icon: "cloudfront.svg", label: "CloudFront" },
+    { icon: "s3.svg", label: "S3" },
+  ];
+
+  return (
+    <div className="absolute inset-x-5 bottom-5 top-[4.25rem] flex items-center justify-center" aria-hidden="true">
+      <div className="relative flex items-center gap-2 rounded-2xl border border-white/80 bg-white/65 px-4 py-3 shadow-[0_12px_35px_rgba(37,99,235,0.10)] backdrop-blur-sm">
+        {nodes.map((node, nodeIndex) => (
+          <div key={node.label} className="contents">
+            {nodeIndex > 0 && <span className="text-lg font-bold text-blue-400/70">→</span>}
+            <div className="flex w-16 flex-col items-center gap-1.5">
+              <Image src={publicAsset(`/aws-icons/${node.icon}`)} alt="" width={40} height={40} className="h-10 w-10 rounded-lg shadow-sm transition duration-500 group-hover:-translate-y-1" />
+              <span className="text-[10px] font-bold text-slate-600">{node.label}</span>
+            </div>
+          </div>
+        ))}
+        <div className="absolute -bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-rose-100 bg-white px-2 py-1 shadow-sm">
+          <Image src={publicAsset("/aws-icons/acm.svg")} alt="" width={20} height={20} className="h-5 w-5 rounded" />
+          <span className="text-[9px] font-bold text-rose-700">TLS</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function Projects() {
   return (
     <section id="projetos" className="scroll-mt-24 bg-[#F3F6FB] px-6 py-24">
@@ -170,7 +198,8 @@ export function Projects() {
                 <span className="absolute left-7 top-7 rounded-full border border-white/80 bg-white/75 px-3 py-1.5 text-xs font-bold text-blue-600 shadow-sm backdrop-blur">
                   {project.category}
                 </span>
-                <span className="absolute bottom-6 right-7 text-5xl font-bold text-blue-950/[0.08]">0{index + 1}</span>
+                {project.slug && <ProjectMiniArchitecture />}
+                {!project.slug && <span className="absolute bottom-6 right-7 text-5xl font-bold text-blue-950/[0.08]">0{index + 1}</span>}
               </div>
               <div className="flex h-[calc(100%-12rem)] flex-col p-7">
                 <h3 className="text-xl font-bold text-slate-900">{project.title}</h3>
