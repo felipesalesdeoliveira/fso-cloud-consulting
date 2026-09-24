@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowIcon } from "@/components/icons/CustomIcons";
 import { articles, highlights, processSteps, projects, services } from "@/data/content";
+import { articlesEn, highlightsEn, processEn, projectsEn, servicesEn, technologyCopyEn } from "@/data/content-en";
 import { technologyCategories, type Technology } from "@/data/technologies";
 import { publicAsset } from "@/lib/paths";
 
@@ -24,24 +25,26 @@ function TechnologyItem({ technology }: { technology: Technology }) {
   );
 }
 
-export function Services() {
+export function Services({ locale = "pt" }: { locale?: "pt" | "en" }) {
+  const english = locale === "en";
+  const items = english ? servicesEn : services;
   return (
-    <section id="servicos" className="scroll-mt-24 border-y border-slate-200/80 bg-white px-6 py-24">
+    <section id={english ? "services" : "servicos"} className="scroll-mt-24 border-y border-slate-200/80 bg-white px-6 py-24">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
-          <p className="section-label">Serviços</p>
-          <h2 className="section-title">Soluções para ambientes mais confiáveis e eficientes</h2>
+          <p className="section-label">{english ? "Services" : "Serviços"}</p>
+          <h2 className="section-title">{english ? "Solutions for more reliable and efficient environments" : "Soluções para ambientes mais confiáveis e eficientes"}</h2>
           <p className="section-description">
-            Atuação técnica direcionada aos principais desafios de infraestrutura, confiabilidade, automação e operação em nuvem.
+            {english ? "Hands-on technical work focused on infrastructure, reliability, automation and cloud operations." : "Atuação técnica direcionada aos principais desafios de infraestrutura, confiabilidade, automação e operação em nuvem."}
           </p>
         </div>
 
         <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => (
+          {items.map((service, index) => (
             <Link
               key={service.slug}
-              href={`/servicos/${service.slug}/`}
-              aria-label={`Saiba mais sobre ${service.title}`}
+              href={english ? `/en/services/${service.slug}/` : `/servicos/${service.slug}/`}
+              aria-label={`${english ? "Learn more about" : "Saiba mais sobre"} ${service.title}`}
               className="group rounded-3xl"
             >
               <article className="light-card relative h-full overflow-hidden rounded-3xl border border-slate-200 bg-white p-7">
@@ -55,7 +58,7 @@ export function Services() {
                 <h3 className="relative mt-8 text-lg font-bold uppercase leading-7 tracking-[0.015em] text-slate-900">{service.title}</h3>
                 <p className="relative mt-4 leading-7 text-slate-600">{service.description}</p>
                 <div className="relative mt-7 flex items-center gap-2 text-sm font-semibold text-blue-600 opacity-100 transition duration-300 group-hover:translate-x-1 lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-visible:opacity-100">
-                  Saiba mais
+                  {english ? "Learn more" : "Saiba mais"}
                   <ArrowIcon />
                 </div>
               </article>
@@ -67,28 +70,30 @@ export function Services() {
   );
 }
 
-export function Process() {
+export function Process({ locale = "pt" }: { locale?: "pt" | "en" }) {
+  const english = locale === "en";
+  const items = english ? processEn : processSteps;
   return (
-    <section id="processo" className="relative scroll-mt-24 overflow-hidden bg-[#EEF4FF] px-6 py-24">
+    <section id={english ? "process" : "processo"} className="relative scroll-mt-24 overflow-hidden bg-[#EEF4FF] px-6 py-24">
       <div className="pointer-events-none absolute -right-40 top-1/2 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-violet-200/35 blur-[110px]" />
       <div className="pointer-events-none absolute -left-40 bottom-0 h-[380px] w-[380px] rounded-full bg-cyan-200/30 blur-[100px]" />
       <div className="relative mx-auto max-w-7xl">
         <div className="max-w-3xl">
-          <p className="section-label">Como funciona</p>
-          <h2 className="section-title">Um processo claro do diagnóstico à evolução</h2>
+          <p className="section-label">{english ? "How it works" : "Como funciona"}</p>
+          <h2 className="section-title">{english ? "A clear process from assessment to delivery" : "Um processo claro do diagnóstico à evolução"}</h2>
           <p className="section-description">
-            Cada projeto começa com a compreensão do cenário atual e evolui com prioridades claras, acompanhamento técnico e entregas alinhadas às necessidades da empresa.
+            {english ? "Every engagement starts with context and progresses through clear priorities, technical follow-up and aligned deliverables." : "Cada projeto começa com a compreensão do cenário atual e evolui com prioridades claras, acompanhamento técnico e entregas alinhadas às necessidades da empresa."}
           </p>
         </div>
 
         <div className="relative mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <div className="absolute left-[8%] right-[8%] top-8 hidden h-[2px] bg-gradient-to-r from-blue-200 via-blue-500/50 to-violet-200 lg:block" />
-          {processSteps.map((item, index) => (
+          {items.map((item, index) => (
             <article key={item.step} className="light-card relative z-10 rounded-3xl border border-white/90 bg-white/80 p-7 backdrop-blur-lg">
               <div className="flex h-16 w-16 items-center justify-center rounded-full border-4 border-white bg-gradient-to-br from-blue-600 to-violet-600 text-sm font-bold text-white shadow-[0_12px_30px_rgba(37,99,235,0.25)]">
                 {item.step}
               </div>
-              <p className="mt-6 text-xs font-bold uppercase tracking-[0.15em] text-blue-600">Etapa {index + 1}</p>
+              <p className="mt-6 text-xs font-bold uppercase tracking-[0.15em] text-blue-600">{english ? "Step" : "Etapa"} {index + 1}</p>
               <h3 className="mt-3 text-xl font-bold text-slate-900">{item.title}</h3>
               <p className="mt-4 leading-7 text-slate-600">{item.text}</p>
             </article>
@@ -99,22 +104,24 @@ export function Process() {
   );
 }
 
-export function About() {
+export function About({ locale = "pt" }: { locale?: "pt" | "en" }) {
+  const english = locale === "en";
+  const items = english ? highlightsEn : highlights;
   return (
-    <section id="sobre" className="scroll-mt-24 border-y border-slate-200/80 bg-white px-6 py-24">
+    <section id={english ? "about" : "sobre"} className="scroll-mt-24 border-y border-slate-200/80 bg-white px-6 py-24">
       <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[1.08fr_0.92fr]">
         <div>
-          <p className="section-label">Sobre</p>
-          <h2 className="section-title">DevOps e SRE aplicados a ambientes de produção.</h2>
+          <p className="section-label">{english ? "About" : "Sobre"}</p>
+          <h2 className="section-title">{english ? "DevOps and SRE applied to production environments." : "DevOps e SRE aplicados a ambientes de produção."}</h2>
           <div className="mt-8 max-w-3xl space-y-5 text-lg leading-8 text-slate-600">
             <p>
-              Sou DevOps Engineer/SRE com mais de 3 anos de experiência em infraestrutura cloud, automação, Kubernetes, CI/CD e observabilidade, atuando na construção, operação e evolução de ambientes de produção.
+              {english ? "I am a DevOps Engineer and SRE with more than three years of experience in cloud infrastructure, automation, Kubernetes, CI/CD and observability, building and operating production environments." : "Sou DevOps Engineer/SRE com mais de 3 anos de experiência em infraestrutura cloud, automação, Kubernetes, CI/CD e observabilidade, atuando na construção, operação e evolução de ambientes de produção."}
             </p>
             <p>
-              Tenho experiência prática com AWS, Terraform, Docker, Kubernetes, Helm, GitHub Actions, Jenkins e Argo CD, além da implementação de soluções de observabilidade com Prometheus, Grafana, Loki, Elastic Stack e OpenTelemetry. Minha atuação também envolve troubleshooting, investigação de incidentes e colaboração com equipes de desenvolvimento e infraestrutura.
+              {english ? "I have hands-on experience with AWS, Terraform, Docker, Kubernetes, Helm, GitHub Actions, Jenkins and Argo CD, as well as Prometheus, Grafana, Loki, Elastic Stack and OpenTelemetry. My work also covers troubleshooting, incident investigation and collaboration with development and infrastructure teams." : "Tenho experiência prática com AWS, Terraform, Docker, Kubernetes, Helm, GitHub Actions, Jenkins e Argo CD, além da implementação de soluções de observabilidade com Prometheus, Grafana, Loki, Elastic Stack e OpenTelemetry. Minha atuação também envolve troubleshooting, investigação de incidentes e colaboração com equipes de desenvolvimento e infraestrutura."}
             </p>
             <p>
-              Minha formação anterior em Engenharia Civil contribuiu para uma visão estruturada de planejamento, riscos, custos e resolução de problemas. À frente da FSO Cloud Consulting, aplico essa experiência para desenvolver soluções confiáveis, automatizadas e alinhadas às necessidades de cada ambiente.
+              {english ? "My previous background in Civil Engineering contributes a structured perspective on planning, risk, cost and problem solving. Through FSO Cloud Consulting, I apply this experience to deliver reliable, automated solutions aligned with each environment." : "Minha formação anterior em Engenharia Civil contribuiu para uma visão estruturada de planejamento, riscos, custos e resolução de problemas. À frente da FSO Cloud Consulting, aplico essa experiência para desenvolver soluções confiáveis, automatizadas e alinhadas às necessidades de cada ambiente."}
             </p>
           </div>
           <a
@@ -122,14 +129,14 @@ export function About() {
             download="felipe-sales-devops-engineer.pdf"
             className="mt-9 inline-flex items-center gap-3 rounded-xl border border-slate-300 bg-white px-5 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:text-blue-600 hover:shadow-lg"
           >
-            Baixar currículo
+            {english ? "Download résumé" : "Baixar currículo"}
             <ArrowIcon />
           </a>
         </div>
         <div className="relative">
           <div className="absolute inset-12 rounded-full bg-blue-200/40 blur-[75px]" />
           <div className="relative grid gap-4">
-            {highlights.map((item, index) => (
+            {items.map((item, index) => (
               <div key={item} className="light-card group flex items-center gap-5 rounded-3xl border border-slate-200 bg-[#F8FAFD] p-6">
                 <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white font-bold text-blue-600 shadow-sm transition group-hover:bg-blue-600 group-hover:text-white">
                   0{index + 1}
@@ -144,18 +151,20 @@ export function About() {
   );
 }
 
-export function Projects() {
-  const featuredProject = projects.find((project) => project.slug);
-  const upcomingProjects = projects.filter((project) => !project.slug);
+export function Projects({ locale = "pt" }: { locale?: "pt" | "en" }) {
+  const english = locale === "en";
+  const source = english ? projectsEn : projects;
+  const featuredProject = source.find((project) => project.slug);
+  const upcomingProjects = source.filter((project) => !project.slug);
 
   return (
-    <section id="projetos" className="scroll-mt-24 bg-[#F3F6FB] px-6 py-24">
+    <section id={english ? "projects" : "projetos"} className="scroll-mt-24 bg-[#F3F6FB] px-6 py-24">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
-          <p className="section-label">Projetos e casos técnicos</p>
-          <h2 className="section-title">Experiência aplicada a desafios reais</h2>
+          <p className="section-label">{english ? "Projects and technical cases" : "Projetos e casos técnicos"}</p>
+          <h2 className="section-title">{english ? "Experience applied to real challenges" : "Experiência aplicada a desafios reais"}</h2>
           <p className="section-description">
-            Casos técnicos que demonstram uma abordagem prática para confiabilidade, observabilidade, automação e infraestrutura.
+            {english ? "Technical cases that demonstrate a practical approach to reliability, observability, automation and infrastructure." : "Casos técnicos que demonstram uma abordagem prática para confiabilidade, observabilidade, automação e infraestrutura."}
           </p>
         </div>
         {featuredProject && (
@@ -170,17 +179,17 @@ export function Projects() {
               <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">{featuredProject.description}</p>
 
               <div className="mt-9 grid gap-5 lg:grid-cols-3">
-                <div className="rounded-2xl border border-slate-200 bg-[#F8FAFD] p-6"><p className="text-xs font-bold uppercase tracking-[0.15em] text-slate-500">Desafio</p><p className="mt-4 leading-7 text-slate-700">{featuredProject.challenge}</p></div>
-                <div className="rounded-2xl border border-blue-100 bg-blue-50/60 p-6"><p className="text-xs font-bold uppercase tracking-[0.15em] text-blue-700">Solução</p><p className="mt-4 leading-7 text-slate-700">{featuredProject.solution}</p></div>
-                <div className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-6"><p className="text-xs font-bold uppercase tracking-[0.15em] text-emerald-700">Resultado</p><p className="mt-4 leading-7 text-slate-700">{featuredProject.result}</p></div>
+                <div className="rounded-2xl border border-slate-200 bg-[#F8FAFD] p-6"><p className="text-xs font-bold uppercase tracking-[0.15em] text-slate-500">{english ? "Challenge" : "Desafio"}</p><p className="mt-4 leading-7 text-slate-700">{featuredProject.challenge}</p></div>
+                <div className="rounded-2xl border border-blue-100 bg-blue-50/60 p-6"><p className="text-xs font-bold uppercase tracking-[0.15em] text-blue-700">{english ? "Solution" : "Solução"}</p><p className="mt-4 leading-7 text-slate-700">{featuredProject.solution}</p></div>
+                <div className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-6"><p className="text-xs font-bold uppercase tracking-[0.15em] text-emerald-700">{english ? "Outcome" : "Resultado"}</p><p className="mt-4 leading-7 text-slate-700">{featuredProject.result}</p></div>
               </div>
 
               <div className="mt-8 flex flex-col gap-6 border-t border-slate-200 pt-7 lg:flex-row lg:items-center lg:justify-between">
                 <div className="flex flex-wrap gap-2">
                   {featuredProject.technologies.map((technology) => <span key={technology} className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600">{technology}</span>)}
                 </div>
-                <Link href={`/projetos/${featuredProject.slug}`} className="inline-flex w-fit shrink-0 items-center gap-3 rounded-xl bg-blue-600 px-6 py-4 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-blue-700">
-                  Ver case completo <ArrowIcon />
+                <Link href={english ? `/en/projects/${featuredProject.slug}/` : `/projetos/${featuredProject.slug}`} className="inline-flex w-fit shrink-0 items-center gap-3 rounded-xl bg-blue-600 px-6 py-4 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-blue-700">
+                  {english ? "View full case" : "Ver case completo"} <ArrowIcon />
                 </Link>
               </div>
             </div>
@@ -203,25 +212,27 @@ export function Projects() {
   );
 }
 
-export function Articles() {
+export function Articles({ locale = "pt" }: { locale?: "pt" | "en" }) {
+  const english = locale === "en";
+  const items = english ? articlesEn : articles;
   return (
-    <section id="artigos" className="scroll-mt-24 border-y border-slate-200/80 bg-white px-6 py-24">
+    <section id={english ? "articles" : "artigos"} className="scroll-mt-24 border-y border-slate-200/80 bg-white px-6 py-24">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
-            <p className="section-label">Artigos e conhecimento</p>
-            <h2 className="section-title">Conteúdo técnico para decisões mais conscientes</h2>
+            <p className="section-label">{english ? "Articles and knowledge" : "Artigos e conhecimento"}</p>
+            <h2 className="section-title">{english ? "Technical content for better decisions" : "Conteúdo técnico para decisões mais conscientes"}</h2>
             <p className="section-description">
-              Reflexões, guias e experiências práticas sobre DevOps, SRE, Cloud, Observabilidade e os desafios reais da operação de ambientes modernos.
+              {english ? "Practical perspectives on DevOps, SRE, Cloud, Observability and the challenges of modern production environments." : "Reflexões, guias e experiências práticas sobre DevOps, SRE, Cloud, Observabilidade e os desafios reais da operação de ambientes modernos."}
             </p>
           </div>
-          <a href="#artigos" className="inline-flex w-fit items-center gap-3 text-sm font-bold text-blue-600 transition hover:gap-4 hover:text-blue-700">
-            Ver todos os artigos
+          <a href={english ? "#articles" : "#artigos"} className="inline-flex w-fit items-center gap-3 text-sm font-bold text-blue-600 transition hover:gap-4 hover:text-blue-700">
+            {english ? "View all articles" : "Ver todos os artigos"}
             <ArrowIcon />
           </a>
         </div>
         <div className="mt-14 grid gap-6 lg:grid-cols-3">
-          {articles.map((article, index) => (
+          {items.map((article, index) => (
             <article key={article.title} className="light-card group relative flex min-h-[390px] flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white p-7">
               <div className="absolute -right-16 -top-16 h-52 w-52 rounded-full bg-gradient-to-br from-blue-100 to-violet-100 transition duration-700 group-hover:scale-125" />
               <div className="relative flex items-center justify-between">
@@ -245,9 +256,10 @@ export function Articles() {
   );
 }
 
-export function Technologies() {
+export function Technologies({ locale = "pt" }: { locale?: "pt" | "en" }) {
+  const english = locale === "en";
   return (
-    <section id="tecnologias" className="relative scroll-mt-24 overflow-hidden bg-[#EDF4FF] px-6 py-24">
+    <section id={english ? "technologies" : "tecnologias"} className="relative scroll-mt-24 overflow-hidden bg-[#EDF4FF] px-6 py-24">
       <div className="pointer-events-none absolute -left-40 top-0 h-96 w-96 rounded-full bg-cyan-200/35 blur-[100px]" />
       <div className="pointer-events-none absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-violet-200/35 blur-[100px]" />
       <div
@@ -264,16 +276,16 @@ export function Technologies() {
       <div className="relative mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.55fr] lg:items-end">
           <div className="max-w-3xl">
-            <p className="section-label">Tecnologias e competências</p>
-            <h2 className="section-title">Ferramentas aplicadas de acordo com o desafio</h2>
+            <p className="section-label">{english ? "Technologies and capabilities" : "Tecnologias e competências"}</p>
+            <h2 className="section-title">{english ? "Tools selected for each challenge" : "Ferramentas aplicadas de acordo com o desafio"}</h2>
             <p className="section-description">
-              Cada tecnologia é escolhida conforme o contexto, os objetivos, a arquitetura e o nível de maturidade de cada ambiente.
+              {english ? "Each technology is selected according to context, objectives, architecture and operational maturity." : "Cada tecnologia é escolhida conforme o contexto, os objetivos, a arquitetura e o nível de maturidade de cada ambiente."}
             </p>
           </div>
           <div className="rounded-3xl border border-white/90 bg-white/60 p-6 shadow-[0_18px_50px_rgba(37,99,235,0.08)] backdrop-blur-xl">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">Abordagem</p>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">{english ? "Approach" : "Abordagem"}</p>
             <p className="mt-3 leading-7 text-slate-600">
-              A ferramenta não é o objetivo. Ela é aplicada para aumentar confiabilidade, eficiência operacional e capacidade de evolução.
+              {english ? "The tool is not the goal. It is applied to improve reliability, operational efficiency and the ability to evolve." : "A ferramenta não é o objetivo. Ela é aplicada para aumentar confiabilidade, eficiência operacional e capacidade de evolução."}
             </p>
           </div>
         </div>
@@ -290,13 +302,13 @@ export function Technologies() {
                   <div>
                     <div className="flex items-center gap-3">
                       <span className="h-9 w-1 rounded-full bg-gradient-to-b from-blue-600 via-cyan-500 to-violet-500" />
-                      <h3 className="text-sm font-bold uppercase tracking-[0.08em] text-slate-950">{category.title}</h3>
+                      <h3 className="text-sm font-bold uppercase tracking-[0.08em] text-slate-950">{english ? technologyCopyEn[category.title].title : category.title}</h3>
                     </div>
-                    <p className="mt-5 max-w-xl text-sm leading-6 text-slate-500">{category.description}</p>
+                    <p className="mt-5 max-w-xl text-sm leading-6 text-slate-500">{english ? technologyCopyEn[category.title].description : category.description}</p>
                   </div>
                   {category.featured && (
                     <span className="shrink-0 rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-blue-600">
-                      Foco principal
+                      {english ? "Primary focus" : "Foco principal"}
                     </span>
                   )}
                 </div>
@@ -312,13 +324,13 @@ export function Technologies() {
 
         <div className="mt-8 flex flex-col gap-5 rounded-3xl bg-gradient-to-r from-blue-600 via-blue-600 to-violet-600 p-7 text-white shadow-[0_20px_55px_rgba(37,99,235,0.18)] md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-100">Mais do que ferramentas</p>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-100">{english ? "More than tools" : "Mais do que ferramentas"}</p>
             <p className="mt-2 max-w-3xl text-lg font-semibold leading-7">
-              Arquitetura, automação e observabilidade conectadas para sustentar ambientes mais confiáveis.
+              {english ? "Architecture, automation and observability connected to support more reliable environments." : "Arquitetura, automação e observabilidade conectadas para sustentar ambientes mais confiáveis."}
             </p>
           </div>
-          <a href="#contato" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-blue-700 shadow-lg transition duration-300 hover:-translate-y-1 hover:bg-blue-50">
-            Conversar sobre o ambiente
+          <a href={english ? "#contact" : "#contato"} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-blue-700 shadow-lg transition duration-300 hover:-translate-y-1 hover:bg-blue-50">
+            {english ? "Discuss your environment" : "Conversar sobre o ambiente"}
             <ArrowIcon />
           </a>
         </div>

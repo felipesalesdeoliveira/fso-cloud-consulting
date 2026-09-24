@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { services } from "@/data/content";
+import { servicesEn } from "@/data/content-en";
 import { siteConfig } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -18,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
   ];
+  const englishServicePages: MetadataRoute.Sitemap = servicesEn.map((service) => ({ url: `${siteConfig.url}/en/services/${service.slug}/`, changeFrequency: "monthly", priority: 0.8 }));
 
   return [
     {
@@ -36,6 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     ...servicePages,
+    ...englishServicePages,
     ...projectPages,
   ];
 }

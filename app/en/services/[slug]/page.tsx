@@ -1,0 +1,20 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Sections";
+import { ArrowIcon } from "@/components/icons/CustomIcons";
+import { servicesEn } from "@/data/content-en";
+import { siteConfig } from "@/lib/site";
+
+type Props = { params: Promise<{ slug: string }> };
+export const dynamicParams = false;
+export function generateStaticParams() { return servicesEn.map(({ slug }) => ({ slug })); }
+export async function generateMetadata({ params }: Props): Promise<Metadata> { const { slug } = await params; const service = servicesEn.find(item => item.slug === slug); return service ? { title: `${service.title} | FSO Cloud Consulting`, description: service.description, alternates: { canonical: `${siteConfig.url}/en/services/${slug}/` } } : {}; }
+
+export default async function EnglishServicePage({ params }: Props) {
+  const { slug } = await params; const service = servicesEn.find(item => item.slug === slug); if (!service) notFound();
+  const deliverables = ["Current-state architecture and operational assessment", "Prioritized technical recommendations and implementation plan", "Configuration, validation and technical documentation", "Knowledge transfer and operational guidance"];
+  const benefits = ["Clearer technical priorities and reduced operational risk", "More consistent, visible and maintainable environments", "Decisions aligned with reliability and business needs"];
+  return <><Header locale="en" /><main className="bg-[#F8FAFD] pt-24 text-slate-900"><section className="border-b border-slate-200 px-6 py-20 md:py-28"><div className="mx-auto max-w-5xl"><Link href="/en/#services" className="text-sm font-semibold text-blue-600">← Back to services</Link><p className="section-label mt-10">Specialized service</p><h1 className="mt-5 max-w-4xl text-4xl font-bold tracking-[-0.04em] md:text-6xl">{service.title}</h1><p className="mt-7 max-w-3xl text-xl leading-9 text-slate-600">{service.description}</p></div></section><section className="bg-white px-6 py-20"><div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-2"><div><p className="section-label">Overview</p><h2 className="section-title">How I can support your operation</h2><p className="mt-7 text-lg leading-8 text-slate-600">I adapt the engagement to the environment, technical maturity and business priorities, combining assessment, implementation, validation and clear documentation.</p></div><aside className="rounded-3xl border border-blue-100 bg-blue-50 p-8"><p className="text-xs font-bold uppercase tracking-wider text-blue-600">Best suited for</p><p className="mt-4 leading-7 text-slate-700">Teams that need to reduce operational risk, improve reliability and establish sustainable technical practices.</p></aside></div></section><section className="border-y border-slate-200 bg-[#F3F6FB] px-6 py-20"><div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-2"><div><p className="section-label">Potential deliverables</p><h2 className="section-title">What the engagement may include</h2><ul className="mt-8 grid gap-4">{deliverables.map(item => <li key={item} className="rounded-2xl border border-slate-200 bg-white p-5 text-slate-700">{item}</li>)}</ul></div><div><p className="section-label">Expected outcomes</p><h2 className="section-title">Benefits for the environment</h2><ul className="mt-8 grid gap-4">{benefits.map(item => <li key={item} className="rounded-2xl bg-white p-5 text-slate-700 shadow-sm">{item}</li>)}</ul></div></div></section><section className="bg-white px-6 py-20"><div className="mx-auto max-w-5xl rounded-[36px] bg-[#101C3C] p-8 text-white md:p-14"><p className="text-sm font-bold uppercase tracking-wider text-blue-300">Next step</p><h2 className="mt-5 max-w-3xl text-3xl font-bold md:text-5xl">I can help define the right solution for your environment.</h2><Link href="/en/#contact" className="mt-8 inline-flex items-center gap-3 rounded-xl bg-white px-6 py-4 text-sm font-bold text-blue-700">Discuss this service <ArrowIcon /></Link></div></section></main><Footer locale="en" /></>;
+}
