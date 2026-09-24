@@ -492,7 +492,7 @@ export function Hero() {
             </a>
           </div>
 
-          <div className="mt-8 flex max-w-xl items-center gap-4 rounded-2xl border border-slate-200 bg-white/80 p-3 shadow-[0_12px_30px_rgba(15,23,42,0.07)] backdrop-blur">
+          <div className="mt-8 flex max-w-xl flex-wrap items-center gap-4 rounded-2xl border border-slate-200 bg-white/80 p-3 shadow-[0_12px_30px_rgba(15,23,42,0.07)] backdrop-blur sm:flex-nowrap">
             <Image
               src={publicAsset("/felipe-sales-profile.png")}
               alt="Felipe Sales, DevOps Engineer e SRE"
@@ -500,14 +500,14 @@ export function Hero() {
               height={512}
               className="h-16 w-16 shrink-0 rounded-2xl object-cover object-top"
             />
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1">
               <p className="font-bold text-slate-900">Felipe Sales</p>
               <p className="mt-0.5 text-sm font-semibold text-blue-600">DevOps Engineer / SRE</p>
               <p className="mt-1 text-xs leading-5 text-slate-500">Mais de 3 anos de experiência · Florianópolis, SC</p>
-              <a href="#sobre" className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 transition hover:gap-2.5 hover:text-blue-700">
-                Conheça minha trajetória <span aria-hidden="true">→</span>
-              </a>
             </div>
+            <a href="#sobre" className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-xs font-bold text-white shadow-[0_8px_20px_rgba(37,99,235,0.22)] transition hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-[0_12px_26px_rgba(37,99,235,0.3)] sm:w-auto">
+              Minha trajetória <span aria-hidden="true">→</span>
+            </a>
           </div>
 
           <div className="mt-8 grid max-w-2xl grid-cols-2 gap-4 border-t border-slate-200 pt-7 sm:grid-cols-4">
