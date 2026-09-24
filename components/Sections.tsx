@@ -327,7 +327,7 @@ export function Technologies() {
   );
 }
 
-export function Footer() {
+export function Footer({ locale = "pt" }: { locale?: "pt" | "en" }) {
   return (
     <footer className="border-t border-slate-200 bg-white px-6 py-10">
       <div className="mx-auto flex max-w-7xl flex-col gap-5 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
@@ -341,7 +341,7 @@ export function Footer() {
           />
           <p className="mt-1">DevOps & Reliability Engineering</p>
         </div>
-        <p>© 2026 FSO Cloud Consulting. Todos os direitos reservados.</p>
+        <p>© 2026 FSO Cloud Consulting. {locale === "en" ? "All rights reserved." : "Todos os direitos reservados."}</p>
       </div>
     </footer>
   );

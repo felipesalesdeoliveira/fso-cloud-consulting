@@ -228,7 +228,17 @@ function ToolLogoCard({
   );
 }
 
-function HexagonHeroGraphic({ cursorX, cursorY }: { cursorX: number; cursorY: number }) {
+const heroSlotEnglish: Record<string, [string, string]> = {
+  cloud: ["Cloud", "Secure, scalable and highly available cloud platforms"],
+  platform: ["Platform", "Application orchestration, packaging and delivery"],
+  automation: ["Automation", "Automated infrastructure, configuration and operations"],
+  containers: ["Containers", "Portable, isolated and standardized applications"],
+  observability: ["Observability", "Metrics, logs, traces, alerts and incident investigation"],
+  delivery: ["CI/CD", "Software versioning, validation and continuous delivery"],
+};
+const heroPillarEnglish: Record<string, string> = { Infraestrutura: "Infrastructure", Automação: "Automation", Observabilidade: "Observability" };
+
+function HexagonHeroGraphic({ cursorX, cursorY, locale = "pt" }: { cursorX: number; cursorY: number; locale?: "pt" | "en" }) {
   const [activeSlotId, setActiveSlotId] = useState<string | null>(null);
   const [rotationStep, setRotationStep] = useState(0);
   const activeSlot = heroSlots.find((slot) => slot.id === activeSlotId);
@@ -334,17 +344,19 @@ function HexagonHeroGraphic({ cursorX, cursorY }: { cursorX: number; cursorY: nu
       </div>
 
       <div className="pointer-events-none absolute left-1/2 top-[60%] z-20 -translate-x-1/2 whitespace-nowrap rounded-full border border-blue-100 bg-white/90 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-blue-600 shadow-sm backdrop-blur">
-        Observar • Automatizar • Escalar
+        {locale === "en" ? "Observe • Automate • Scale" : "Observar • Automatizar • Escalar"}
       </div>
 
       <div className={`pointer-events-none absolute left-1/2 top-[68%] z-20 w-[270px] -translate-x-1/2 rounded-xl border border-white/90 bg-white/85 px-4 py-2 text-center text-[11px] font-semibold leading-4 text-slate-600 shadow-sm backdrop-blur transition duration-300 ${activeSlot ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"}`}>
-        {activeSlot?.description ?? ""}
+        {activeSlot ? (locale === "en" ? heroSlotEnglish[activeSlot.id][1] : activeSlot.description) : ""}
       </div>
 
       {heroSlots.map((slot) => (
         <ToolLogoCard
           key={slot.id}
           {...slot}
+          layer={locale === "en" ? heroSlotEnglish[slot.id][0] : slot.layer}
+          description={locale === "en" ? heroSlotEnglish[slot.id][1] : slot.description}
           technology={currentTechnology(slot)}
           cursorX={cursorX}
           cursorY={cursorY}
@@ -357,7 +369,7 @@ function HexagonHeroGraphic({ cursorX, cursorY }: { cursorX: number; cursorY: nu
   );
 }
 
-function MobileHexagonHeroBackground() {
+function MobileHexagonHeroBackground({ locale = "pt" }: { locale?: "pt" | "en" }) {
   return (
     <div className="pointer-events-none absolute left-1/2 top-[-46px] z-0 h-[560px] w-[620px] origin-top -translate-x-1/2 scale-[0.52] opacity-[0.12] sm:scale-[0.6] lg:hidden">
       <div className="relative h-full w-full">
@@ -410,15 +422,16 @@ function MobileHexagonHeroBackground() {
         </div>
 
         {heroPillars.map((pillar) => (
-          <HexagonPillarCard key={pillar.title} {...pillar} cursorX={0} cursorY={0} />
+          <HexagonPillarCard key={pillar.title} {...pillar} title={locale === "en" ? (heroPillarEnglish[pillar.title] ?? pillar.title) : pillar.title} cursorX={0} cursorY={0} />
         ))}
       </div>
     </div>
   );
 }
 
-export function Hero() {
+export function Hero({ locale = "pt" }: { locale?: "pt" | "en" }) {
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
+  const english = locale === "en";
 
   function handleHeroMouseMove(event: MouseEvent<HTMLElement>) {
     const bounds = event.currentTarget.getBoundingClientRect();
@@ -438,7 +451,7 @@ export function Hero() {
       onMouseLeave={resetHeroPosition}
       className="relative flex min-h-[calc(100svh-96px)] scroll-mt-24 items-center overflow-hidden px-6 py-16 lg:py-20"
     >
-      <MobileHexagonHeroBackground />
+      <MobileHexagonHeroBackground locale={locale} />
       <div className="pointer-events-none absolute -left-48 top-8 h-[480px] w-[480px] rounded-full bg-blue-200/25 blur-[120px]" />
       <div className="pointer-events-none absolute -right-32 bottom-0 h-[520px] w-[520px] rounded-full bg-violet-200/25 blur-[130px]" />
       <div
@@ -458,37 +471,37 @@ export function Hero() {
           <div className="mb-7 inline-flex max-w-full items-center gap-3 rounded-full border border-blue-200/90 bg-white/80 px-4 py-2 shadow-sm backdrop-blur">
             <span className="pulse-dot h-2 w-2 rounded-full bg-blue-500" />
             <span className="text-center text-[11px] font-bold uppercase tracking-[0.12em] text-slate-600 sm:text-xs sm:tracking-[0.17em]">
-              DevOps & Reliability Engineering
+              DevOps &amp; Reliability Engineering
             </span>
           </div>
 
           <h1 className="max-w-4xl text-4xl font-bold leading-[1.07] tracking-[-0.045em] text-slate-950 md:text-6xl lg:text-[58px]">
-            Transformo complexidade operacional em{" "}
+            {english ? "I turn operational complexity into " : "Transformo complexidade operacional em "}
             <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-violet-600 bg-clip-text text-transparent">
-              infraestrutura confiável e escalável.
+              {english ? "reliable, scalable infrastructure." : "infraestrutura confiável e escalável."}
             </span>
           </h1>
 
           <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-600">
-            Consultoria especializada em DevOps, SRE, Cloud e Observabilidade
-            para empresas que precisam aumentar a estabilidade, automatizar
-            operações e ter mais visibilidade sobre seus ambientes.
+            {english
+              ? "DevOps, SRE, Cloud and Observability consulting for companies that need greater stability, automated operations and better visibility across their environments."
+              : "Consultoria especializada em DevOps, SRE, Cloud e Observabilidade para empresas que precisam aumentar a estabilidade, automatizar operações e ter mais visibilidade sobre seus ambientes."}
           </p>
 
           <div className="mt-9 flex flex-col gap-4 sm:flex-row">
             <a
-              href="#servicos"
+              href={english ? "#services" : "#servicos"}
               className="inline-flex w-full items-center justify-center gap-3 rounded-xl bg-blue-600 px-6 py-4 text-center text-sm font-semibold text-white shadow-[0_14px_32px_rgba(37,99,235,0.25)] transition duration-300 hover:-translate-y-1 hover:bg-blue-700 hover:shadow-[0_18px_40px_rgba(37,99,235,0.32)] sm:w-auto"
             >
-              Conheça meus serviços
+              {english ? "Explore my services" : "Conheça meus serviços"}
               <ArrowIcon />
             </a>
 
             <a
-              href="#contato"
+              href={english ? "#contact" : "#contato"}
               className="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 bg-white/80 px-6 py-4 text-center text-sm font-semibold text-slate-700 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:text-blue-700 hover:shadow-lg sm:w-auto"
             >
-              Fale comigo
+              {english ? "Contact me" : "Fale comigo"}
             </a>
           </div>
 
@@ -503,15 +516,15 @@ export function Hero() {
             <div className="min-w-0 flex-1">
               <p className="font-bold text-slate-900">Felipe Sales</p>
               <p className="mt-0.5 text-sm font-semibold text-blue-600">DevOps Engineer / SRE</p>
-              <p className="mt-1 text-xs leading-5 text-slate-500">Mais de 3 anos de experiência · Florianópolis, SC</p>
+              <p className="mt-1 text-xs leading-5 text-slate-500">{english ? "3+ years of experience · Florianópolis, Brazil" : "Mais de 3 anos de experiência · Florianópolis, SC"}</p>
             </div>
-            <a href="#sobre" className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-xs font-bold text-white shadow-[0_8px_20px_rgba(37,99,235,0.22)] transition hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-[0_12px_26px_rgba(37,99,235,0.3)] sm:w-auto">
-              Minha trajetória <span aria-hidden="true">→</span>
+            <a href={english ? "#about" : "#sobre"} className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-xs font-bold text-white shadow-[0_8px_20px_rgba(37,99,235,0.22)] transition hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-[0_12px_26px_rgba(37,99,235,0.3)] sm:w-auto">
+              {english ? "My background" : "Minha trajetória"} <span aria-hidden="true">→</span>
             </a>
           </div>
 
           <div className="mt-8 grid max-w-2xl grid-cols-2 gap-4 border-t border-slate-200 pt-7 sm:grid-cols-4">
-            {heroStats.map((item) => (
+            {(english ? ["Production environments", "Cloud & Kubernetes", "SRE & reliability", "Infrastructure automation"] : heroStats).map((item) => (
               <div key={item}>
                 <span className="mb-2 block h-1 w-7 rounded-full bg-gradient-to-r from-blue-600 to-cyan-400" />
                 <span className="text-sm font-medium text-slate-500">{item}</span>
@@ -520,7 +533,7 @@ export function Hero() {
           </div>
         </div>
 
-        <HexagonHeroGraphic cursorX={cursor.x} cursorY={cursor.y} />
+        <HexagonHeroGraphic cursorX={cursor.x} cursorY={cursor.y} locale={locale} />
       </div>
     </section>
   );

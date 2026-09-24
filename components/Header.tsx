@@ -6,8 +6,20 @@ import { useState } from "react";
 import { navItems } from "@/data/content";
 import { publicAsset } from "@/lib/paths";
 
-export function Header() {
+const englishNavItems = [
+  { label: "Home", href: "/en/" },
+  { label: "Services", href: "/en/#services" },
+  { label: "Process", href: "/en/#process" },
+  { label: "About", href: "/en/#about" },
+  { label: "Projects", href: "/en/#projects" },
+  { label: "Articles", href: "/en/#articles" },
+  { label: "Technologies", href: "/en/#technologies" },
+  { label: "Contact", href: "/en/#contact" },
+];
+
+export function Header({ locale = "pt" }: { locale?: "pt" | "en" }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const items = locale === "en" ? englishNavItems : navItems;
 
   function closeMenu() {
     setMenuOpen(false);
@@ -16,7 +28,7 @@ export function Header() {
   return (
     <header className="fixed left-0 top-0 z-50 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
       <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-6">
-        <Link href="/" className="group" onClick={closeMenu}>
+        <Link href={locale === "en" ? "/en/" : "/"} className="group" onClick={closeMenu}>
           <Image
             src={publicAsset("/logo-fso-cloud-consulting.png")}
             alt="FSO Cloud Consulting"
@@ -27,8 +39,8 @@ export function Header() {
           />
         </Link>
 
-        <nav aria-label="Navegação principal" className="hidden items-center gap-6 text-sm font-medium text-slate-600 lg:flex">
-          {navItems.map((item) => (
+        <nav aria-label={locale === "en" ? "Main navigation" : "Navegação principal"} className="hidden items-center gap-4 text-sm font-medium text-slate-600 lg:flex">
+          {items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -37,6 +49,10 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          <div className="ml-1 flex items-center rounded-lg border border-slate-200 bg-slate-50 p-1 text-xs font-bold">
+            <Link href="/" hrefLang="pt-BR" className={`rounded-md px-2 py-1.5 ${locale === "pt" ? "bg-white text-blue-600 shadow-sm" : "text-slate-400 hover:text-slate-700"}`}>PT</Link>
+            <Link href="/en/" hrefLang="en" className={`rounded-md px-2 py-1.5 ${locale === "en" ? "bg-white text-blue-600 shadow-sm" : "text-slate-400 hover:text-slate-700"}`}>EN</Link>
+          </div>
         </nav>
 
         <button
@@ -53,10 +69,10 @@ export function Header() {
         </button>
 
         <Link
-          href="/#contato"
+          href={locale === "en" ? "/en/#contact" : "/#contato"}
           className="hidden rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-[0_10px_25px_rgba(37,99,235,0.22)] transition duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-[0_14px_32px_rgba(37,99,235,0.30)] lg:inline-flex"
         >
-          Fale comigo
+          {locale === "en" ? "Contact me" : "Fale comigo"}
         </Link>
       </div>
 
@@ -67,7 +83,7 @@ export function Header() {
         className={`border-t border-slate-200/80 bg-white/95 px-6 py-4 shadow-[0_20px_40px_rgba(15,23,42,0.08)] backdrop-blur-xl lg:hidden ${menuOpen ? "grid" : "hidden"}`}
       >
         <div className="mx-auto grid w-full max-w-7xl gap-2">
-          {navItems.map((item) => (
+          {items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -77,6 +93,10 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          <div className="mt-2 flex w-fit items-center rounded-lg border border-slate-200 bg-slate-50 p-1 text-xs font-bold">
+            <Link href="/" hrefLang="pt-BR" onClick={closeMenu} className={`rounded-md px-3 py-2 ${locale === "pt" ? "bg-white text-blue-600 shadow-sm" : "text-slate-500"}`}>PT</Link>
+            <Link href="/en/" hrefLang="en" onClick={closeMenu} className={`rounded-md px-3 py-2 ${locale === "en" ? "bg-white text-blue-600 shadow-sm" : "text-slate-500"}`}>EN</Link>
+          </div>
         </div>
       </nav>
     </header>
