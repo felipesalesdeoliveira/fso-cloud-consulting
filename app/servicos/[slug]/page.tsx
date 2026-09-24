@@ -132,7 +132,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
               Próximo passo
             </p>
             <h2 className="mt-5 max-w-3xl text-3xl font-bold tracking-[-0.035em] md:text-5xl">
-              Vamos entender o cenário antes de definir a solução.
+              Posso ajudar a definir a solução adequada para o seu cenário.
             </h2>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
               O escopo é adaptado ao ambiente, à maturidade técnica e às prioridades da empresa.
@@ -141,7 +141,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
               href="/#contato"
               className="mt-8 inline-flex items-center gap-3 rounded-xl bg-white px-6 py-4 text-sm font-bold text-blue-700 transition hover:-translate-y-1 hover:bg-blue-50"
             >
-              Conversar sobre este serviço
+              Falar comigo sobre este serviço
               <ArrowIcon />
             </Link>
           </div>

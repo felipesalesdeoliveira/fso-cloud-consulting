@@ -56,7 +56,7 @@ export function Header() {
           href="/#contato"
           className="hidden rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-[0_10px_25px_rgba(37,99,235,0.22)] transition duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-[0_14px_32px_rgba(37,99,235,0.30)] lg:inline-flex"
         >
-          Vamos conversar
+          Fale comigo
         </Link>
       </div>
 
