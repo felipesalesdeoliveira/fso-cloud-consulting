@@ -50,8 +50,8 @@ export function Header({ locale = "pt" }: { locale?: "pt" | "en" }) {
             </Link>
           ))}
           <div className="ml-1 flex items-center rounded-lg border border-slate-200 bg-slate-50 p-1 text-xs font-bold">
-            <Link href="/" hrefLang="pt-BR" className={`rounded-md px-2 py-1.5 ${locale === "pt" ? "bg-white text-blue-600 shadow-sm" : "text-slate-400 hover:text-slate-700"}`}>PT</Link>
-            <Link href="/en/" hrefLang="en" className={`rounded-md px-2 py-1.5 ${locale === "en" ? "bg-white text-blue-600 shadow-sm" : "text-slate-400 hover:text-slate-700"}`}>EN</Link>
+            <Link href="/#inicio" hrefLang="pt-BR" className={`rounded-md px-2 py-1.5 ${locale === "pt" ? "bg-white text-blue-600 shadow-sm" : "text-slate-400 hover:text-slate-700"}`}>PT</Link>
+            <Link href="/en/#home" hrefLang="en" className={`rounded-md px-2 py-1.5 ${locale === "en" ? "bg-white text-blue-600 shadow-sm" : "text-slate-400 hover:text-slate-700"}`}>EN</Link>
           </div>
         </nav>
 
@@ -94,8 +94,8 @@ export function Header({ locale = "pt" }: { locale?: "pt" | "en" }) {
             </Link>
           ))}
           <div className="mt-2 flex w-fit items-center rounded-lg border border-slate-200 bg-slate-50 p-1 text-xs font-bold">
-            <Link href="/" hrefLang="pt-BR" onClick={closeMenu} className={`rounded-md px-3 py-2 ${locale === "pt" ? "bg-white text-blue-600 shadow-sm" : "text-slate-500"}`}>PT</Link>
-            <Link href="/en/" hrefLang="en" onClick={closeMenu} className={`rounded-md px-3 py-2 ${locale === "en" ? "bg-white text-blue-600 shadow-sm" : "text-slate-500"}`}>EN</Link>
+            <Link href="/#inicio" hrefLang="pt-BR" onClick={closeMenu} className={`rounded-md px-3 py-2 ${locale === "pt" ? "bg-white text-blue-600 shadow-sm" : "text-slate-500"}`}>PT</Link>
+            <Link href="/en/#home" hrefLang="en" onClick={closeMenu} className={`rounded-md px-3 py-2 ${locale === "en" ? "bg-white text-blue-600 shadow-sm" : "text-slate-500"}`}>EN</Link>
           </div>
         </div>
       </nav>
