@@ -152,8 +152,8 @@ function ProjectMiniArchitecture() {
   ];
 
   return (
-    <div className="absolute inset-x-5 bottom-5 top-[4.25rem] flex items-center justify-center" aria-hidden="true">
-      <div className="relative flex items-center gap-2 rounded-2xl border border-white/80 bg-white/65 px-4 py-3 shadow-[0_12px_35px_rgba(37,99,235,0.10)] backdrop-blur-sm">
+    <div className="absolute inset-x-5 bottom-2 top-[4.25rem] flex items-center justify-center" aria-hidden="true">
+      <div className="relative flex items-start gap-2 rounded-2xl border border-white/80 bg-white/65 px-4 pb-8 pt-2 shadow-[0_12px_35px_rgba(37,99,235,0.10)] backdrop-blur-sm">
         {nodes.map((node, nodeIndex) => (
           <div key={node.label} className="contents">
             {nodeIndex > 0 && <span className="text-lg font-bold text-blue-400/70">→</span>}
@@ -163,7 +163,7 @@ function ProjectMiniArchitecture() {
             </div>
           </div>
         ))}
-        <div className="absolute -bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-rose-100 bg-white px-2 py-1 shadow-sm">
+        <div className="absolute bottom-1.5 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-rose-100 bg-white px-2 py-1 shadow-sm">
           <Image src={publicAsset("/aws-icons/acm.svg")} alt="" width={20} height={20} className="h-5 w-5 rounded" />
           <span className="text-[9px] font-bold text-rose-700">TLS</span>
         </div>
