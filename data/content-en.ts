@@ -35,7 +35,7 @@ export const articlesEn = [
   { category: "Cloud & FinOps", title: "FinOps beyond cost reduction", description: "Optimizing cloud environments without compromising performance, stability or growth.", readingTime: "7 min read", status: "Coming soon" },
 ];
 
-export const highlightsEn = ["3+ years in DevOps and SRE", "Hands-on production experience", "AWS, Terraform, Kubernetes, CI/CD, and GitOps", "Observability, incident response, and reliability"];
+export const highlightsEn = ["3+ years in DevOps and SRE", "Hands-on production experience", "AWS, Terraform, Kubernetes, CI/CD, and GitOps", "Observability, troubleshooting, and reliability", "Incident investigation and cross-team collaboration", "A structured approach to planning, risk, and cost"];
 
 export const technologyCopyEn: Record<string, { title: string; description: string }> = {
   Cloud: { title: "Cloud", description: "Platforms used to build and operate secure, scalable and highly available environments." },

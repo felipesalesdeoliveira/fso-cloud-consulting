@@ -173,6 +173,8 @@ export const highlights = [
   "Atuação prática em ambientes de produção",
   "AWS, Terraform, Kubernetes, CI/CD e GitOps",
   "Observabilidade, troubleshooting e confiabilidade",
+  "Investigação de incidentes e colaboração entre equipes",
+  "Visão estruturada de planejamento, riscos e custos",
 ];
 
 export const projects = [
