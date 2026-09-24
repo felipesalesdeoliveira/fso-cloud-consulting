@@ -6,6 +6,7 @@ import { heroStats } from "@/data/content";
 import { technologyCategories, type Technology } from "@/data/technologies";
 import { ArrowIcon, AutomationIcon, CloudIcon, InfrastructureIcon, ObservabilityIcon } from "@/components/icons/CustomIcons";
 import brandIcon from "@/app/icon.png";
+import { publicAsset } from "@/lib/paths";
 
 type HeroPillar = {
   title: string;
@@ -491,7 +492,22 @@ export function Hero() {
             </a>
           </div>
 
-          <div className="mt-12 grid max-w-2xl grid-cols-2 gap-4 border-t border-slate-200 pt-7 sm:grid-cols-4">
+          <div className="mt-8 flex max-w-xl items-center gap-4 rounded-2xl border border-slate-200 bg-white/80 p-3 shadow-[0_12px_30px_rgba(15,23,42,0.07)] backdrop-blur">
+            <Image
+              src={publicAsset("/felipe-sales-profile.png")}
+              alt="Felipe Sales, DevOps Engineer e SRE"
+              width={512}
+              height={512}
+              className="h-16 w-16 shrink-0 rounded-2xl object-cover object-top"
+            />
+            <div className="min-w-0">
+              <p className="font-bold text-slate-900">Felipe Sales</p>
+              <p className="mt-0.5 text-sm font-semibold text-blue-600">DevOps Engineer / SRE</p>
+              <p className="mt-1 text-xs leading-5 text-slate-500">Mais de 3 anos de experiência · Florianópolis, SC</p>
+            </div>
+          </div>
+
+          <div className="mt-8 grid max-w-2xl grid-cols-2 gap-4 border-t border-slate-200 pt-7 sm:grid-cols-4">
             {heroStats.map((item) => (
               <div key={item}>
                 <span className="mb-2 block h-1 w-7 rounded-full bg-gradient-to-r from-blue-600 to-cyan-400" />
