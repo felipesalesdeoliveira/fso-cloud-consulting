@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useState, type ComponentType, type MouseEvent, type SVGProps } from "react";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { MdOutlineEmail } from "react-icons/md";
 import { heroStats } from "@/data/content";
 import { technologyCategories, type Technology } from "@/data/technologies";
 import { ArrowIcon, AutomationIcon, CloudIcon, InfrastructureIcon, ObservabilityIcon } from "@/components/icons/CustomIcons";
@@ -502,6 +504,34 @@ export function Hero({ locale = "pt" }: { locale?: "pt" | "en" }) {
               className="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 bg-white/80 px-6 py-4 text-center text-sm font-semibold text-slate-700 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:text-blue-700 hover:shadow-lg sm:w-auto"
             >
               {english ? "Contact me" : "Fale comigo"}
+            </a>
+          </div>
+
+          <div className="mt-5 flex flex-wrap gap-3" aria-label={english ? "Professional profiles and email" : "Perfis profissionais e e-mail"}>
+            <a
+              href="https://github.com/felipesalesdeoliveira"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white/80 px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-slate-400 hover:text-slate-950 hover:shadow-md"
+              aria-label={english ? "Felipe Sales on GitHub (opens in a new tab)" : "Felipe Sales no GitHub (abre em uma nova aba)"}
+            >
+              <FaGithub className="h-4 w-4" aria-hidden="true" /> GitHub
+            </a>
+            <a
+              href="https://www.linkedin.com/in/felipesalesdeoliveira"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-blue-200 bg-white/80 px-4 py-2.5 text-sm font-semibold text-blue-700 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-blue-400 hover:bg-blue-50 hover:shadow-md"
+              aria-label={english ? "Felipe Sales on LinkedIn (opens in a new tab)" : "Felipe Sales no LinkedIn (abre em uma nova aba)"}
+            >
+              <FaLinkedinIn className="h-4 w-4" aria-hidden="true" /> LinkedIn
+            </a>
+            <a
+              href="mailto:fesales.oliveira@gmail.com"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white/80 px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-blue-300 hover:text-blue-700 hover:shadow-md"
+              aria-label={english ? "Email Felipe Sales" : "Enviar e-mail para Felipe Sales"}
+            >
+              <MdOutlineEmail className="h-4 w-4" aria-hidden="true" /> {english ? "Email" : "E-mail"}
             </a>
           </div>
 
