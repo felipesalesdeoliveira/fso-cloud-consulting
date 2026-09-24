@@ -8,7 +8,7 @@ import { siteConfig, siteImage } from "@/lib/site";
 
 const title = "Frontend com CDN, S3, TLS e domínio customizado";
 const description =
-  "Implementação manual de uma SPA React na AWS com S3 privado, CloudFront, certificado TLS do ACM e domínio gerenciado pelo Route 53.";
+  "Arquitetura segura e escalável para publicação de uma SPA React, com origem privada, distribuição global, HTTPS e domínio customizado na AWS.";
 const pageUrl = `${siteConfig.url}/projetos/frontend-cdn-s3-tls-dominio/`;
 
 export const metadata: Metadata = {
@@ -26,29 +26,49 @@ export const metadata: Metadata = {
   },
 };
 
-const resources = [
-  ["Amazon S3", "Armazena o build da SPA em um bucket privado, com o bloqueio de acesso público ativado."],
-  ["Amazon CloudFront", "Distribui o conteúdo pela CDN, redireciona HTTP para HTTPS e utiliza cache otimizado."],
-  ["AWS Certificate Manager", "Fornece o certificado TLS para o domínio raiz e o www, emitido obrigatoriamente em us-east-1."],
-  ["Amazon Route 53", "Gerencia a zona DNS e os registros Alias que apontam o domínio para a distribuição."],
-  ["Origin Access Control", "Autoriza somente o CloudFront a ler os objetos do bucket, mantendo a origem fechada."],
-  ["Custom error responses", "Converte respostas 403 e 404 em /index.html com status 200 para preservar o roteamento da SPA."],
+const challenges = [
+  "Publicar uma SPA com baixa latência e alcance global, sem manter servidores de aplicação.",
+  "Proteger os arquivos da origem e impedir que o bucket fosse acessado diretamente pela internet.",
+  "Disponibilizar domínio próprio, HTTPS obrigatório e suporte às rotas internas da aplicação.",
 ];
 
 const execution = [
-  "Fork e clone do repositório da Residência, com o projeto original cadastrado como upstream.",
-  "Instalação das dependências, execução local e geração do build de produção da SPA React.",
-  "Criação do bucket S3 em us-east-1 com Block all public access habilitado e upload do conteúdo de site/dist.",
+  "Preparação da aplicação React e geração dos artefatos otimizados para produção.",
+  "Criação do bucket S3 com Block all public access habilitado e publicação do build da SPA.",
   "Solicitação e validação DNS do certificado ACM para o domínio raiz e o www, na região us-east-1.",
   "Criação da distribuição CloudFront usando a origem S3, OAC, HTTPS obrigatório, GET/HEAD e CachingOptimized.",
   "Configuração do index.html como objeto raiz e fallback da SPA para erros 403 e 404.",
   "Criação dos registros Alias no Route 53 para o domínio raiz e o www.",
 ];
 
+const decisions = [
+  ["Origem privada", "O endpoint público de website do S3 foi descartado. O CloudFront acessa o bucket privado por OAC e uma policy restritiva."],
+  ["DNS sem redirecionamentos", "Registros Alias A/AAAA no Route 53 conectam o domínio raiz diretamente à distribuição CloudFront."],
+  ["TLS gerenciado", "O certificado do domínio e do www foi emitido pelo ACM em us-east-1, região exigida pelo CloudFront."],
+  ["Cache eficiente", "A política CachingOptimized reduz acessos à origem, enquanto o index.html recebe tratamento específico nas atualizações."],
+  ["Compatibilidade com SPA", "Respostas 403 e 404 retornam o index.html com status 200, preservando o roteamento do lado do cliente."],
+  ["HTTPS obrigatório", "Toda requisição HTTP é redirecionada para HTTPS antes da entrega do conteúdo."],
+];
+
+const security = [
+  "Bloqueio integral de acesso público no bucket S3.",
+  "Bucket policy limitada à distribuição CloudFront por OAC.",
+  "Criptografia em trânsito com TLS e certificado gerenciado pelo ACM.",
+  "Exposição pública concentrada no CloudFront, sem acesso direto à origem.",
+];
+
 const validations = [
   ["HTTPS", "Uma requisição por HTTP é redirecionada para HTTPS com resposta 301."],
   ["Roteamento da SPA", "Um caminho que não corresponde a um arquivo retorna o index.html, sem expor um erro do S3."],
   ["Origem privada", "O acesso direto à URL do bucket é negado; o conteúdo é servido exclusivamente pelo CloudFront."],
+];
+
+const results = [
+  "Distribuição global do frontend por meio da rede de borda do CloudFront.",
+  "Origem privada e protegida contra acesso público direto.",
+  "Comunicação HTTPS no domínio raiz e no endereço www.",
+  "Rotas da SPA funcionando mesmo em acessos diretos e atualizações de página.",
+  "Arquitetura sem servidores, com menor esforço operacional para hospedar o frontend.",
 ];
 
 export default function AwsFrontendProjectPage() {
@@ -66,7 +86,7 @@ export default function AwsFrontendProjectPage() {
             </Link>
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <span className="rounded-full bg-emerald-100 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-emerald-700">Projeto concluído</span>
-              <span className="rounded-full bg-blue-100 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-blue-700">Sprint 01 · Residência</span>
+              <span className="rounded-full bg-blue-100 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-blue-700">Cloud &amp; CDN</span>
             </div>
             <h1 className="mt-7 max-w-5xl text-4xl font-bold leading-[1.08] tracking-[-0.04em] text-slate-950 md:text-6xl">{title}</h1>
             <p className="mt-7 max-w-3xl text-xl leading-9 text-slate-600">{description}</p>
@@ -79,6 +99,25 @@ export default function AwsFrontendProjectPage() {
         </section>
 
         <section className="bg-white px-6 py-20">
+          <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+            <div>
+              <p className="section-label">Visão geral</p>
+              <h2 className="section-title">Entrega segura e global de uma aplicação frontend</h2>
+              <p className="mt-6 text-lg leading-8 text-slate-600">A solução disponibiliza uma aplicação React sem servidores web dedicados. Os arquivos estáticos permanecem em uma origem privada e são entregues pelo CloudFront com cache distribuído, domínio próprio e criptografia TLS.</p>
+            </div>
+            <div>
+              <p className="section-label">Desafio</p>
+              <h2 className="section-title">Requisitos que orientaram a solução</h2>
+              <ul className="mt-7 grid gap-4">
+                {challenges.map((challenge, index) => (
+                  <li key={challenge} className="flex gap-4 rounded-2xl border border-slate-200 bg-[#F8FAFD] p-5 leading-7 text-slate-700"><span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-xs font-bold text-blue-700">0{index + 1}</span>{challenge}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-y border-slate-200 bg-[#F3F6FB] px-6 py-20">
           <div className="mx-auto max-w-6xl">
             <p className="section-label">Arquitetura</p>
             <h2 className="section-title">Como os recursos se conectam</h2>
@@ -114,28 +153,28 @@ export default function AwsFrontendProjectPage() {
                 </div>
               </div>
             </div>
-            <p className="mt-4 text-sm text-slate-500">O arquivo-fonte editável do desenho também é mantido no repositório em <code>docs/diagrams</code>.</p>
+            <p className="mt-4 text-sm text-slate-500">O diagrama representa o caminho da requisição, as fronteiras de acesso e o comportamento de cache da solução.</p>
           </div>
         </section>
 
-        <section className="border-y border-slate-200 bg-[#F3F6FB] px-6 py-20">
+        <section className="bg-white px-6 py-20">
           <div className="mx-auto max-w-6xl">
-            <p className="section-label">Componentes</p>
-            <h2 className="section-title">Responsabilidade de cada recurso</h2>
+            <p className="section-label">Decisões técnicas</p>
+            <h2 className="section-title">Escolhas que sustentam a arquitetura</h2>
             <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {resources.map(([name, text]) => (
+              {decisions.map(([name, text]) => (
                 <article key={name} className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"><h3 className="text-lg font-bold text-slate-900">{name}</h3><p className="mt-4 leading-7 text-slate-600">{text}</p></article>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="bg-white px-6 py-20">
+        <section className="border-y border-slate-200 bg-[#F3F6FB] px-6 py-20">
           <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[1.1fr_0.9fr]">
             <div>
               <p className="section-label">Implementação</p>
-              <h2 className="section-title">Execução manual pelo Console da AWS</h2>
-              <p className="mt-6 text-lg leading-8 text-slate-600">Nesta sprint, todos os recursos foram configurados manualmente para compreender as relações entre origem, CDN, certificado e DNS. A automação com Terraform está prevista a partir da Sprint 05.</p>
+              <h2 className="section-title">Construção e configuração da solução</h2>
+              <p className="mt-6 text-lg leading-8 text-slate-600">A implementação conectou a geração do build da aplicação à configuração da origem, distribuição, certificado e DNS, mantendo cada responsabilidade isolada e verificável.</p>
               <ol className="mt-9 grid gap-4">
                 {execution.map((step, index) => (
                   <li key={step} className="flex gap-4 rounded-2xl border border-slate-200 p-5 leading-7 text-slate-700"><span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-xs font-bold text-blue-700">{index + 1}</span>{step}</li>
@@ -143,19 +182,16 @@ export default function AwsFrontendProjectPage() {
               </ol>
             </div>
             <aside className="h-fit rounded-[32px] bg-[#101C3C] p-8 text-white lg:sticky lg:top-32">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-300">Decisões técnicas</p>
-              <h2 className="mt-5 text-3xl font-bold tracking-[-0.03em]">Segurança e comportamento de cache</h2>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-300">Segurança e confiabilidade</p>
+              <h2 className="mt-5 text-3xl font-bold tracking-[-0.03em]">Origem protegida e entrega controlada</h2>
               <ul className="mt-7 grid gap-5 leading-7 text-slate-300">
-                <li>• O endpoint de website do S3 não foi usado, pois não oferece HTTPS para essa arquitetura e contornaria o OAC.</li>
-                <li>• O bucket permanece privado; a policy autoriza somente a distribuição CloudFront.</li>
-                <li>• Os assets com hash podem permanecer em cache por mais tempo. O index.html exige tratamento cuidadoso porque mantém o mesmo nome entre deploys.</li>
-                <li>• Invalidar somente o index.html preserva o cache válido dos assets e evita requisições desnecessárias à origem.</li>
+                {security.map((item) => <li key={item}>• {item}</li>)}
               </ul>
             </aside>
           </div>
         </section>
 
-        <section className="border-t border-slate-200 bg-[#F3F6FB] px-6 py-20">
+        <section className="bg-white px-6 py-20">
           <div className="mx-auto max-w-6xl">
             <p className="section-label">Validação</p>
             <h2 className="section-title">Critérios verificados após o deploy</h2>
@@ -164,9 +200,36 @@ export default function AwsFrontendProjectPage() {
                 <article key={name} className="rounded-3xl border border-emerald-200 bg-white p-7"><span className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 font-bold text-emerald-700" aria-hidden="true">✓</span><h3 className="mt-5 text-lg font-bold text-slate-900">{name}</h3><p className="mt-3 leading-7 text-slate-600">{text}</p></article>
               ))}
             </div>
-            <div className="mt-12 rounded-3xl border border-blue-100 bg-blue-50 p-8">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700">Resultado</p>
-              <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-700">SPA publicada com distribuição global, tráfego protegido por TLS, domínio customizado, fallback de rotas e origem inacessível diretamente pela internet. A implementação consolidou o entendimento prático do fluxo DNS → CDN → origem privada.</p>
+          </div>
+        </section>
+
+        <section className="border-y border-slate-200 bg-[#F3F6FB] px-6 py-20">
+          <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.15fr_0.85fr]">
+            <div>
+              <p className="section-label">Resultados</p>
+              <h2 className="section-title">Uma entrega completa dentro do escopo definido</h2>
+              <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+                {results.map((result) => <li key={result} className="flex gap-3 rounded-2xl border border-emerald-200 bg-white p-5 leading-7 text-slate-700"><span className="font-bold text-emerald-600">✓</span>{result}</li>)}
+              </ul>
+            </div>
+            <aside className="h-fit rounded-[32px] border border-slate-200 bg-white p-8 shadow-sm">
+              <p className="section-label">Tecnologias</p>
+              <h2 className="text-2xl font-bold text-slate-950">Stack utilizada</h2>
+              <div className="mt-7 flex flex-wrap gap-3">
+                {["React", "Amazon S3", "Amazon CloudFront", "AWS Certificate Manager", "Amazon Route 53", "Origin Access Control", "DNS", "TLS", "CDN"].map((technology) => <span key={technology} className="rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">{technology}</span>)}
+              </div>
+              <p className="mt-7 border-t border-slate-200 pt-6 text-sm leading-6 text-slate-500">Arquitetura documentada em Draw.io com os componentes e fluxos da solução.</p>
+            </aside>
+          </div>
+        </section>
+
+        <section className="bg-white px-6 py-20">
+          <div className="mx-auto max-w-6xl rounded-[36px] bg-[#101C3C] p-8 text-white md:p-12">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-300">Case técnico</p>
+            <h2 className="mt-5 max-w-3xl text-3xl font-bold tracking-[-0.035em] md:text-5xl">Arquitetura simples de operar, segura na origem e preparada para distribuição global.</h2>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/#projetos" className="rounded-xl bg-white px-6 py-4 text-sm font-bold text-blue-700 transition hover:bg-blue-50">Ver outros projetos</Link>
+              <Link href="/#contato" className="rounded-xl border border-blue-300/40 px-6 py-4 text-sm font-bold text-white transition hover:bg-white/10">Conversar sobre uma solução</Link>
             </div>
           </div>
         </section>
