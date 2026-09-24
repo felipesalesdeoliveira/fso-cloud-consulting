@@ -183,20 +183,34 @@ export const projects = [
     description:
       "SPA React hospedada em S3 privado e distribuída globalmente pelo CloudFront, com HTTPS via ACM e DNS gerenciado pelo Route 53.",
     status: "Concluído",
+    challenge: "Publicar uma SPA com domínio próprio e baixa latência, preservando a segurança da origem e o funcionamento das rotas internas.",
+    solution: "Arquitetura com S3 privado, CloudFront, ACM, Route 53, OAC e fallback de rotas para o index.html.",
+    result: "Distribuição global por CDN, HTTPS obrigatório, suporte às rotas da SPA e bloqueio do acesso direto ao bucket.",
+    technologies: ["React", "Amazon S3", "CloudFront", "ACM", "Route 53", "OAC"],
   },
   {
+    slug: null,
     category: "Kubernetes",
     title: "Observabilidade em ambientes distribuídos",
     description:
       "Centralização de métricas, logs e indicadores operacionais para melhorar a investigação de incidentes.",
     status: "Em breve",
+    challenge: null,
+    solution: null,
+    result: null,
+    technologies: [],
   },
   {
+    slug: null,
     category: "Cloud & IaC",
     title: "Infraestrutura cloud automatizada",
     description:
       "Provisionamento e padronização de ambientes utilizando infraestrutura como código e práticas de automação.",
     status: "Em breve",
+    challenge: null,
+    solution: null,
+    result: null,
+    technologies: [],
   },
 ];
 

@@ -144,35 +144,10 @@ export function About() {
   );
 }
 
-function ProjectMiniArchitecture() {
-  const nodes = [
-    { icon: "route-53.svg", label: "Route 53" },
-    { icon: "cloudfront.svg", label: "CloudFront" },
-    { icon: "s3.svg", label: "S3" },
-  ];
-
-  return (
-    <div className="absolute inset-x-5 bottom-2 top-[4.25rem] flex items-center justify-center" aria-hidden="true">
-      <div className="relative flex items-start gap-2 rounded-2xl border border-white/80 bg-white/65 px-4 pb-8 pt-2 shadow-[0_12px_35px_rgba(37,99,235,0.10)] backdrop-blur-sm">
-        {nodes.map((node, nodeIndex) => (
-          <div key={node.label} className="contents">
-            {nodeIndex > 0 && <span className="text-lg font-bold text-blue-400/70">→</span>}
-            <div className="flex w-16 flex-col items-center gap-1.5">
-              <Image src={publicAsset(`/aws-icons/${node.icon}`)} alt="" width={40} height={40} className="h-10 w-10 rounded-lg shadow-sm transition duration-500 group-hover:-translate-y-1" />
-              <span className="text-[10px] font-bold text-slate-600">{node.label}</span>
-            </div>
-          </div>
-        ))}
-        <div className="absolute bottom-1.5 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-rose-100 bg-white px-2 py-1 shadow-sm">
-          <Image src={publicAsset("/aws-icons/acm.svg")} alt="" width={20} height={20} className="h-5 w-5 rounded" />
-          <span className="text-[9px] font-bold text-rose-700">TLS</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function Projects() {
+  const featuredProject = projects.find((project) => project.slug);
+  const upcomingProjects = projects.filter((project) => !project.slug);
+
   return (
     <section id="projetos" className="scroll-mt-24 bg-[#F3F6FB] px-6 py-24">
       <div className="mx-auto max-w-7xl">
@@ -183,41 +158,43 @@ export function Projects() {
             Casos técnicos que demonstram uma abordagem prática para confiabilidade, observabilidade, automação e infraestrutura.
           </p>
         </div>
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
-          {projects.map((project, index) => (
-            <article key={project.title} className="light-card group overflow-hidden rounded-3xl border border-slate-200 bg-white">
-              <div className="relative h-48 overflow-hidden bg-gradient-to-br from-blue-100 via-white to-violet-100">
-                <div
-                  className="absolute -right-8 -top-12 h-44 w-44 border border-blue-300/50 bg-white/45 transition duration-700 group-hover:rotate-12 group-hover:scale-110"
-                  style={{ clipPath: "polygon(25% 6.7%,75% 6.7%,100% 50%,75% 93.3%,25% 93.3%,0% 50%)" }}
-                />
-                <div
-                  className="absolute bottom-[-35px] left-[-10px] h-36 w-36 border border-violet-300/40 bg-violet-100/30 transition duration-700 group-hover:-rotate-12 group-hover:scale-110"
-                  style={{ clipPath: "polygon(25% 6.7%,75% 6.7%,100% 50%,75% 93.3%,25% 93.3%,0% 50%)" }}
-                />
-                <span className="absolute left-7 top-7 rounded-full border border-white/80 bg-white/75 px-3 py-1.5 text-xs font-bold text-blue-600 shadow-sm backdrop-blur">
-                  {project.category}
-                </span>
-                {project.slug && <ProjectMiniArchitecture />}
-                {!project.slug && <span className="absolute bottom-6 right-7 text-5xl font-bold text-blue-950/[0.08]">0{index + 1}</span>}
+        {featuredProject && (
+          <article className="light-card relative mt-14 overflow-hidden rounded-[32px] border border-slate-200 bg-white p-7 md:p-10">
+            <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-gradient-to-br from-blue-100 to-violet-100 opacity-70 blur-2xl" />
+            <div className="relative">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <span className="rounded-full bg-blue-50 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-blue-700">{featuredProject.category}</span>
+                <span className="rounded-full bg-emerald-100 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-emerald-700">{featuredProject.status}</span>
               </div>
-              <div className="flex h-[calc(100%-12rem)] flex-col p-7">
-                <h3 className="text-xl font-bold text-slate-900">{project.title}</h3>
-                <p className="mt-4 leading-7 text-slate-600">{project.description}</p>
-                {project.slug ? (
-                  <Link
-                    href={`/projetos/${project.slug}`}
-                    className="mt-7 inline-flex w-fit items-center gap-2 rounded-full bg-blue-600 px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:gap-3 hover:bg-blue-700"
-                  >
-                    Ver projeto
-                    <ArrowIcon />
-                  </Link>
-                ) : (
-                  <span className="mt-7 inline-flex w-fit rounded-full bg-blue-50 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-blue-600">
-                    {project.status}
-                  </span>
-                )}
+              <h3 className="mt-7 max-w-4xl text-3xl font-bold tracking-[-0.035em] text-slate-950 md:text-4xl">{featuredProject.title}</h3>
+              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">{featuredProject.description}</p>
+
+              <div className="mt-9 grid gap-5 lg:grid-cols-3">
+                <div className="rounded-2xl border border-slate-200 bg-[#F8FAFD] p-6"><p className="text-xs font-bold uppercase tracking-[0.15em] text-slate-500">Desafio</p><p className="mt-4 leading-7 text-slate-700">{featuredProject.challenge}</p></div>
+                <div className="rounded-2xl border border-blue-100 bg-blue-50/60 p-6"><p className="text-xs font-bold uppercase tracking-[0.15em] text-blue-700">Solução</p><p className="mt-4 leading-7 text-slate-700">{featuredProject.solution}</p></div>
+                <div className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-6"><p className="text-xs font-bold uppercase tracking-[0.15em] text-emerald-700">Resultado</p><p className="mt-4 leading-7 text-slate-700">{featuredProject.result}</p></div>
               </div>
+
+              <div className="mt-8 flex flex-col gap-6 border-t border-slate-200 pt-7 lg:flex-row lg:items-center lg:justify-between">
+                <div className="flex flex-wrap gap-2">
+                  {featuredProject.technologies.map((technology) => <span key={technology} className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600">{technology}</span>)}
+                </div>
+                <Link href={`/projetos/${featuredProject.slug}`} className="inline-flex w-fit shrink-0 items-center gap-3 rounded-xl bg-blue-600 px-6 py-4 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-blue-700">
+                  Ver case completo <ArrowIcon />
+                </Link>
+              </div>
+            </div>
+          </article>
+        )}
+
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
+          {upcomingProjects.map((project, index) => (
+            <article key={project.title} className="light-card relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-7">
+              <span className="absolute right-7 top-5 text-5xl font-bold text-blue-950/[0.06]">0{index + 2}</span>
+              <span className="relative rounded-full bg-blue-50 px-3 py-1.5 text-xs font-bold text-blue-600">{project.category}</span>
+              <h3 className="relative mt-7 max-w-md text-xl font-bold text-slate-900">{project.title}</h3>
+              <p className="relative mt-4 max-w-xl leading-7 text-slate-600">{project.description}</p>
+              <span className="relative mt-7 inline-flex rounded-full bg-slate-100 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">{project.status}</span>
             </article>
           ))}
         </div>
