@@ -30,6 +30,7 @@ export const metadata: Metadata = {
   creator: "Felipe Sales",
   alternates: {
     canonical: `${siteConfig.url}/`,
+    languages: { "pt-BR": `${siteConfig.url}/`, en: `${siteConfig.url}/en/` },
   },
   openGraph: {
     type: "website",

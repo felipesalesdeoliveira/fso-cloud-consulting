@@ -14,7 +14,7 @@ const pageUrl = `${siteConfig.url}/projetos/frontend-cdn-s3-tls-dominio/`;
 export const metadata: Metadata = {
   title: `${title} | ${siteConfig.name}`,
   description,
-  alternates: { canonical: pageUrl },
+  alternates: { canonical: pageUrl, languages: { "pt-BR": pageUrl, en: `${siteConfig.url}/en/projects/frontend-cdn-s3-tls-custom-domain/` } },
   openGraph: {
     type: "article",
     locale: siteConfig.locale,

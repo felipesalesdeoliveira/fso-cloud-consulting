@@ -25,6 +25,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
+    {
+      url: `${siteConfig.url}/en/`,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${siteConfig.url}/en/projects/frontend-cdn-s3-tls-custom-domain/`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
     ...servicePages,
     ...projectPages,
   ];
