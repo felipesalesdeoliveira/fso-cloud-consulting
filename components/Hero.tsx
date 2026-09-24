@@ -504,6 +504,9 @@ export function Hero() {
               <p className="font-bold text-slate-900">Felipe Sales</p>
               <p className="mt-0.5 text-sm font-semibold text-blue-600">DevOps Engineer / SRE</p>
               <p className="mt-1 text-xs leading-5 text-slate-500">Mais de 3 anos de experiência · Florianópolis, SC</p>
+              <a href="#sobre" className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 transition hover:gap-2.5 hover:text-blue-700">
+                Conheça minha trajetória <span aria-hidden="true">→</span>
+              </a>
             </div>
           </div>
 
