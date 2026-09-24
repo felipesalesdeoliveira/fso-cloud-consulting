@@ -486,7 +486,7 @@ export function Hero({ locale = "pt" }: { locale?: "pt" | "en" }) {
 
           <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-600">
             {english
-              ? "I help teams build, automate, and operate cloud platforms that are reliable, observable, and ready to scale."
+              ? "Specialized DevOps, SRE, cloud, and observability consulting for companies looking to improve reliability, automate operations, and gain deeper visibility into their environments."
               : "Consultoria especializada em DevOps, SRE, Cloud e Observabilidade para empresas que precisam aumentar a estabilidade, automatizar operações e ter mais visibilidade sobre seus ambientes."}
           </p>
 
