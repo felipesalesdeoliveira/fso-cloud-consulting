@@ -33,9 +33,9 @@ export function Services({ locale = "pt" }: { locale?: "pt" | "en" }) {
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <p className="section-label">{english ? "Services" : "Serviços"}</p>
-          <h2 className="section-title">{english ? "Solutions for more reliable and efficient environments" : "Soluções para ambientes mais confiáveis e eficientes"}</h2>
+          <h2 className="section-title">{english ? "Engineering services for reliable cloud operations" : "Soluções para ambientes mais confiáveis e eficientes"}</h2>
           <p className="section-description">
-            {english ? "Hands-on technical work focused on infrastructure, reliability, automation and cloud operations." : "Atuação técnica direcionada aos principais desafios de infraestrutura, confiabilidade, automação e operação em nuvem."}
+            {english ? "Hands-on support across cloud infrastructure, automation, observability, and production reliability." : "Atuação técnica direcionada aos principais desafios de infraestrutura, confiabilidade, automação e operação em nuvem."}
           </p>
         </div>
 
@@ -80,9 +80,9 @@ export function Process({ locale = "pt" }: { locale?: "pt" | "en" }) {
       <div className="relative mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <p className="section-label">{english ? "How it works" : "Como funciona"}</p>
-          <h2 className="section-title">{english ? "A clear process from assessment to delivery" : "Um processo claro do diagnóstico à evolução"}</h2>
+          <h2 className="section-title">{english ? "A practical path from discovery to handover" : "Um processo claro do diagnóstico à evolução"}</h2>
           <p className="section-description">
-            {english ? "Every engagement starts with context and progresses through clear priorities, technical follow-up and aligned deliverables." : "Cada projeto começa com a compreensão do cenário atual e evolui com prioridades claras, acompanhamento técnico e entregas alinhadas às necessidades da empresa."}
+            {english ? "Every engagement begins with the current environment and business goals, then moves through clear priorities, controlled delivery, and an effective handover." : "Cada projeto começa com a compreensão do cenário atual e evolui com prioridades claras, acompanhamento técnico e entregas alinhadas às necessidades da empresa."}
           </p>
         </div>
 
@@ -112,16 +112,16 @@ export function About({ locale = "pt" }: { locale?: "pt" | "en" }) {
       <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[1.08fr_0.92fr]">
         <div>
           <p className="section-label">{english ? "About" : "Sobre"}</p>
-          <h2 className="section-title">{english ? "DevOps and SRE applied to production environments." : "DevOps e SRE aplicados a ambientes de produção."}</h2>
+          <h2 className="section-title">{english ? "DevOps and SRE, grounded in production experience." : "DevOps e SRE aplicados a ambientes de produção."}</h2>
           <div className="mt-8 max-w-3xl space-y-5 text-lg leading-8 text-slate-600">
             <p>
-              {english ? "I am a DevOps Engineer and SRE with more than three years of experience in cloud infrastructure, automation, Kubernetes, CI/CD and observability, building and operating production environments." : "Sou DevOps Engineer/SRE com mais de 3 anos de experiência em infraestrutura cloud, automação, Kubernetes, CI/CD e observabilidade, atuando na construção, operação e evolução de ambientes de produção."}
+              {english ? "I am a DevOps Engineer and SRE with more than three years of hands-on experience building, operating, and improving production environments. My work spans cloud infrastructure, automation, Kubernetes, CI/CD, and observability." : "Sou DevOps Engineer/SRE com mais de 3 anos de experiência em infraestrutura cloud, automação, Kubernetes, CI/CD e observabilidade, atuando na construção, operação e evolução de ambientes de produção."}
             </p>
             <p>
-              {english ? "I have hands-on experience with AWS, Terraform, Docker, Kubernetes, Helm, GitHub Actions, Jenkins and Argo CD, as well as Prometheus, Grafana, Loki, Elastic Stack and OpenTelemetry. My work also covers troubleshooting, incident investigation and collaboration with development and infrastructure teams." : "Tenho experiência prática com AWS, Terraform, Docker, Kubernetes, Helm, GitHub Actions, Jenkins e Argo CD, além da implementação de soluções de observabilidade com Prometheus, Grafana, Loki, Elastic Stack e OpenTelemetry. Minha atuação também envolve troubleshooting, investigação de incidentes e colaboração com equipes de desenvolvimento e infraestrutura."}
+              {english ? "I work with AWS, Terraform, Docker, Kubernetes, Helm, GitHub Actions, Jenkins, and Argo CD, alongside observability tooling such as Prometheus, Grafana, Loki, Elastic Stack, and OpenTelemetry. I also troubleshoot complex issues, investigate incidents, and work closely with development and infrastructure teams." : "Tenho experiência prática com AWS, Terraform, Docker, Kubernetes, Helm, GitHub Actions, Jenkins e Argo CD, além da implementação de soluções de observabilidade com Prometheus, Grafana, Loki, Elastic Stack e OpenTelemetry. Minha atuação também envolve troubleshooting, investigação de incidentes e colaboração com equipes de desenvolvimento e infraestrutura."}
             </p>
             <p>
-              {english ? "My previous background in Civil Engineering contributes a structured perspective on planning, risk, cost and problem solving. Through FSO Cloud Consulting, I apply this experience to deliver reliable, automated solutions aligned with each environment." : "Minha formação anterior em Engenharia Civil contribuiu para uma visão estruturada de planejamento, riscos, custos e resolução de problemas. À frente da FSO Cloud Consulting, aplico essa experiência para desenvolver soluções confiáveis, automatizadas e alinhadas às necessidades de cada ambiente."}
+              {english ? "My background in Civil Engineering shaped a structured approach to planning, risk, cost, and problem-solving. At FSO Cloud Consulting, I bring that discipline to reliable, automated solutions tailored to each environment." : "Minha formação anterior em Engenharia Civil contribuiu para uma visão estruturada de planejamento, riscos, custos e resolução de problemas. À frente da FSO Cloud Consulting, aplico essa experiência para desenvolver soluções confiáveis, automatizadas e alinhadas às necessidades de cada ambiente."}
             </p>
           </div>
           <a
@@ -162,9 +162,9 @@ export function Projects({ locale = "pt" }: { locale?: "pt" | "en" }) {
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <p className="section-label">{english ? "Projects and technical cases" : "Projetos e casos técnicos"}</p>
-          <h2 className="section-title">{english ? "Experience applied to real challenges" : "Experiência aplicada a desafios reais"}</h2>
+          <h2 className="section-title">{english ? "Production-minded engineering, applied to real challenges" : "Experiência aplicada a desafios reais"}</h2>
           <p className="section-description">
-            {english ? "Technical cases that demonstrate a practical approach to reliability, observability, automation and infrastructure." : "Casos técnicos que demonstram uma abordagem prática para confiabilidade, observabilidade, automação e infraestrutura."}
+            {english ? "Technical case studies focused on sound architecture, reliable operations, automation, and measurable outcomes." : "Casos técnicos que demonstram uma abordagem prática para confiabilidade, observabilidade, automação e infraestrutura."}
           </p>
         </div>
         {featuredProject && (
@@ -221,9 +221,9 @@ export function Articles({ locale = "pt" }: { locale?: "pt" | "en" }) {
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
             <p className="section-label">{english ? "Articles and knowledge" : "Artigos e conhecimento"}</p>
-            <h2 className="section-title">{english ? "Technical content for better decisions" : "Conteúdo técnico para decisões mais conscientes"}</h2>
+            <h2 className="section-title">{english ? "Practical insight for better technical decisions" : "Conteúdo técnico para decisões mais conscientes"}</h2>
             <p className="section-description">
-              {english ? "Practical perspectives on DevOps, SRE, Cloud, Observability and the challenges of modern production environments." : "Reflexões, guias e experiências práticas sobre DevOps, SRE, Cloud, Observabilidade e os desafios reais da operação de ambientes modernos."}
+              {english ? "Field notes, guides, and practical perspectives on DevOps, SRE, cloud, observability, and modern production systems." : "Reflexões, guias e experiências práticas sobre DevOps, SRE, Cloud, Observabilidade e os desafios reais da operação de ambientes modernos."}
             </p>
           </div>
           <a href={english ? "#articles" : "#artigos"} className="inline-flex w-fit items-center gap-3 text-sm font-bold text-blue-600 transition hover:gap-4 hover:text-blue-700">
@@ -277,15 +277,15 @@ export function Technologies({ locale = "pt" }: { locale?: "pt" | "en" }) {
         <div className="grid gap-10 lg:grid-cols-[1fr_0.55fr] lg:items-end">
           <div className="max-w-3xl">
             <p className="section-label">{english ? "Technologies and capabilities" : "Tecnologias e competências"}</p>
-            <h2 className="section-title">{english ? "Tools selected for each challenge" : "Ferramentas aplicadas de acordo com o desafio"}</h2>
+            <h2 className="section-title">{english ? "The right tools for the problem at hand" : "Ferramentas aplicadas de acordo com o desafio"}</h2>
             <p className="section-description">
-              {english ? "Each technology is selected according to context, objectives, architecture and operational maturity." : "Cada tecnologia é escolhida conforme o contexto, os objetivos, a arquitetura e o nível de maturidade de cada ambiente."}
+              {english ? "Technology choices are driven by context, architecture, business goals, and the team's operational maturity." : "Cada tecnologia é escolhida conforme o contexto, os objetivos, a arquitetura e o nível de maturidade de cada ambiente."}
             </p>
           </div>
           <div className="rounded-3xl border border-white/90 bg-white/60 p-6 shadow-[0_18px_50px_rgba(37,99,235,0.08)] backdrop-blur-xl">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">{english ? "Approach" : "Abordagem"}</p>
             <p className="mt-3 leading-7 text-slate-600">
-              {english ? "The tool is not the goal. It is applied to improve reliability, operational efficiency and the ability to evolve." : "A ferramenta não é o objetivo. Ela é aplicada para aumentar confiabilidade, eficiência operacional e capacidade de evolução."}
+              {english ? "Tools are a means, not the goal. I use them to improve reliability, operational efficiency, and the team's ability to evolve the platform." : "A ferramenta não é o objetivo. Ela é aplicada para aumentar confiabilidade, eficiência operacional e capacidade de evolução."}
             </p>
           </div>
         </div>
@@ -326,11 +326,11 @@ export function Technologies({ locale = "pt" }: { locale?: "pt" | "en" }) {
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-100">{english ? "More than tools" : "Mais do que ferramentas"}</p>
             <p className="mt-2 max-w-3xl text-lg font-semibold leading-7">
-              {english ? "Architecture, automation and observability connected to support more reliable environments." : "Arquitetura, automação e observabilidade conectadas para sustentar ambientes mais confiáveis."}
+              {english ? "Architecture, automation, and observability working together to support reliable production systems." : "Arquitetura, automação e observabilidade conectadas para sustentar ambientes mais confiáveis."}
             </p>
           </div>
           <a href={english ? "#contact" : "#contato"} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-blue-700 shadow-lg transition duration-300 hover:-translate-y-1 hover:bg-blue-50">
-            {english ? "Discuss your environment" : "Conversar sobre o ambiente"}
+            {english ? "Let's discuss your environment" : "Conversar sobre o ambiente"}
             <ArrowIcon />
           </a>
         </div>
