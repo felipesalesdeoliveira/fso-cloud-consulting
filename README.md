@@ -58,6 +58,24 @@ Navegador do usuário
 Todo o conteúdo do site é disponibilizado em uma única página. Os itens do menu
 navegam para as respectivas seções por meio de âncoras.
 
+O site também possui páginas detalhadas para serviços e estudos de caso, em
+português e inglês, geradas estaticamente durante o build.
+
+## Case publicado — Frontend na AWS
+
+O primeiro estudo de caso documenta uma SPA React publicada em uma arquitetura
+AWS com origem S3 privada, CloudFront, ACM, Route 53 e OAC. A página apresenta
+arquitetura, fundamentos, decisões técnicas, configuração real, validações e
+próximos passos.
+
+- [Case técnico em português](https://felipesalesdeoliveira.github.io/fso-cloud-consulting/projetos/frontend-cdn-s3-tls-dominio/)
+- [Case study in English](https://felipesalesdeoliveira.github.io/fso-cloud-consulting/en/projects/frontend-cdn-s3-tls-custom-domain/)
+- [Aplicação publicada na AWS](https://residencia.fsocloudconsulting.com)
+
+As informações públicas omitem identificadores internos da conta AWS. Os testes
+documentados incluem redirecionamento HTTPS, fallback da SPA, bloqueio do acesso
+direto ao S3 e cache hit no CloudFront.
+
 ## Executar localmente
 
 ### Pré-requisitos
@@ -140,7 +158,9 @@ merge.
 - [x] CI e deploy no GitHub Pages;
 - [x] Proteção da branch principal;
 - [x] Atualizações automáticas com Dependabot;
-- [ ] SEO, sitemap, robots e metadados sociais;
+- [x] SEO, sitemap, robots e metadados sociais;
+- [x] Páginas em português e inglês;
+- [x] Primeiro estudo de caso técnico com aplicação ao vivo;
 - [ ] Hospedagem privada no Amazon S3;
 - [ ] Distribuição global com Amazon CloudFront;
 - [ ] Domínio `fsocloudconsulting.com` no Route 53.

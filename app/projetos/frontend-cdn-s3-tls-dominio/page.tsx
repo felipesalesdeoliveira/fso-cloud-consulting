@@ -10,6 +10,7 @@ const title = "Frontend com CDN, S3, TLS e domínio customizado";
 const description =
   "Arquitetura segura e escalável para publicação de uma SPA React, com origem privada, distribuição global, HTTPS e domínio customizado na AWS.";
 const pageUrl = `${siteConfig.url}/projetos/frontend-cdn-s3-tls-dominio/`;
+const liveProjectUrl = "https://residencia.fsocloudconsulting.com";
 
 export const metadata: Metadata = {
   title: `${title} | ${siteConfig.name}`,
@@ -35,17 +36,17 @@ const challenges = [
 const execution = [
   "Preparação da aplicação React e geração dos artefatos otimizados para produção.",
   "Criação do bucket S3 com Block all public access habilitado e publicação do build da SPA.",
-  "Solicitação e validação DNS do certificado ACM para o domínio raiz e o www, na região us-east-1.",
+  "Solicitação e validação DNS do certificado ACM para residencia.fsocloudconsulting.com, na região us-east-1.",
   "Criação da distribuição CloudFront usando a origem S3, OAC, HTTPS obrigatório, GET/HEAD e CachingOptimized.",
   "Configuração do index.html como objeto raiz e fallback da SPA para erros 403 e 404.",
-  "Criação dos registros Alias no Route 53 para o domínio raiz e o www.",
+  "Criação do registro Alias A no Route 53, apontando o subdomínio da aplicação para a distribuição.",
 ];
 
 const decisions = [
   ["Origem privada", "O endpoint público de website do S3 foi descartado. O CloudFront acessa o bucket privado por OAC e uma policy restritiva."],
-  ["DNS sem redirecionamentos", "Registros Alias A/AAAA no Route 53 conectam o domínio raiz diretamente à distribuição CloudFront."],
-  ["TLS gerenciado", "O certificado do domínio e do www foi emitido pelo ACM em us-east-1, região exigida pelo CloudFront."],
-  ["Cache eficiente", "A política CachingOptimized reduz acessos à origem, enquanto o index.html recebe tratamento específico nas atualizações."],
+  ["DNS direto para a CDN", "Um registro Alias A no Route 53 resolve residencia.fsocloudconsulting.com para a distribuição CloudFront."],
+  ["TLS gerenciado", "O certificado do hostname da aplicação foi emitido pelo ACM em us-east-1, região exigida pelo CloudFront."],
+  ["Cache distribuído", "A política gerenciada CachingOptimized reduz acessos à origem. A atualização do index.html exige invalidação ou uma política de TTL específica."],
   ["Compatibilidade com SPA", "Respostas 403 e 404 retornam o index.html com status 200, preservando o roteamento do lado do cliente."],
   ["HTTPS obrigatório", "Toda requisição HTTP é redirecionada para HTTPS antes da entrega do conteúdo."],
 ];
@@ -61,14 +62,50 @@ const validations = [
   ["HTTPS", "Uma requisição por HTTP é redirecionada para HTTPS com resposta 301."],
   ["Roteamento da SPA", "Um caminho que não corresponde a um arquivo retorna o index.html, sem expor um erro do S3."],
   ["Origem privada", "O acesso direto à URL do bucket é negado; o conteúdo é servido exclusivamente pelo CloudFront."],
+  ["Cache na borda", "Uma segunda consulta ao conteúdo retornou Hit from cloudfront em uma edge location de São Paulo."],
 ];
 
 const results = [
   "Distribuição global do frontend por meio da rede de borda do CloudFront.",
   "Origem privada e protegida contra acesso público direto.",
-  "Comunicação HTTPS no domínio raiz e no endereço www.",
+  "Comunicação HTTPS em residencia.fsocloudconsulting.com com TLS 1.2 ou superior.",
   "Rotas da SPA funcionando mesmo em acessos diretos e atualizações de página.",
   "Arquitetura sem servidores, com menor esforço operacional para hospedar o frontend.",
+];
+
+const environment = [
+  ["Aplicação", "residencia.fsocloudconsulting.com"],
+  ["Origem", "Bucket S3 privado em us-east-1"],
+  ["Distribuição", "CloudFront implantado e habilitado"],
+  ["Acesso à origem", "OAC com assinatura SigV4"],
+  ["Certificado", "ACM emitido em us-east-1"],
+  ["Cache", "Managed-CachingOptimized"],
+];
+
+const fundamentals = [
+  ["DNS não transporta o conteúdo", "O Route 53 resolve o hostname. Depois disso, o navegador estabelece a conexão HTTPS diretamente com a rede do CloudFront."],
+  ["Edge location não é Região", "A borda termina TLS, consulta o cache e busca a origem quando necessário. O bucket continua provisionado em uma Região AWS."],
+  ["Cache hit e cache miss", "Em um hit, a borda responde sem consultar o S3. Em um miss, busca o objeto na origem e pode armazenar uma cópia."],
+  ["Uma única porta pública", "O bucket permanece privado para impedir que domínio, TLS, cache e controles da distribuição sejam contornados."],
+  ["OAC autentica a CDN", "O CloudFront assina a requisição com SigV4, e a bucket policy limita GetObject ao ARN da distribuição autorizada."],
+  ["Deploy inclui o cache", "Enviar arquivos ao S3 não basta: a versão correta precisa estar sendo entregue pela CDN, especialmente o index.html da SPA."],
+];
+
+const evidence = [
+  ["Redirecionamento", "HTTP 301 para HTTPS"],
+  ["Página principal", "HTTPS 200"],
+  ["Fallback da SPA", "Rota inexistente retorna index.html com status 200"],
+  ["Proteção da origem", "Acesso direto ao S3 retorna 403 AccessDenied"],
+  ["Cache", "X-Cache: Hit from cloudfront"],
+  ["Segurança do bucket", "Block Public Access ativo, ACLs desabilitadas e policy não pública"],
+];
+
+const nextSteps = [
+  "Definir Cache-Control curto ou revalidação para index.html e cache longo para assets com hash.",
+  "Automatizar build, sincronização com o S3 e invalidação seletiva de /index.html.",
+  "Criar um Alias AAAA para aproveitar o IPv6 já habilitado na distribuição.",
+  "Avaliar versionamento do bucket acompanhado de lifecycle para recuperação sem retenção indefinida.",
+  "Adicionar logs e métricas de entrega para acompanhar erros, tráfego e cache hit ratio.",
 ];
 
 export default function AwsFrontendProjectPage() {
@@ -90,11 +127,35 @@ export default function AwsFrontendProjectPage() {
             </div>
             <h1 className="mt-7 max-w-5xl text-4xl font-bold leading-[1.08] tracking-[-0.04em] text-slate-950 md:text-6xl">{title}</h1>
             <p className="mt-7 max-w-3xl text-xl leading-9 text-slate-600">{description}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href={liveProjectUrl} target="_blank" rel="noopener noreferrer" className="rounded-xl bg-blue-600 px-6 py-4 text-sm font-bold text-white shadow-[0_12px_28px_rgba(37,99,235,0.25)] transition hover:-translate-y-0.5 hover:bg-blue-700">
+                Acessar aplicação publicada ↗
+              </a>
+              <a href="#evidencias" className="rounded-xl border border-slate-300 bg-white px-6 py-4 text-sm font-bold text-slate-700 transition hover:border-blue-300 hover:text-blue-700">
+                Ver evidências técnicas
+              </a>
+            </div>
             <div className="mt-10 flex flex-wrap gap-3 text-sm font-semibold text-slate-700">
               {["React", "Amazon S3", "CloudFront", "ACM", "Route 53", "OAC"].map((technology) => (
                 <span key={technology} className="rounded-full border border-slate-200 bg-white px-4 py-2 shadow-sm">{technology}</span>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="border-b border-slate-200 bg-[#F8FAFD] px-6 py-16">
+          <div className="mx-auto max-w-6xl">
+            <p className="section-label">Ambiente implementado</p>
+            <h2 className="section-title">Configuração real validada na AWS</h2>
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">Os dados abaixo representam o ambiente implantado e foram conferidos por consultas de leitura e testes HTTP após o deploy.</p>
+            <dl className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {environment.map(([name, value]) => (
+                <div key={name} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                  <dt className="text-xs font-bold uppercase tracking-[0.14em] text-blue-600">{name}</dt>
+                  <dd className="mt-3 break-words font-semibold leading-7 text-slate-800">{value}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </section>
 
@@ -121,7 +182,7 @@ export default function AwsFrontendProjectPage() {
           <div className="mx-auto max-w-6xl">
             <p className="section-label">Arquitetura</p>
             <h2 className="section-title">Como os recursos se conectam</h2>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">O usuário resolve o domínio no Route 53 e acessa a distribuição CloudFront por HTTPS. A CDN utiliza o certificado do ACM e busca os arquivos no S3 por meio do OAC, sem tornar o bucket público.</p>
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">O Route 53 resolve o hostname, mas não transporta o conteúdo. Depois da resolução DNS, o navegador acessa a rede do CloudFront por HTTPS. A CDN utiliza o certificado do ACM e busca os arquivos no S3 por meio do OAC, sem tornar o bucket público.</p>
             <div className="mt-10 overflow-hidden rounded-[32px] border border-slate-300 bg-slate-50 shadow-sm">
               <div className="bg-[#232f3e] px-6 py-4 text-lg font-bold text-white">AWS Cloud</div>
               <div className="p-5 md:p-10">
@@ -134,9 +195,9 @@ export default function AwsFrontendProjectPage() {
                     <p className="mt-3 font-bold text-slate-900">Usuário</p>
                     <p className="text-sm text-slate-500">Navegador</p>
                   </div>
-                  <div className="text-center text-sm font-bold text-slate-500"><span className="block lg:hidden">↓</span><span className="hidden lg:block">1. GET →</span></div>
+                  <div className="text-center text-sm font-bold text-slate-500"><span className="block lg:hidden">↓</span><span className="hidden lg:block">1. DNS →</span></div>
                   <ArchitectureNode icon="route-53.svg" name="Amazon Route 53" detail="DNS público · Alias" />
-                  <div className="text-center text-sm font-bold text-violet-600"><span className="block lg:hidden">↓</span><span className="hidden lg:block">2. Alias →</span></div>
+                  <div className="text-center text-sm font-bold text-violet-600"><span className="block lg:hidden">↓</span><span className="hidden lg:block">2. HTTPS →</span></div>
                   <div className="relative">
                     <ArchitectureNode icon="cloudfront.svg" name="Amazon CloudFront" detail="CDN global · HTTPS" />
                     <div className="mx-auto mt-4 w-fit rounded-xl border border-rose-300 bg-rose-50 px-3 py-2 text-center text-xs font-bold text-rose-700">ACM · TLS · us-east-1</div>
@@ -154,6 +215,22 @@ export default function AwsFrontendProjectPage() {
               </div>
             </div>
             <p className="mt-4 text-sm text-slate-500">O diagrama representa o caminho da requisição, as fronteiras de acesso e o comportamento de cache da solução.</p>
+          </div>
+        </section>
+
+        <section className="bg-white px-6 py-20">
+          <div className="mx-auto max-w-6xl">
+            <p className="section-label">Fundamentos</p>
+            <h2 className="section-title">Conceitos demonstrados pela implementação</h2>
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">Além da criação dos recursos, o projeto foi usado para compreender o caminho da requisição, as fronteiras de segurança e o comportamento do cache.</p>
+            <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {fundamentals.map(([name, text]) => (
+                <article key={name} className="rounded-3xl border border-slate-200 bg-[#F8FAFD] p-7">
+                  <h3 className="text-lg font-bold text-slate-900">{name}</h3>
+                  <p className="mt-4 leading-7 text-slate-600">{text}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -191,15 +268,24 @@ export default function AwsFrontendProjectPage() {
           </div>
         </section>
 
-        <section className="bg-white px-6 py-20">
+        <section id="evidencias" className="scroll-mt-24 bg-white px-6 py-20">
           <div className="mx-auto max-w-6xl">
             <p className="section-label">Validação</p>
             <h2 className="section-title">Critérios verificados após o deploy</h2>
-            <div className="mt-10 grid gap-5 md:grid-cols-3">
+            <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
               {validations.map(([name, text]) => (
                 <article key={name} className="rounded-3xl border border-emerald-200 bg-white p-7"><span className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 font-bold text-emerald-700" aria-hidden="true">✓</span><h3 className="mt-5 text-lg font-bold text-slate-900">{name}</h3><p className="mt-3 leading-7 text-slate-600">{text}</p></article>
               ))}
             </div>
+            <div className="mt-10 overflow-hidden rounded-3xl border border-slate-200">
+              <div className="grid grid-cols-[0.8fr_1.2fr] bg-slate-900 px-5 py-4 text-xs font-bold uppercase tracking-[0.14em] text-white"><span>Teste</span><span>Resultado observado</span></div>
+              {evidence.map(([name, value]) => (
+                <div key={name} className="grid grid-cols-[0.8fr_1.2fr] gap-4 border-t border-slate-200 bg-white px-5 py-4 text-sm leading-6 first:border-t-0">
+                  <span className="font-semibold text-slate-800">{name}</span><span className="text-slate-600">{value}</span>
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 text-sm text-slate-500">Validações repetidas em 27/09/2026. Identificadores internos da conta AWS foram omitidos desta página pública.</p>
           </div>
         </section>
 
@@ -224,11 +310,27 @@ export default function AwsFrontendProjectPage() {
         </section>
 
         <section className="bg-white px-6 py-20">
+          <div className="mx-auto max-w-6xl">
+            <p className="section-label">Evolução</p>
+            <h2 className="section-title">Próximos passos técnicos</h2>
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">O escopo obrigatório foi concluído. Os itens abaixo representam melhorias conscientes para transformar o laboratório manual em uma entrega mais automatizada, observável e resiliente.</p>
+            <ol className="mt-10 grid gap-4 md:grid-cols-2">
+              {nextSteps.map((step, index) => (
+                <li key={step} className="flex gap-4 rounded-2xl border border-slate-200 bg-[#F8FAFD] p-6 leading-7 text-slate-700">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-violet-100 text-xs font-bold text-violet-700">{index + 1}</span>{step}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section className="bg-white px-6 py-20">
           <div className="mx-auto max-w-6xl rounded-[36px] bg-[#101C3C] p-8 text-white md:p-12">
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-300">Case técnico</p>
             <h2 className="mt-5 max-w-3xl text-3xl font-bold tracking-[-0.035em] md:text-5xl">Arquitetura simples de operar, segura na origem e preparada para distribuição global.</h2>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/#projetos" className="rounded-xl bg-white px-6 py-4 text-sm font-bold text-blue-700 transition hover:bg-blue-50">Ver outros projetos</Link>
+              <a href={liveProjectUrl} target="_blank" rel="noopener noreferrer" className="rounded-xl border border-emerald-300/50 bg-emerald-400/10 px-6 py-4 text-sm font-bold text-emerald-100 transition hover:bg-emerald-400/20">Abrir aplicação ao vivo ↗</a>
               <Link href="/#contato" className="rounded-xl border border-blue-300/40 px-6 py-4 text-sm font-bold text-white transition hover:bg-white/10">Conversar sobre uma solução</Link>
             </div>
           </div>
