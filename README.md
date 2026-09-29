@@ -65,8 +65,7 @@ português e inglês, geradas estaticamente durante o build.
 
 O primeiro estudo de caso documenta uma SPA React publicada em uma arquitetura
 AWS com origem S3 privada, CloudFront, ACM, Route 53 e OAC. A página apresenta
-arquitetura, fundamentos, decisões técnicas, configuração real, validações e
-próximos passos.
+arquitetura, fundamentos, decisões técnicas, configuração real e validações.
 
 - [Case técnico em português](https://felipesalesdeoliveira.github.io/fso-cloud-consulting/projetos/frontend-cdn-s3-tls-dominio/)
 - [Case study in English](https://felipesalesdeoliveira.github.io/fso-cloud-consulting/en/projects/frontend-cdn-s3-tls-custom-domain/)

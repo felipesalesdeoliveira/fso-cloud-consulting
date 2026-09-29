@@ -68,14 +68,6 @@ const validations = [
   ["S3 controls", "Block Public Access enabled, ACLs disabled, and a non-public bucket policy"],
 ];
 
-const nextSteps = [
-  "Set explicit Cache-Control metadata: short-lived or revalidated index.html and long-lived immutable hashed assets.",
-  "Automate the build, S3 synchronization, and selective /index.html invalidation.",
-  "Add a Route 53 AAAA Alias to use the distribution's existing IPv6 support.",
-  "Evaluate S3 versioning together with lifecycle rules for controlled rollback and retention.",
-  "Add delivery logs and metrics for errors, traffic, latency, and cache hit ratio.",
-];
-
 export default function EnglishProjectPage() {
   return (
     <>
@@ -157,17 +149,6 @@ export default function EnglishProjectPage() {
               {validations.map(([name, value]) => <div key={name} className="grid grid-cols-[0.8fr_1.2fr] gap-4 border-t border-slate-200 px-5 py-4 text-sm leading-6"><span className="font-semibold text-slate-800">{name}</span><span className="text-slate-600">{value}</span></div>)}
             </div>
             <p className="mt-4 text-sm text-slate-500">Checks repeated on September 27, 2026. Internal AWS account identifiers are intentionally omitted from this public page.</p>
-          </div>
-        </section>
-
-        <section className="border-y border-slate-200 bg-[#F3F6FB] px-6 py-20">
-          <div className="mx-auto max-w-6xl">
-            <p className="section-label">Evolution</p>
-            <h2 className="section-title">Next technical steps</h2>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">The required scope is complete. These improvements would evolve the manual lab into a more automated, observable, and resilient delivery process.</p>
-            <ol className="mt-10 grid gap-4 md:grid-cols-2">
-              {nextSteps.map((step, index) => <li key={step} className="flex gap-4 rounded-2xl border border-slate-200 bg-white p-6 leading-7 text-slate-700"><span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-violet-100 text-xs font-bold text-violet-700">{index + 1}</span>{step}</li>)}
-            </ol>
           </div>
         </section>
 

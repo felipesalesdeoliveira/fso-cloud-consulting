@@ -100,14 +100,6 @@ const evidence = [
   ["Segurança do bucket", "Block Public Access ativo, ACLs desabilitadas e policy não pública"],
 ];
 
-const nextSteps = [
-  "Definir Cache-Control curto ou revalidação para index.html e cache longo para assets com hash.",
-  "Automatizar build, sincronização com o S3 e invalidação seletiva de /index.html.",
-  "Criar um Alias AAAA para aproveitar o IPv6 já habilitado na distribuição.",
-  "Avaliar versionamento do bucket acompanhado de lifecycle para recuperação sem retenção indefinida.",
-  "Adicionar logs e métricas de entrega para acompanhar erros, tráfego e cache hit ratio.",
-];
-
 export default function AwsFrontendProjectPage() {
   return (
     <>
@@ -306,21 +298,6 @@ export default function AwsFrontendProjectPage() {
               </div>
               <p className="mt-7 border-t border-slate-200 pt-6 text-sm leading-6 text-slate-500">Arquitetura documentada em Draw.io com os componentes e fluxos da solução.</p>
             </aside>
-          </div>
-        </section>
-
-        <section className="bg-white px-6 py-20">
-          <div className="mx-auto max-w-6xl">
-            <p className="section-label">Evolução</p>
-            <h2 className="section-title">Próximos passos técnicos</h2>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">O escopo obrigatório foi concluído. Os itens abaixo representam melhorias conscientes para transformar o laboratório manual em uma entrega mais automatizada, observável e resiliente.</p>
-            <ol className="mt-10 grid gap-4 md:grid-cols-2">
-              {nextSteps.map((step, index) => (
-                <li key={step} className="flex gap-4 rounded-2xl border border-slate-200 bg-[#F8FAFD] p-6 leading-7 text-slate-700">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-violet-100 text-xs font-bold text-violet-700">{index + 1}</span>{step}
-                </li>
-              ))}
-            </ol>
           </div>
         </section>
 
