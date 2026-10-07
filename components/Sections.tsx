@@ -154,7 +154,7 @@ export function About({ locale = "pt" }: { locale?: "pt" | "en" }) {
 export function Projects({ locale = "pt" }: { locale?: "pt" | "en" }) {
   const english = locale === "en";
   const source = english ? projectsEn : projects;
-  const featuredProject = source.find((project) => project.slug);
+  const publishedProjects = source.filter((project) => project.slug);
   const upcomingProjects = source.filter((project) => !project.slug);
 
   return (
@@ -167,34 +167,39 @@ export function Projects({ locale = "pt" }: { locale?: "pt" | "en" }) {
             {english ? "Technical case studies focused on sound architecture, reliable operations, automation, and measurable outcomes." : "Casos técnicos que demonstram uma abordagem prática para confiabilidade, observabilidade, automação e infraestrutura."}
           </p>
         </div>
-        {featuredProject && (
-          <article className="light-card relative mt-14 overflow-hidden rounded-[32px] border border-slate-200 bg-white p-7 md:p-10">
+        <div className="mt-14 grid gap-8">
+        {publishedProjects.map((project) => {
+          const completed = project.status === "Concluído" || project.status === "Completed";
+          return (
+          <article key={project.slug} className="light-card relative overflow-hidden rounded-[32px] border border-slate-200 bg-white p-7 md:p-10">
             <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-gradient-to-br from-blue-100 to-violet-100 opacity-70 blur-2xl" />
             <div className="relative">
               <div className="flex flex-wrap items-center justify-between gap-4">
-                <span className="rounded-full bg-blue-50 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-blue-700">{featuredProject.category}</span>
-                <span className="rounded-full bg-emerald-100 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-emerald-700">{featuredProject.status}</span>
+                <span className="rounded-full bg-blue-50 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-blue-700">{project.category}</span>
+                <span className={`rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] ${completed ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-800"}`}>{project.status}</span>
               </div>
-              <h3 className="mt-7 max-w-4xl text-3xl font-bold tracking-[-0.035em] text-slate-950 md:text-4xl">{featuredProject.title}</h3>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">{featuredProject.description}</p>
+              <h3 className="mt-7 max-w-4xl text-3xl font-bold tracking-[-0.035em] text-slate-950 md:text-4xl">{project.title}</h3>
+              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">{project.description}</p>
 
               <div className="mt-9 grid gap-5 lg:grid-cols-3">
-                <div className="rounded-2xl border border-slate-200 bg-[#F8FAFD] p-6"><p className="text-xs font-bold uppercase tracking-[0.15em] text-slate-500">{english ? "Challenge" : "Desafio"}</p><p className="mt-4 leading-7 text-slate-700">{featuredProject.challenge}</p></div>
-                <div className="rounded-2xl border border-blue-100 bg-blue-50/60 p-6"><p className="text-xs font-bold uppercase tracking-[0.15em] text-blue-700">{english ? "Solution" : "Solução"}</p><p className="mt-4 leading-7 text-slate-700">{featuredProject.solution}</p></div>
-                <div className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-6"><p className="text-xs font-bold uppercase tracking-[0.15em] text-emerald-700">{english ? "Outcome" : "Resultado"}</p><p className="mt-4 leading-7 text-slate-700">{featuredProject.result}</p></div>
+                <div className="rounded-2xl border border-slate-200 bg-[#F8FAFD] p-6"><p className="text-xs font-bold uppercase tracking-[0.15em] text-slate-500">{english ? "Challenge" : "Desafio"}</p><p className="mt-4 leading-7 text-slate-700">{project.challenge}</p></div>
+                <div className="rounded-2xl border border-blue-100 bg-blue-50/60 p-6"><p className="text-xs font-bold uppercase tracking-[0.15em] text-blue-700">{english ? "Solution" : "Solução"}</p><p className="mt-4 leading-7 text-slate-700">{project.solution}</p></div>
+                <div className={`rounded-2xl border p-6 ${completed ? "border-emerald-200 bg-emerald-50/70" : "border-amber-200 bg-amber-50/70"}`}><p className={`text-xs font-bold uppercase tracking-[0.15em] ${completed ? "text-emerald-700" : "text-amber-800"}`}>{english ? "Outcome" : "Resultado"}</p><p className="mt-4 leading-7 text-slate-700">{project.result}</p></div>
               </div>
 
               <div className="mt-8 flex flex-col gap-6 border-t border-slate-200 pt-7 lg:flex-row lg:items-center lg:justify-between">
                 <div className="flex flex-wrap gap-2">
-                  {featuredProject.technologies.map((technology) => <span key={technology} className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600">{technology}</span>)}
+                  {project.technologies.map((technology) => <span key={technology} className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600">{technology}</span>)}
                 </div>
-                <Link href={english ? `/en/projects/${featuredProject.slug}/` : `/projetos/${featuredProject.slug}`} className="inline-flex w-fit shrink-0 items-center gap-3 rounded-xl bg-blue-600 px-6 py-4 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-blue-700">
+                <Link href={english ? `/en/projects/${project.slug}/` : `/projetos/${project.slug}`} className="inline-flex w-fit shrink-0 items-center gap-3 rounded-xl bg-blue-600 px-6 py-4 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-blue-700">
                   {english ? "View full case" : "Ver case completo"} <ArrowIcon />
                 </Link>
               </div>
             </div>
           </article>
-        )}
+          );
+        })}
+        </div>
 
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           {upcomingProjects.map((project, index) => (

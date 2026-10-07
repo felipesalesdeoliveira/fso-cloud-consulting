@@ -75,6 +75,20 @@ As informações públicas omitem identificadores internos da conta AWS. Os test
 documentados incluem redirecionamento HTTPS, fallback da SPA, bloqueio do acesso
 direto ao S3 e cache hit no CloudFront.
 
+## Case em implementação — Marketplace serverless
+
+O segundo estudo de caso acompanha a evolução do frontend para uma aplicação
+serverless com identidade, API, persistência e processamento assíncrono. A página
+distingue o que já foi preparado do que ainda depende de provisionamento e
+validação na AWS.
+
+- [Case técnico em português](https://felipesalesdeoliveira.github.io/fso-cloud-consulting/projetos/marketplace-serverless-identidade-eventos/)
+- [Case study in English](https://felipesalesdeoliveira.github.io/fso-cloud-consulting/en/projects/serverless-marketplace-identity-events/)
+- [Frontend publicado na AWS](https://residencia.fsocloudconsulting.com)
+
+Enquanto a sprint estiver aberta, o case permanece identificado como **Em
+implementação** e não apresenta testes planejados como resultados concluídos.
+
 ## Executar localmente
 
 ### Pré-requisitos
@@ -160,6 +174,7 @@ merge.
 - [x] SEO, sitemap, robots e metadados sociais;
 - [x] Páginas em português e inglês;
 - [x] Primeiro estudo de caso técnico com aplicação ao vivo;
+- [x] Segundo estudo de caso publicado com acompanhamento transparente da implementação;
 - [ ] Hospedagem privada no Amazon S3;
 - [ ] Distribuição global com Amazon CloudFront;
 - [ ] Domínio `fsocloudconsulting.com` no Route 53.

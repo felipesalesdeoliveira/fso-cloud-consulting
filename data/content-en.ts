@@ -25,7 +25,17 @@ export const projectsEn = [
     result: "Fast global delivery, HTTPS by default, reliable client-side routes, and no direct public access to the bucket.",
     status: "Completed", technologies: ["React", "Amazon S3", "CloudFront", "ACM", "Route 53", "OAC"],
   },
-  { slug: null, category: "Kubernetes", title: "Observability for distributed systems", description: "Centralized metrics, logs, and operational signals designed to speed up incident investigation.", status: "Coming soon", challenge: null, solution: null, result: null, technologies: [] },
+  {
+    slug: "serverless-marketplace-identity-events",
+    category: "AWS & Serverless",
+    title: "Serverless marketplace with identity and events",
+    description: "An evolution from a published SPA to an AWS architecture with authentication, APIs, persistence, and asynchronous order processing.",
+    challenge: "Turn a published frontend into a system that authenticates users, persists a catalog, and keeps processing orders when individual components fail.",
+    solution: "A planned architecture using Cognito, API Gateway, Lambda, DynamoDB, private S3, SQS, and a DLQ while preserving the Sprint 01 frontend.",
+    result: "Local preparation and the technical design are complete; AWS provisioning and validation remain in progress.",
+    status: "In progress",
+    technologies: ["Cognito", "API Gateway", "AWS Lambda", "DynamoDB", "Amazon S3", "Amazon SQS"],
+  },
   { slug: null, category: "Cloud & IaC", title: "Cloud infrastructure as code", description: "Repeatable, standardized cloud environments delivered through infrastructure as code and automation.", status: "Coming soon", challenge: null, solution: null, result: null, technologies: [] },
 ];
 
