@@ -3,7 +3,7 @@ export const siteConfig = {
   title: "FSO Cloud Consulting | DevOps & Reliability Engineering",
   description:
     "Consultoria em DevOps, SRE, Cloud, Observabilidade, Kubernetes, automação e confiabilidade para ambientes de produção.",
-  url: "https://felipesalesdeoliveira.github.io/fso-cloud-consulting",
+  url: "https://www.fsocloudconsulting.com",
   locale: "pt_BR",
 } as const;
 
