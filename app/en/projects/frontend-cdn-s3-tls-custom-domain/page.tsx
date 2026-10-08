@@ -105,33 +105,16 @@ export default function EnglishProjectPage() {
 
         <section className="border-y border-slate-200 bg-[#F3F6FB] px-6 py-20">
           <div className="mx-auto max-w-6xl">
-            <p className="section-label">Architecture</p>
-            <h2 className="section-title">Request flow and security boundaries</h2>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">Route 53 resolves the hostname but does not carry application traffic. The browser connects to CloudFront over HTTPS, and the CDN reads the private S3 origin through OAC only when the object is not already cached.</p>
-            <div className="mt-10 grid items-center gap-5 rounded-[32px] border border-slate-200 bg-slate-50 p-8 md:grid-cols-4">
-              {[["route-53.svg", "Route 53", "DNS resolution"], ["cloudfront.svg", "CloudFront", "Edge delivery and TLS"], ["acm.svg", "ACM", "Certificate in us-east-1"], ["s3.svg", "Private S3", "Static origin"]].map(([icon, name, detail], index) => (
-                <div key={name} className="relative flex min-h-44 flex-col items-center justify-center rounded-2xl bg-white p-6 text-center shadow-sm">
-                  <Image src={publicAsset(`/aws-icons/${icon}`)} alt="" width={64} height={64} />
-                  <strong className="mt-4">{name}</strong><span className="mt-2 text-sm text-slate-500">{detail}</span>
-                  {index < 3 && <span className="absolute -right-4 top-1/2 hidden text-blue-500 md:block">→</span>}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-white px-6 py-20">
-          <div className="mx-auto max-w-6xl">
-            <p className="section-label">Animated flow</p>
-            <h2 className="section-title">The complete architecture in motion</h2>
-            <p className="mt-6 max-w-4xl text-lg leading-8 text-slate-600">The arrows follow DNS resolution, the HTTPS connection, and file retrieval from the private bucket, making the order in which each service participates in SPA delivery explicit.</p>
+            <p className="section-label">Architecture and flow</p>
+            <h2 className="section-title">From DNS resolution to SPA delivery</h2>
+            <p className="mt-6 max-w-4xl text-lg leading-8 text-slate-600">Route 53 resolves the hostname but does not carry application traffic. The browser connects to CloudFront over HTTPS. The CDN presents the ACM certificate and reads the private S3 origin through OAC only when the object is not already cached.</p>
             <figure className="mt-10 overflow-hidden rounded-[32px] border border-slate-300 bg-white shadow-sm">
               <figcaption className="flex flex-wrap items-center justify-between gap-3 bg-[#232f3e] px-6 py-4 text-lg font-bold text-white">
                 <span>Sprint 01 · Frontend</span>
                 <a href={publicAsset("/diagrams/sprint-01-frontend.svg")} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-blue-200 transition hover:text-white">Open at full size ↗</a>
               </figcaption>
               <div className="p-3 md:p-5">
-                <Image src={publicAsset("/diagrams/sprint-01-frontend.svg")} alt="Animated Sprint 01 flow from the user and Route 53 to CloudFront and the private S3 bucket" width={2321} height={652} unoptimized className="h-auto w-full" />
+                <Image src={publicAsset("/diagrams/sprint-01-frontend.svg")} alt="Sprint 01 architecture and animated flow from the user and Route 53 to CloudFront and the private S3 bucket" width={2321} height={652} unoptimized className="h-auto w-full" />
               </div>
             </figure>
           </div>

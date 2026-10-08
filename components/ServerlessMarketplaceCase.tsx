@@ -6,17 +6,6 @@ import { publicAsset } from "@/lib/paths";
 
 type Locale = "pt" | "en";
 
-const services = [
-  ["cognito.svg", "Amazon Cognito", "Identidade e emissão de tokens"],
-  ["api-gateway.svg", "Amazon API Gateway", "REST API e authorizer"],
-  ["lambda.svg", "AWS Lambda", "Catálogo, pedidos e processamento"],
-  ["dynamodb.svg", "Amazon DynamoDB", "Produtos, estoque e pedidos"],
-  ["s3.svg", "Amazon S3", "Imagens privadas dos produtos"],
-  ["sqs.svg", "Amazon SQS", "Fila de pedidos e DLQ"],
-  ["cloudwatch.svg", "Amazon CloudWatch", "Logs, métricas e tentativas"],
-  ["xray.svg", "AWS X-Ray", "Rastreamento distribuído"],
-];
-
 const copy = {
   pt: {
     title: "Marketplace serverless com identidade e eventos",
@@ -25,19 +14,12 @@ const copy = {
     status: "Em implementação",
     category: "AWS & Serverless",
     live: "Abrir frontend publicado ↗",
-    architecture: "Arquitetura planejada",
-    architectureTitle: "Uma requisição autenticada e duas velocidades de processamento",
-    architectureText: "O navegador continua recebendo a SPA pelo CloudFront. Para usar as funções do marketplace, a pessoa se autentica no Cognito; a SPA envia o ID token à API, e o authorizer valida o JWT antes de a rota acionar a Lambda correta.",
-    inherited: "Sprint 01 · já publicado",
-    current: "Sprint 02 · em implementação",
-    diagramLabel: "Fluxo animado",
-    diagramTitle: "Identidade, catálogo e pedidos no mesmo fluxo",
-    diagramText: "O diagrama percorre autenticação, operações de catálogo e recebimento assíncrono dos pedidos. As áreas coloridas separam responsabilidades e as setas numeradas mostram quando cada serviço entra no processamento.",
+    architecture: "Arquitetura e fluxo",
+    architectureTitle: "Identidade, catálogo e pedidos no mesmo caminho",
+    architectureText: "O navegador continua recebendo a SPA pelo CloudFront. Para usar o marketplace, a pessoa se autentica no Cognito; depois, a SPA envia o ID token ao API Gateway. O desenho percorre catálogo, imagens e processamento assíncrono dos pedidos, com as responsabilidades separadas por área.",
     diagramAlt: "Fluxo animado da Sprint 02 com Cognito, API Gateway, Lambda, DynamoDB, S3, SQS, DLQ, CloudWatch e X-Ray",
     diagramFrame: "Sprint 02 · Backend serverless",
     diagramZoom: "Abrir em tamanho real ↗",
-    frontend: "SPA no navegador",
-    frontendDetail: "S3 privado + CloudFront + Route 53",
     authFlow: "Fluxo de acesso",
     authTitle: "O API Gateway não faz login nem escolhe uma tela",
     authText: "Cognito administra identidade e sessão. Depois do login, a própria SPA chama uma rota da API conforme a ação do usuário. O API Gateway valida o token, aplica o contrato HTTP e encaminha a requisição ao backend responsável.",
@@ -88,11 +70,8 @@ const copy = {
     title: "Serverless marketplace with identity and events",
     description: "An evolution of the Sprint 01 frontend into an AWS application architecture with authentication, APIs, persistence, and asynchronous processing.",
     back: "Back to projects", status: "In progress", category: "AWS & Serverless", live: "Open the published frontend ↗",
-    architecture: "Planned architecture", architectureTitle: "One authenticated request and two processing speeds",
-    architectureText: "The browser still receives the SPA through CloudFront. To use marketplace features, the user authenticates with Cognito; the SPA sends the ID token to the API, and the authorizer validates the JWT before the route invokes the appropriate Lambda.",
-    inherited: "Sprint 01 · already live", current: "Sprint 02 · in progress", frontend: "SPA in the browser", frontendDetail: "Private S3 + CloudFront + Route 53",
-    diagramLabel: "Animated flow", diagramTitle: "Identity, catalog, and orders in one flow",
-    diagramText: "The diagram follows authentication, catalog operations, and asynchronous order intake. Colored areas separate responsibilities, while numbered arrows show when each service joins the processing path.",
+    architecture: "Architecture and flow", architectureTitle: "Identity, catalog, and orders on the same path",
+    architectureText: "The browser still receives the SPA through CloudFront. To use the marketplace, the user authenticates with Cognito, then the SPA sends the ID token to API Gateway. The diagram follows catalog operations, images, and asynchronous order processing, with responsibilities separated by area.",
     diagramAlt: "Animated Sprint 02 flow with Cognito, API Gateway, Lambda, DynamoDB, S3, SQS, DLQ, CloudWatch, and X-Ray",
     diagramFrame: "Sprint 02 · Serverless backend", diagramZoom: "Open at full size ↗",
     authFlow: "Access flow", authTitle: "API Gateway does not perform the login or choose a screen",
@@ -133,27 +112,10 @@ export function ServerlessMarketplaceCase({ locale }: { locale: Locale }) {
       </section>
 
       <section className="border-b border-slate-200 bg-white px-6 py-20">
-        <div className="mx-auto max-w-6xl"><p className="section-label">{t.architecture}</p><h2 className="section-title">{t.architectureTitle}</h2><p className="mt-6 max-w-4xl text-lg leading-8 text-slate-600">{t.architectureText}</p>
-          <div className="mt-10 overflow-hidden rounded-[32px] border border-slate-300 bg-slate-50 shadow-sm">
-            <div className="bg-[#232f3e] px-6 py-4 text-lg font-bold text-white">AWS Cloud</div>
-            <div className="p-5 md:p-8">
-              <p className="mb-4 text-xs font-bold uppercase tracking-[0.14em] text-emerald-700">{t.inherited}</p>
-              <div className="grid gap-4 rounded-3xl border border-emerald-200 bg-emerald-50/60 p-5 md:grid-cols-[1fr_auto_1fr] md:items-center">
-                <ArchitectureNode icon="cloudfront.svg" name="Amazon CloudFront" detail="CDN · HTTPS" /><Flow label="HTML · CSS · JavaScript" /><div className="rounded-2xl border border-slate-200 bg-white p-6 text-center"><p className="font-bold text-slate-900">{t.frontend}</p><p className="mt-2 text-sm text-slate-500">{t.frontendDetail}</p></div>
-              </div>
-              <p className="mb-4 mt-8 text-xs font-bold uppercase tracking-[0.14em] text-amber-800">{t.current}</p>
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">{services.map(([icon, name, detail]) => <ArchitectureNode key={name} icon={icon} name={name} detail={detail} />)}</div>
-              <div className="mt-6 grid gap-4 md:grid-cols-2"><div className="rounded-2xl border border-blue-200 bg-blue-50 p-5"><p className="font-bold text-blue-800">1 · {t.sync}</p><p className="mt-2 text-sm leading-6 text-slate-600">SPA → Cognito → API Gateway → Lambda → DynamoDB / S3</p></div><div className="rounded-2xl border border-violet-200 bg-violet-50 p-5"><p className="font-bold text-violet-800">2 · {t.async}</p><p className="mt-2 text-sm leading-6 text-slate-600">SPA → API Gateway → Lambda → SQS → Lambda → DynamoDB · DLQ</p></div></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-white px-6 py-20">
         <div className="mx-auto max-w-6xl">
-          <p className="section-label">{t.diagramLabel}</p>
-          <h2 className="section-title">{t.diagramTitle}</h2>
-          <p className="mt-6 max-w-4xl text-lg leading-8 text-slate-600">{t.diagramText}</p>
+          <p className="section-label">{t.architecture}</p>
+          <h2 className="section-title">{t.architectureTitle}</h2>
+          <p className="mt-6 max-w-4xl text-lg leading-8 text-slate-600">{t.architectureText}</p>
           <figure className="mt-10 overflow-hidden rounded-[32px] border border-slate-300 bg-white shadow-sm">
             <figcaption className="flex flex-wrap items-center justify-between gap-3 bg-[#232f3e] px-6 py-4 text-lg font-bold text-white">
               <span>{t.diagramFrame}</span>
@@ -180,12 +142,6 @@ export function ServerlessMarketplaceCase({ locale }: { locale: Locale }) {
     </main><Footer locale={locale} />
   </>;
 }
-
-function ArchitectureNode({ icon, name, detail }: { icon: string; name: string; detail: string }) {
-  return <div className="flex min-h-44 flex-col items-center justify-center rounded-3xl border border-slate-200 bg-white p-5 text-center shadow-sm"><Image src={publicAsset(`/aws-icons/${icon}`)} alt="" width={72} height={72} className="h-[72px] w-[72px]" /><p className="mt-4 font-bold text-slate-900">{name}</p><p className="mt-1 text-sm leading-5 text-slate-500">{detail}</p></div>;
-}
-
-function Flow({ label }: { label: string }) { return <div className="text-center text-xs font-bold text-slate-500"><span className="md:hidden">↓</span><span className="hidden md:inline">← {label} →</span></div>; }
 
 function StatusList({ title, items, done = false }: { title: string; items: string[]; done?: boolean }) {
   return <article className={`rounded-3xl border p-8 ${done ? "border-emerald-200 bg-emerald-50/60" : "border-amber-200 bg-amber-50/60"}`}><h3 className={`text-xl font-bold ${done ? "text-emerald-900" : "text-amber-950"}`}>{title}</h3><ul className="mt-6 grid gap-4">{items.map((item) => <li key={item} className="flex gap-3 leading-7 text-slate-700"><span className={`font-bold ${done ? "text-emerald-600" : "text-amber-700"}`}>{done ? "✓" : "○"}</span>{item}</li>)}</ul></article>;
