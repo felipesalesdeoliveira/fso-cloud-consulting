@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://felipesalesdeoliveira.github.io/fso-cloud-consulting/">Acessar o site</a>
+  <a href="https://www.fsocloudconsulting.com/">Acessar o site</a>
   ·
   <a href="https://github.com/felipesalesdeoliveira/fso-cloud-consulting/issues">Reportar um problema</a>
 </p>
@@ -67,8 +67,8 @@ O primeiro estudo de caso documenta uma SPA React publicada em uma arquitetura
 AWS com origem S3 privada, CloudFront, ACM, Route 53 e OAC. A página apresenta
 arquitetura, fundamentos, decisões técnicas, configuração real e validações.
 
-- [Case técnico em português](https://felipesalesdeoliveira.github.io/fso-cloud-consulting/projetos/frontend-cdn-s3-tls-dominio/)
-- [Case study in English](https://felipesalesdeoliveira.github.io/fso-cloud-consulting/en/projects/frontend-cdn-s3-tls-custom-domain/)
+- [Case técnico em português](https://www.fsocloudconsulting.com/projetos/frontend-cdn-s3-tls-dominio/)
+- [Case study in English](https://www.fsocloudconsulting.com/en/projects/frontend-cdn-s3-tls-custom-domain/)
 - [Aplicação publicada na AWS](https://residencia.fsocloudconsulting.com)
 
 As informações públicas omitem identificadores internos da conta AWS. Os testes
@@ -82,8 +82,8 @@ serverless com identidade, API, persistência e processamento assíncrono. A pá
 distingue o que já foi preparado do que ainda depende de provisionamento e
 validação na AWS.
 
-- [Case técnico em português](https://felipesalesdeoliveira.github.io/fso-cloud-consulting/projetos/marketplace-serverless-identidade-eventos/)
-- [Case study in English](https://felipesalesdeoliveira.github.io/fso-cloud-consulting/en/projects/serverless-marketplace-identity-events/)
+- [Case técnico em português](https://www.fsocloudconsulting.com/projetos/marketplace-serverless-identidade-eventos/)
+- [Case study in English](https://www.fsocloudconsulting.com/en/projects/serverless-marketplace-identity-events/)
 - [Frontend publicado na AWS](https://residencia.fsocloudconsulting.com)
 
 Enquanto a sprint estiver aberta, o case permanece identificado como **Em
@@ -175,13 +175,13 @@ merge.
 - [x] Páginas em português e inglês;
 - [x] Primeiro estudo de caso técnico com aplicação ao vivo;
 - [x] Segundo estudo de caso publicado com acompanhamento transparente da implementação;
-- [ ] Hospedagem privada no Amazon S3;
-- [ ] Distribuição global com Amazon CloudFront;
-- [ ] Domínio `fsocloudconsulting.com` no Route 53.
+- [x] Hospedagem privada no Amazon S3;
+- [x] Distribuição global com Amazon CloudFront;
+- [x] Domínio `www.fsocloudconsulting.com` no Route 53.
 
 ## Contato
 
-- Site atual: [felipesalesdeoliveira.github.io/fso-cloud-consulting](https://felipesalesdeoliveira.github.io/fso-cloud-consulting/)
+- Site atual: [www.fsocloudconsulting.com](https://www.fsocloudconsulting.com/)
 - WhatsApp: [iniciar conversa](https://wa.me/5548996297388)
 
 ## Direitos de uso
