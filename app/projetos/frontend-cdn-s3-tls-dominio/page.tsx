@@ -212,6 +212,23 @@ export default function AwsFrontendProjectPage() {
 
         <section className="bg-white px-6 py-20">
           <div className="mx-auto max-w-6xl">
+            <p className="section-label">Fluxo animado</p>
+            <h2 className="section-title">A arquitetura completa em movimento</h2>
+            <p className="mt-6 max-w-4xl text-lg leading-8 text-slate-600">As setas percorrem a resolução DNS, a conexão HTTPS e a busca dos arquivos no bucket privado, deixando visível a ordem em que cada serviço participa da entrega da SPA.</p>
+            <figure className="mt-10 overflow-hidden rounded-[32px] border border-slate-300 bg-white shadow-sm">
+              <figcaption className="flex flex-wrap items-center justify-between gap-3 bg-[#232f3e] px-6 py-4 text-lg font-bold text-white">
+                <span>Sprint 01 · Frontend</span>
+                <a href={publicAsset("/diagrams/sprint-01-frontend.svg")} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-blue-200 transition hover:text-white">Abrir em tamanho real ↗</a>
+              </figcaption>
+              <div className="p-3 md:p-5">
+                <Image src={publicAsset("/diagrams/sprint-01-frontend.svg")} alt="Fluxo animado da Sprint 01, do usuário e Route 53 ao CloudFront e ao bucket S3 privado" width={2321} height={652} unoptimized className="h-auto w-full" />
+              </div>
+            </figure>
+          </div>
+        </section>
+
+        <section className="bg-white px-6 py-20">
+          <div className="mx-auto max-w-6xl">
             <p className="section-label">Fundamentos</p>
             <h2 className="section-title">Conceitos demonstrados pela implementação</h2>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">Além da criação dos recursos, o projeto foi usado para compreender o caminho da requisição, as fronteiras de segurança e o comportamento do cache.</p>
