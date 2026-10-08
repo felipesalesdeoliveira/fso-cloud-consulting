@@ -30,6 +30,12 @@ const copy = {
     architectureText: "O navegador continua recebendo a SPA pelo CloudFront. Para usar as funções do marketplace, a pessoa se autentica no Cognito; a SPA envia o ID token à API, e o authorizer valida o JWT antes de a rota acionar a Lambda correta.",
     inherited: "Sprint 01 · já publicado",
     current: "Sprint 02 · em implementação",
+    diagramLabel: "Fluxo animado",
+    diagramTitle: "Identidade, catálogo e pedidos no mesmo fluxo",
+    diagramText: "O diagrama percorre autenticação, operações de catálogo e recebimento assíncrono dos pedidos. As áreas coloridas separam responsabilidades e as setas numeradas mostram quando cada serviço entra no processamento.",
+    diagramAlt: "Fluxo animado da Sprint 02 com Cognito, API Gateway, Lambda, DynamoDB, S3, SQS, DLQ, CloudWatch e X-Ray",
+    diagramFrame: "Sprint 02 · Backend serverless",
+    diagramZoom: "Abrir em tamanho real ↗",
     frontend: "SPA no navegador",
     frontendDetail: "S3 privado + CloudFront + Route 53",
     authFlow: "Fluxo de acesso",
@@ -85,6 +91,10 @@ const copy = {
     architecture: "Planned architecture", architectureTitle: "One authenticated request and two processing speeds",
     architectureText: "The browser still receives the SPA through CloudFront. To use marketplace features, the user authenticates with Cognito; the SPA sends the ID token to the API, and the authorizer validates the JWT before the route invokes the appropriate Lambda.",
     inherited: "Sprint 01 · already live", current: "Sprint 02 · in progress", frontend: "SPA in the browser", frontendDetail: "Private S3 + CloudFront + Route 53",
+    diagramLabel: "Animated flow", diagramTitle: "Identity, catalog, and orders in one flow",
+    diagramText: "The diagram follows authentication, catalog operations, and asynchronous order intake. Colored areas separate responsibilities, while numbered arrows show when each service joins the processing path.",
+    diagramAlt: "Animated Sprint 02 flow with Cognito, API Gateway, Lambda, DynamoDB, S3, SQS, DLQ, CloudWatch, and X-Ray",
+    diagramFrame: "Sprint 02 · Serverless backend", diagramZoom: "Open at full size ↗",
     authFlow: "Access flow", authTitle: "API Gateway does not perform the login or choose a screen",
     authText: "Cognito manages identity and session. After login, the SPA calls an API route based on the user action. API Gateway validates the token, applies the HTTP contract, and forwards the request to the responsible backend.",
     steps: ["The user opens the domain and receives the Sprint 01 SPA.", "The SPA starts sign-up or sign-in through the Cognito User Pool.", "After authentication, Cognito returns tokens; the application uses the ID token for the calls defined by this project.", "The SPA sends Authorization: Bearer <ID token> to API Gateway.", "The Cognito authorizer validates the JWT signature, expiration, and audience.", "The requested route invokes the matching Lambda; an invalid request never reaches the function."],
@@ -136,6 +146,23 @@ export function ServerlessMarketplaceCase({ locale }: { locale: Locale }) {
               <div className="mt-6 grid gap-4 md:grid-cols-2"><div className="rounded-2xl border border-blue-200 bg-blue-50 p-5"><p className="font-bold text-blue-800">1 · {t.sync}</p><p className="mt-2 text-sm leading-6 text-slate-600">SPA → Cognito → API Gateway → Lambda → DynamoDB / S3</p></div><div className="rounded-2xl border border-violet-200 bg-violet-50 p-5"><p className="font-bold text-violet-800">2 · {t.async}</p><p className="mt-2 text-sm leading-6 text-slate-600">SPA → API Gateway → Lambda → SQS → Lambda → DynamoDB · DLQ</p></div></div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-6 py-20">
+        <div className="mx-auto max-w-6xl">
+          <p className="section-label">{t.diagramLabel}</p>
+          <h2 className="section-title">{t.diagramTitle}</h2>
+          <p className="mt-6 max-w-4xl text-lg leading-8 text-slate-600">{t.diagramText}</p>
+          <figure className="mt-10 overflow-hidden rounded-[32px] border border-slate-300 bg-white shadow-sm">
+            <figcaption className="flex flex-wrap items-center justify-between gap-3 bg-[#232f3e] px-6 py-4 text-lg font-bold text-white">
+              <span>{t.diagramFrame}</span>
+              <a href={publicAsset("/diagrams/sprint-02-backend.svg")} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-blue-200 transition hover:text-white">{t.diagramZoom}</a>
+            </figcaption>
+            <div className="p-3 md:p-5">
+              <Image src={publicAsset("/diagrams/sprint-02-backend.svg")} alt={t.diagramAlt} width={2321} height={1122} unoptimized className="h-auto w-full" />
+            </div>
+          </figure>
         </div>
       </section>
 

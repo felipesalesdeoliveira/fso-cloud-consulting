@@ -122,6 +122,23 @@ export default function EnglishProjectPage() {
 
         <section className="bg-white px-6 py-20">
           <div className="mx-auto max-w-6xl">
+            <p className="section-label">Animated flow</p>
+            <h2 className="section-title">The complete architecture in motion</h2>
+            <p className="mt-6 max-w-4xl text-lg leading-8 text-slate-600">The arrows follow DNS resolution, the HTTPS connection, and file retrieval from the private bucket, making the order in which each service participates in SPA delivery explicit.</p>
+            <figure className="mt-10 overflow-hidden rounded-[32px] border border-slate-300 bg-white shadow-sm">
+              <figcaption className="flex flex-wrap items-center justify-between gap-3 bg-[#232f3e] px-6 py-4 text-lg font-bold text-white">
+                <span>Sprint 01 · Frontend</span>
+                <a href={publicAsset("/diagrams/sprint-01-frontend.svg")} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-blue-200 transition hover:text-white">Open at full size ↗</a>
+              </figcaption>
+              <div className="p-3 md:p-5">
+                <Image src={publicAsset("/diagrams/sprint-01-frontend.svg")} alt="Animated Sprint 01 flow from the user and Route 53 to CloudFront and the private S3 bucket" width={2321} height={652} unoptimized className="h-auto w-full" />
+              </div>
+            </figure>
+          </div>
+        </section>
+
+        <section className="bg-white px-6 py-20">
+          <div className="mx-auto max-w-6xl">
             <p className="section-label">Foundations</p>
             <h2 className="section-title">Concepts demonstrated by the implementation</h2>
             <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
