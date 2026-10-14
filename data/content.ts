@@ -196,10 +196,10 @@ export const projects = [
     title: "Marketplace serverless com identidade e eventos",
     description:
       "Evolução de uma SPA publicada para uma arquitetura com autenticação, APIs, persistência e processamento assíncrono na AWS.",
-    status: "Em implementação",
+    status: "Concluído",
     challenge: "Transformar um frontend publicado em um sistema capaz de autenticar usuários, persistir catálogo e continuar processando pedidos mesmo diante de falhas.",
-    solution: "Arquitetura planejada com Cognito, API Gateway, Lambdas, DynamoDB, S3 privado, SQS e DLQ, preservando o frontend entregue na Sprint 01.",
-    result: "Preparação local e desenho técnico concluídos; provisionamento e validações na AWS seguem em andamento.",
+    solution: "Arquitetura implementada com Cognito, API Gateway, três Lambdas, DynamoDB, S3 privado, SQS e DLQ, integrada ao frontend da Sprint 01.",
+    result: "API autenticada validada, pedido processado com baixa de estoque e mensagens inválidas isoladas na DLQ sem bloquear o fluxo válido.",
     technologies: ["Cognito", "API Gateway", "AWS Lambda", "DynamoDB", "Amazon S3", "Amazon SQS"],
   },
   {

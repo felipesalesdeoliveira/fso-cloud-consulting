@@ -3,7 +3,7 @@ import { ServerlessMarketplaceCase } from "@/components/ServerlessMarketplaceCas
 import { siteConfig, siteImage } from "@/lib/site";
 
 const title = "Marketplace serverless com identidade e eventos";
-const description = "Arquitetura em implementação com Cognito, API Gateway, Lambda, DynamoDB, S3 e SQS para identidade, catálogo e processamento assíncrono de pedidos.";
+const description = "Marketplace serverless implementado e validado na AWS com Cognito, API Gateway, Lambda, DynamoDB, S3, SQS e DLQ.";
 const pageUrl = `${siteConfig.url}/projetos/marketplace-serverless-identidade-eventos/`;
 
 export const metadata: Metadata = {

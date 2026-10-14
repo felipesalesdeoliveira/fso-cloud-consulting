@@ -11,7 +11,7 @@ const copy = {
     title: "Marketplace serverless com identidade e eventos",
     description: "Evolução do frontend publicado na Sprint 01 para uma arquitetura de aplicação com autenticação, APIs, persistência e processamento assíncrono na AWS.",
     back: "Voltar para projetos",
-    status: "Em implementação",
+    status: "Concluído",
     category: "AWS & Serverless",
     live: "Abrir frontend publicado ↗",
     architecture: "Arquitetura e fluxo",
@@ -48,28 +48,28 @@ const copy = {
       ["Visibilidade operacional", "CloudWatch e X-Ray compõem o plano de investigação de erros, latência e tentativas do fluxo."],
     ],
     statusLabel: "Estado real da entrega",
-    statusTitle: "O desenho está definido; a validação em nuvem ainda está aberta",
-    doneTitle: "Concluído até aqui",
-    done: ["Frontend da Sprint 01 permanece publicado", "Arquitetura e responsabilidades documentadas", "Estrutura local da aplicação e das funções preparada", "Case técnico publicado com status transparente"],
-    pendingTitle: "Ainda precisa ser comprovado",
-    pending: ["User Pool, app client e authorizer provisionados", "Rotas e Lambdas integradas na AWS", "Tabelas, bucket de imagens, fila e DLQ configurados", "Falha induzida acompanhada no CloudWatch até a DLQ", "Fluxo ponta a ponta validado com evidências"],
-    validation: "Plano de validação",
-    validationTitle: "O case só será marcado como concluído com evidência reproduzível",
+    statusTitle: "Implementação concluída e validada de ponta a ponta na AWS",
+    doneTitle: "Infraestrutura entregue",
+    done: ["Cognito User Pool, app client e authorizer configurados", "Três Lambdas publicadas para catálogo, pedidos e processamento", "DynamoDB, bucket S3 privado, fila SQS e DLQ configurados", "API REST publicada no estágio de produção", "Frontend integrado e publicado no domínio da aplicação"],
+    resultsTitle: "Resultados comprovados",
+    results: ["Rota protegida respondeu 401 sem token e 200 com ID token válido", "Produto criado e editado com duas imagens armazenadas no S3 privado", "Pedido válido foi processado e o estoque caiu de 3 para 2", "Duas mensagens inválidas falharam três vezes e chegaram à DLQ", "Falhas inválidas não bloquearam o processamento do pedido válido"],
+    validation: "Evidências da validação",
+    validationTitle: "Identidade, catálogo, pedidos e resiliência testados em conjunto",
     validationItems: [
-      ["Identidade", "Login válido retorna tokens; token ausente, expirado ou inválido é recusado pela API."],
-      ["Catálogo", "CRUD persiste dados e as URLs pré-assinadas respeitam quantidade, validade e bucket privado."],
-      ["Pedidos", "A API confirma o recebimento sem esperar o processamento completo da compra."],
-      ["Resiliência", "Uma falha provocada percorre as tentativas definidas e chega à DLQ sem impedir outras mensagens."],
-      ["Observabilidade", "Logs e traces permitem correlacionar requisição, mensagem, pedido e causa da falha."],
+      ["Identidade", "A API recusou a chamada sem token com HTTP 401 e aceitou um ID token válido com HTTP 200."],
+      ["Catálogo", "O CRUD persistiu o produto e as imagens foram acessadas por URLs pré-assinadas, mantendo o bucket privado."],
+      ["Pedidos", "Um pedido válido chegou ao estado processado e a transação reduziu o estoque de 3 para 2."],
+      ["Resiliência", "Duas mensagens inválidas esgotaram três tentativas e chegaram à DLQ sem bloquear a compra válida."],
+      ["Observabilidade", "O CloudWatch registrou execuções, tentativas e falhas do processador; o X-Ray ficou ativo no estágio prod."],
     ],
-    notice: "Este case acompanha uma implementação em andamento. Resultados pendentes não são apresentados como evidência concluída.",
+    notice: "Sprint 02 concluída: identidade, catálogo e processamento assíncrono estão publicados e validados na AWS.",
     other: "Ver outros projetos",
     contact: "Conversar sobre uma solução",
   },
   en: {
     title: "Serverless marketplace with identity and events",
     description: "An evolution of the Sprint 01 frontend into an AWS application architecture with authentication, APIs, persistence, and asynchronous processing.",
-    back: "Back to projects", status: "In progress", category: "AWS & Serverless", live: "Open the published frontend ↗",
+    back: "Back to projects", status: "Completed", category: "AWS & Serverless", live: "Open the published frontend ↗",
     architecture: "Architecture and flow", architectureTitle: "Identity, catalog, and orders on the same path",
     architectureText: "The browser still receives the SPA through CloudFront. To use the marketplace, the user authenticates with Cognito, then the SPA sends the ID token to API Gateway. The diagram follows catalog operations, images, and asynchronous order processing, with responsibilities separated by area.",
     diagramAlt: "Animated Sprint 02 flow with Cognito, API Gateway, Lambda, DynamoDB, S3, SQS, DLQ, CloudWatch, and X-Ray",
@@ -82,12 +82,12 @@ const copy = {
     async: "Asynchronous · orders", asyncText: "The API receives and persists the order, publishes a message to SQS, and returns. Another Lambda processes the event, with retries and DLQ isolation for persistent failures.",
     decisions: "Technical decisions", decisionsTitle: "Responsibilities separated by operational behavior",
     decisionItems: [["Identity before logic", "The authorizer blocks missing or invalid tokens before business code runs."], ["Separate Lambdas", "Catalog, intake, and processing scale and fail differently, so they do not share one function."], ["Images outside the API", "Pre-signed URLs allow up to eight product images without making the bucket public or moving binaries through Lambda."], ["Queue as a boundary", "SQS separates purchase acknowledgement from processing and absorbs demand variation."], ["Failure isolation", "After the planned retry limit, problematic messages move to the DLQ without blocking the rest."], ["Operational visibility", "CloudWatch and X-Ray form the investigation plan for errors, latency, and retries."]],
-    statusLabel: "Actual delivery status", statusTitle: "The design is defined; cloud validation is still open",
-    doneTitle: "Completed so far", done: ["Sprint 01 frontend remains live", "Architecture and responsibilities documented", "Local application and function structure prepared", "Technical case published with a transparent status"],
-    pendingTitle: "Still to be proven", pending: ["User Pool, app client, and authorizer provisioned", "Routes and Lambdas integrated on AWS", "Tables, image bucket, queue, and DLQ configured", "Injected failure followed in CloudWatch through the DLQ", "End-to-end flow validated with evidence"],
-    validation: "Validation plan", validationTitle: "The case will only be marked complete with reproducible evidence",
-    validationItems: [["Identity", "A valid login returns tokens; missing, expired, or invalid tokens are rejected by the API."], ["Catalog", "CRUD persists data and pre-signed URLs respect quantity, expiration, and private-bucket constraints."], ["Orders", "The API acknowledges intake without waiting for the complete purchase processing."], ["Resilience", "An injected failure exhausts the configured attempts and reaches the DLQ without stopping other messages."], ["Observability", "Logs and traces correlate the request, message, order, and failure cause."]],
-    notice: "This case follows an implementation in progress. Pending outcomes are not presented as completed evidence.", other: "View other projects", contact: "Discuss a solution",
+    statusLabel: "Actual delivery status", statusTitle: "Implementation completed and validated end to end on AWS",
+    doneTitle: "Delivered infrastructure", done: ["Cognito User Pool, app client, and authorizer configured", "Three Lambdas deployed for catalog, orders, and processing", "DynamoDB, private S3 bucket, SQS queue, and DLQ configured", "REST API deployed to the production stage", "Frontend integrated and published on the application domain"],
+    resultsTitle: "Verified results", results: ["Protected route returned 401 without a token and 200 with a valid ID token", "Product created and edited with two images stored in private S3", "A valid order was processed and stock dropped from 3 to 2", "Two invalid messages failed three times and reached the DLQ", "Invalid messages did not block the valid order"],
+    validation: "Validation evidence", validationTitle: "Identity, catalog, orders, and resilience tested together",
+    validationItems: [["Identity", "The API rejected a tokenless call with HTTP 401 and accepted a valid ID token with HTTP 200."], ["Catalog", "CRUD persisted the product and pre-signed URLs served its images while the bucket remained private."], ["Orders", "A valid order reached the processed state and the transaction reduced stock from 3 to 2."], ["Resilience", "Two invalid messages exhausted three attempts and reached the DLQ without blocking the valid purchase."], ["Observability", "CloudWatch recorded processor executions, retries, and failures; X-Ray was enabled on the prod stage."]],
+    notice: "Sprint 02 is complete: identity, catalog, and asynchronous processing are deployed and validated on AWS.", other: "View other projects", contact: "Discuss a solution",
   },
 };
 
@@ -104,7 +104,7 @@ export function ServerlessMarketplaceCase({ locale }: { locale: Locale }) {
         <div className="pointer-events-none absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-amber-200/35 blur-[110px]" />
         <div className="relative mx-auto max-w-6xl">
           <Link href={projectHome} className="text-sm font-semibold text-blue-600 hover:text-blue-700">← {t.back}</Link>
-          <div className="mt-10 flex flex-wrap gap-3"><span className="rounded-full bg-amber-100 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-amber-800">{t.status}</span><span className="rounded-full bg-blue-100 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-blue-700">{t.category}</span></div>
+          <div className="mt-10 flex flex-wrap gap-3"><span className="rounded-full bg-emerald-100 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-emerald-800">{t.status}</span><span className="rounded-full bg-blue-100 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-blue-700">{t.category}</span></div>
           <h1 className="mt-7 max-w-5xl text-4xl font-bold leading-[1.08] tracking-[-0.04em] text-slate-950 md:text-6xl">{t.title}</h1>
           <p className="mt-7 max-w-3xl text-xl leading-9 text-slate-600">{t.description}</p>
           <a href="https://residencia.fsocloudconsulting.com" target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex rounded-xl bg-blue-600 px-6 py-4 text-sm font-bold text-white shadow-lg transition hover:bg-blue-700">{t.live}</a>
@@ -134,11 +134,11 @@ export function ServerlessMarketplaceCase({ locale }: { locale: Locale }) {
 
       <section className="border-y border-slate-200 bg-[#F3F6FB] px-6 py-20"><div className="mx-auto max-w-6xl"><p className="section-label">{t.decisions}</p><h2 className="section-title">{t.decisionsTitle}</h2><div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">{t.decisionItems.map(([name, text]) => <article key={name} className="rounded-3xl border border-slate-200 bg-white p-7"><h3 className="text-lg font-bold text-slate-900">{name}</h3><p className="mt-4 leading-7 text-slate-600">{text}</p></article>)}</div></div></section>
 
-      <section className="bg-white px-6 py-20"><div className="mx-auto max-w-6xl"><p className="section-label">{t.statusLabel}</p><h2 className="section-title">{t.statusTitle}</h2><div className="mt-10 grid gap-6 md:grid-cols-2"><StatusList title={t.doneTitle} items={t.done} done /><StatusList title={t.pendingTitle} items={t.pending} /></div></div></section>
+      <section className="bg-white px-6 py-20"><div className="mx-auto max-w-6xl"><p className="section-label">{t.statusLabel}</p><h2 className="section-title">{t.statusTitle}</h2><div className="mt-10 grid gap-6 md:grid-cols-2"><StatusList title={t.doneTitle} items={t.done} done /><StatusList title={t.resultsTitle} items={t.results} done /></div></div></section>
 
-      <section className="border-y border-slate-200 bg-[#F3F6FB] px-6 py-20"><div className="mx-auto max-w-6xl"><p className="section-label">{t.validation}</p><h2 className="section-title">{t.validationTitle}</h2><div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-5">{t.validationItems.map(([name, text]) => <article key={name} className="rounded-3xl border border-amber-200 bg-white p-6"><span className="rounded-full bg-amber-100 px-3 py-1.5 text-xs font-bold uppercase text-amber-800">{english ? "To validate" : "A validar"}</span><h3 className="mt-5 font-bold text-slate-900">{name}</h3><p className="mt-3 text-sm leading-6 text-slate-600">{text}</p></article>)}</div></div></section>
+      <section className="border-y border-slate-200 bg-[#F3F6FB] px-6 py-20"><div className="mx-auto max-w-6xl"><p className="section-label">{t.validation}</p><h2 className="section-title">{t.validationTitle}</h2><div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-5">{t.validationItems.map(([name, text]) => <article key={name} className="rounded-3xl border border-emerald-200 bg-white p-6"><span className="rounded-full bg-emerald-100 px-3 py-1.5 text-xs font-bold uppercase text-emerald-800">{english ? "Validated" : "Validado"}</span><h3 className="mt-5 font-bold text-slate-900">{name}</h3><p className="mt-3 text-sm leading-6 text-slate-600">{text}</p></article>)}</div></div></section>
 
-      <section className="bg-white px-6 py-20"><div className="mx-auto max-w-6xl rounded-[36px] bg-[#101C3C] p-8 text-white md:p-12"><p className="text-sm font-bold uppercase tracking-[0.2em] text-amber-300">{t.status}</p><h2 className="mt-5 max-w-4xl text-3xl font-bold tracking-[-0.035em] md:text-5xl">{t.notice}</h2><div className="mt-8 flex flex-wrap gap-3"><Link href={projectHome} className="rounded-xl bg-white px-6 py-4 text-sm font-bold text-blue-700">{t.other}</Link><Link href={english ? "/en/#contact" : "/#contato"} className="rounded-xl border border-blue-300/40 px-6 py-4 text-sm font-bold text-white">{t.contact}</Link></div></div></section>
+      <section className="bg-white px-6 py-20"><div className="mx-auto max-w-6xl rounded-[36px] bg-[#101C3C] p-8 text-white md:p-12"><p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">{t.status}</p><h2 className="mt-5 max-w-4xl text-3xl font-bold tracking-[-0.035em] md:text-5xl">{t.notice}</h2><div className="mt-8 flex flex-wrap gap-3"><Link href={projectHome} className="rounded-xl bg-white px-6 py-4 text-sm font-bold text-blue-700">{t.other}</Link><Link href={english ? "/en/#contact" : "/#contato"} className="rounded-xl border border-blue-300/40 px-6 py-4 text-sm font-bold text-white">{t.contact}</Link></div></div></section>
     </main><Footer locale={locale} />
   </>;
 }

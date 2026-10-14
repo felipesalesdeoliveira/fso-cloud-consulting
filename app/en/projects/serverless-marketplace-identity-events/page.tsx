@@ -3,7 +3,7 @@ import { ServerlessMarketplaceCase } from "@/components/ServerlessMarketplaceCas
 import { siteConfig, siteImage } from "@/lib/site";
 
 const title = "Serverless marketplace with identity and events";
-const description = "An in-progress architecture using Cognito, API Gateway, Lambda, DynamoDB, S3, and SQS for identity, catalog, and asynchronous order processing.";
+const description = "A serverless marketplace implemented and validated on AWS with Cognito, API Gateway, Lambda, DynamoDB, S3, SQS, and a DLQ.";
 const pageUrl = `${siteConfig.url}/en/projects/serverless-marketplace-identity-events/`;
 
 export const metadata: Metadata = {
