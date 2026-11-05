@@ -151,26 +151,39 @@ export function About({ locale = "pt" }: { locale?: "pt" | "en" }) {
   );
 }
 
-export function Projects({ locale = "pt" }: { locale?: "pt" | "en" }) {
+export function Projects({
+  locale = "pt",
+  limit,
+  showAllLink = false,
+  showUpcoming = true,
+  showIntro = true,
+}: {
+  locale?: "pt" | "en";
+  limit?: number;
+  showAllLink?: boolean;
+  showUpcoming?: boolean;
+  showIntro?: boolean;
+}) {
   const english = locale === "en";
   const source = english ? projectsEn : projects;
   const publishedProjects = source
     .filter((project) => project.slug)
     .sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""));
+  const visibleProjects = typeof limit === "number" ? publishedProjects.slice(0, limit) : publishedProjects;
   const upcomingProjects = source.filter((project) => !project.slug);
 
   return (
     <section id={english ? "projects" : "projetos"} className="scroll-mt-24 bg-[#F3F6FB] px-6 py-24">
       <div className="mx-auto max-w-7xl">
-        <div className="max-w-3xl">
+        {showIntro && <div className="max-w-3xl">
           <p className="section-label">{english ? "Projects and technical cases" : "Projetos e casos técnicos"}</p>
           <h2 className="section-title">{english ? "Production-minded engineering, applied to real challenges" : "Experiência aplicada a desafios reais"}</h2>
           <p className="section-description">
             {english ? "Technical case studies focused on sound architecture, reliable operations, automation, and measurable outcomes." : "Casos técnicos que demonstram uma abordagem prática para confiabilidade, observabilidade, automação e infraestrutura."}
           </p>
-        </div>
+        </div>}
         <div className="mt-14 grid gap-8">
-        {publishedProjects.map((project) => {
+        {visibleProjects.map((project) => {
           const completed = project.status === "Concluído" || project.status === "Completed";
           return (
           <article key={project.slug} className="light-card relative overflow-hidden rounded-[32px] border border-slate-200 bg-white p-7 md:p-10">
@@ -203,7 +216,13 @@ export function Projects({ locale = "pt" }: { locale?: "pt" | "en" }) {
         })}
         </div>
 
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
+        {showAllLink && <div className="mt-12 flex justify-center">
+          <Link href={english ? "/en/projects/" : "/projetos/"} className="inline-flex items-center gap-3 rounded-xl border border-blue-200 bg-white px-7 py-4 text-sm font-bold text-blue-700 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-300 hover:bg-blue-50">
+            {english ? "View all projects" : "Ver todos os projetos"} <ArrowIcon />
+          </Link>
+        </div>}
+
+        {showUpcoming && <div className="mt-8 grid gap-6 md:grid-cols-2">
           {upcomingProjects.map((project, index) => (
             <article key={project.title} className="light-card relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-7">
               <span className="absolute right-7 top-5 text-5xl font-bold text-blue-950/[0.06]">0{index + 2}</span>
@@ -213,7 +232,7 @@ export function Projects({ locale = "pt" }: { locale?: "pt" | "en" }) {
               <span className="relative mt-7 inline-flex rounded-full bg-slate-100 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">{project.status}</span>
             </article>
           ))}
-        </div>
+        </div>}
       </div>
     </section>
   );

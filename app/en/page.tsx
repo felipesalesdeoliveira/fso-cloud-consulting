@@ -16,5 +16,5 @@ export const metadata: Metadata = {
 };
 
 export default function EnglishHome() {
-  return <><a href="#content" className="skip-link">Skip to main content</a><Header locale="en" /><main id="content" tabIndex={-1} className="overflow-x-hidden bg-[#F8FAFD] pt-24 text-[#101828]"><Hero locale="en" /><Services locale="en" /><Process locale="en" /><About locale="en" /><Projects locale="en" /><Articles locale="en" /><Technologies locale="en" /><Contact locale="en" /></main><Footer locale="en" /></>;
+  return <><a href="#content" className="skip-link">Skip to main content</a><Header locale="en" /><main id="content" tabIndex={-1} className="overflow-x-hidden bg-[#F8FAFD] pt-24 text-[#101828]"><Hero locale="en" /><Services locale="en" /><Process locale="en" /><About locale="en" /><Projects locale="en" limit={3} showAllLink showUpcoming={false} /><Articles locale="en" /><Technologies locale="en" /><Contact locale="en" /></main><Footer locale="en" /></>;
 }
