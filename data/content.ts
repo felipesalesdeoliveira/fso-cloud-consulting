@@ -180,6 +180,7 @@ export const highlights = [
 export const projects = [
   {
     slug: "frontend-cdn-s3-tls-dominio",
+    publishedAt: "2026-09-27",
     category: "AWS & CDN",
     title: "Frontend com CDN, S3, TLS e domínio customizado",
     description:
@@ -192,6 +193,7 @@ export const projects = [
   },
   {
     slug: "marketplace-serverless-identidade-eventos",
+    publishedAt: "2026-10-14",
     category: "AWS & Serverless",
     title: "Marketplace serverless com identidade e eventos",
     description:
@@ -204,6 +206,7 @@ export const projects = [
   },
   {
     slug: "postgresql-rds-proxy-rede-privada",
+    publishedAt: "2026-11-04",
     category: "AWS & Dados",
     title: "PostgreSQL com RDS Proxy e rede privada",
     description:
@@ -216,6 +219,7 @@ export const projects = [
   },
   {
     slug: null,
+    publishedAt: null,
     category: "Cloud & IaC",
     title: "Infraestrutura cloud automatizada",
     description:
