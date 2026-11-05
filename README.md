@@ -89,6 +89,21 @@ validação na AWS.
 Enquanto a sprint estiver aberta, o case permanece identificado como **Em
 implementação** e não apresenta testes planejados como resultados concluídos.
 
+## Case publicado — PostgreSQL privado e RDS Proxy
+
+O terceiro estudo de caso documenta a evolução do marketplace para dois modos
+explícitos de persistência. A implementação combina PostgreSQL privado, RDS
+Proxy, Secrets Manager, duas subnets privadas e VPC Endpoints, preservando o
+adapter DynamoDB e o processamento assíncrono da sprint anterior.
+
+- [Case técnico em português](https://www.fsocloudconsulting.com/projetos/postgresql-rds-proxy-rede-privada/)
+- [Case study in English](https://www.fsocloudconsulting.com/en/projects/private-postgresql-rds-proxy-vpc/)
+
+As vinte etapas técnicas foram concluídas e os fluxos de catálogo, pedidos e
+estoque foram validados nos modos RDS e DynamoDB. Após os testes, os recursos
+com cobrança contínua foram removidos de forma controlada; o case registra essa
+limpeza sem apresentar o ambiente temporário como atualmente ativo.
+
 ## Executar localmente
 
 ### Pré-requisitos
