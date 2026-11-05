@@ -154,7 +154,9 @@ export function About({ locale = "pt" }: { locale?: "pt" | "en" }) {
 export function Projects({ locale = "pt" }: { locale?: "pt" | "en" }) {
   const english = locale === "en";
   const source = english ? projectsEn : projects;
-  const publishedProjects = source.filter((project) => project.slug);
+  const publishedProjects = source
+    .filter((project) => project.slug)
+    .sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""));
   const upcomingProjects = source.filter((project) => !project.slug);
 
   return (

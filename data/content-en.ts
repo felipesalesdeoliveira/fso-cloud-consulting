@@ -17,6 +17,7 @@ export const processEn = [
 export const projectsEn = [
   {
     slug: "frontend-cdn-s3-tls-custom-domain",
+    publishedAt: "2026-09-27",
     category: "AWS & CDN",
     title: "Secure frontend delivery on AWS",
     description: "A React SPA served from a private S3 origin through CloudFront, with managed TLS and DNS in Route 53.",
@@ -27,6 +28,7 @@ export const projectsEn = [
   },
   {
     slug: "serverless-marketplace-identity-events",
+    publishedAt: "2026-10-14",
     category: "AWS & Serverless",
     title: "Serverless marketplace with identity and events",
     description: "An evolution from a published SPA to an AWS architecture with authentication, APIs, persistence, and asynchronous order processing.",
@@ -38,6 +40,7 @@ export const projectsEn = [
   },
   {
     slug: "private-postgresql-rds-proxy-vpc",
+    publishedAt: "2026-11-04",
     category: "AWS & Data",
     title: "Private PostgreSQL with RDS Proxy and Amazon VPC",
     description: "A serverless marketplace validated with private PostgreSQL, RDS Proxy, VPC Endpoints, and an explicit choice between RDS and DynamoDB.",
@@ -47,7 +50,7 @@ export const projectsEn = [
     status: "Completed",
     technologies: ["PostgreSQL", "Amazon RDS", "RDS Proxy", "Amazon VPC", "AWS Lambda", "DynamoDB"],
   },
-  { slug: null, category: "Cloud & IaC", title: "Cloud infrastructure as code", description: "Repeatable, standardized cloud environments delivered through infrastructure as code and automation.", status: "Coming soon", challenge: null, solution: null, result: null, technologies: [] },
+  { slug: null, publishedAt: null, category: "Cloud & IaC", title: "Cloud infrastructure as code", description: "Repeatable, standardized cloud environments delivered through infrastructure as code and automation.", status: "Coming soon", challenge: null, solution: null, result: null, technologies: [] },
 ];
 
 export const articlesEn = [
