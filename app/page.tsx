@@ -27,7 +27,7 @@ export default function Home() {
         <Services />
         <Process />
         <About />
-        <Projects />
+        <Projects limit={3} showAllLink showUpcoming={false} />
         <Articles />
         <Technologies />
         <Contact />
