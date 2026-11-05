@@ -23,6 +23,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    {
+      url: `${siteConfig.url}/projetos/postgresql-rds-proxy-rede-privada/`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
   ];
   const englishServicePages: MetadataRoute.Sitemap = servicesEn.map((service) => ({ url: `${siteConfig.url}/en/services/${service.slug}/`, changeFrequency: "monthly", priority: 0.8 }));
 
@@ -45,6 +50,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${siteConfig.url}/en/projects/serverless-marketplace-identity-events/`,
       changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${siteConfig.url}/en/projects/private-postgresql-rds-proxy-vpc/`,
+      changeFrequency: "monthly",
       priority: 0.8,
     },
     ...servicePages,

@@ -203,6 +203,18 @@ export const projects = [
     technologies: ["Cognito", "API Gateway", "AWS Lambda", "DynamoDB", "Amazon S3", "Amazon SQS"],
   },
   {
+    slug: "postgresql-rds-proxy-rede-privada",
+    category: "AWS & Dados",
+    title: "PostgreSQL com RDS Proxy e rede privada",
+    description:
+      "Marketplace serverless validado com PostgreSQL privado, RDS Proxy, VPC Endpoints e seleção explícita entre RDS e DynamoDB.",
+    status: "Concluído",
+    challenge: "Adicionar persistência relacional às três Lambdas sem expor o banco, abandonar o DynamoDB ou criar saída por NAT Gateway.",
+    solution: "VPC com duas subnets privadas, RDS Proxy, PostgreSQL, Secrets Manager, endpoints privados e adapters selecionados por DATA_SOURCE.",
+    result: "Fluxos de catálogo e pedidos comprovados nos dois bancos, transação atômica no PostgreSQL e recursos cobrados removidos após a validação.",
+    technologies: ["PostgreSQL", "Amazon RDS", "RDS Proxy", "Amazon VPC", "AWS Lambda", "DynamoDB"],
+  },
+  {
     slug: null,
     category: "Cloud & IaC",
     title: "Infraestrutura cloud automatizada",
