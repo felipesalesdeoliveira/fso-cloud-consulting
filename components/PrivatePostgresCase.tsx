@@ -14,7 +14,6 @@ const copy = {
     title: "PostgreSQL com RDS Proxy e rede privada",
     description:
       "Evolução de um marketplace serverless para operar com PostgreSQL privado sem abandonar o DynamoDB nem as integrações assíncronas construídas anteriormente.",
-    coverAlt: "Capa da Sprint 03 com Lambda, RDS Proxy, PostgreSQL, Amazon VPC e DynamoDB",
     architectureLink: "Explorar a arquitetura",
     contextLabel: "Desafio",
     contextTitle: "Adicionar persistência relacional sem abrir o banco para a Internet",
@@ -117,7 +116,6 @@ const copy = {
     title: "Private PostgreSQL with RDS Proxy and Amazon VPC",
     description:
       "An evolution of a serverless marketplace to run on private PostgreSQL without abandoning DynamoDB or the asynchronous integrations delivered earlier.",
-    coverAlt: "Sprint 03 cover with Lambda, RDS Proxy, PostgreSQL, Amazon VPC, and DynamoDB",
     architectureLink: "Explore the architecture",
     contextLabel: "Challenge",
     contextTitle: "Add relational persistence without exposing the database",
@@ -228,23 +226,22 @@ export function PrivatePostgresCase({ locale }: { locale: Locale }) {
             <h1 className="mt-7 max-w-5xl text-4xl font-bold leading-[1.08] tracking-[-0.04em] text-slate-950 md:text-6xl">{t.title}</h1>
             <p className="mt-7 max-w-3xl text-xl leading-9 text-slate-600">{t.description}</p>
             <a href="#arquitetura" className="mt-8 inline-flex rounded-xl bg-blue-600 px-6 py-4 text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-blue-700">{t.architectureLink}</a>
-            <Image src={publicAsset("/projects/sprint-03-postgresql-rds-proxy.png")} alt={t.coverAlt} width={2055} height={765} priority unoptimized className="mt-12 h-auto w-full rounded-[28px] border border-slate-200 shadow-xl" />
           </div>
         </section>
 
-        <section className="bg-white px-6 py-20">
+        <section id="arquitetura" className="scroll-mt-24 border-b border-slate-200 bg-white px-6 py-20">
+          <div className="mx-auto max-w-6xl"><p className="section-label">{t.architectureLabel}</p><h2 className="section-title">{t.architectureTitle}</h2><p className="mt-6 max-w-4xl text-lg leading-8 text-slate-600">{t.architectureText}</p><figure className="mt-10 overflow-hidden rounded-[32px] border border-slate-300 bg-white shadow-sm"><figcaption className="flex flex-wrap items-center justify-between gap-3 bg-[#232f3e] px-6 py-4 text-lg font-bold text-white"><span>{t.diagramFrame}</span><a href={publicAsset("/diagrams/sprint-03-postgresql.svg")} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-blue-200 transition hover:text-white">{t.diagramZoom}</a></figcaption><div className="p-3 md:p-5"><Image src={publicAsset("/diagrams/sprint-03-postgresql.svg")} alt={t.diagramAlt} width={3102} height={2082} unoptimized className="h-auto w-full" /></div></figure></div>
+        </section>
+
+        <section className="bg-[#F3F6FB] px-6 py-20">
           <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
             <div><p className="section-label">{t.contextLabel}</p><h2 className="section-title">{t.contextTitle}</h2><p className="mt-6 text-lg leading-8 text-slate-600">{t.contextText}</p></div>
-            <ol className="grid gap-4">{t.requirements.map((item, index) => <li key={item} className="flex gap-4 rounded-2xl border border-slate-200 bg-[#F8FAFD] p-5 leading-7 text-slate-700"><span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-xs font-bold text-blue-700">0{index + 1}</span>{item}</li>)}</ol>
+            <ol className="grid gap-4">{t.requirements.map((item, index) => <li key={item} className="flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 leading-7 text-slate-700"><span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-xs font-bold text-blue-700">0{index + 1}</span>{item}</li>)}</ol>
           </div>
         </section>
 
-        <section className="border-y border-slate-200 bg-[#F3F6FB] px-6 py-20">
-          <div className="mx-auto max-w-6xl"><p className="section-label">{t.environmentLabel}</p><h2 className="section-title">{t.environmentTitle}</h2><p className="mt-6 max-w-4xl text-lg leading-8 text-slate-600">{t.environmentText}</p><dl className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{t.environment.map(([name, value]) => <div key={name} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><dt className="text-xs font-bold uppercase tracking-[0.14em] text-blue-600">{name}</dt><dd className="mt-3 font-semibold leading-7 text-slate-800">{value}</dd></div>)}</dl></div>
-        </section>
-
-        <section id="arquitetura" className="scroll-mt-24 bg-white px-6 py-20">
-          <div className="mx-auto max-w-6xl"><p className="section-label">{t.architectureLabel}</p><h2 className="section-title">{t.architectureTitle}</h2><p className="mt-6 max-w-4xl text-lg leading-8 text-slate-600">{t.architectureText}</p><figure className="mt-10 overflow-hidden rounded-[32px] border border-slate-300 bg-white shadow-sm"><figcaption className="flex flex-wrap items-center justify-between gap-3 bg-[#232f3e] px-6 py-4 text-lg font-bold text-white"><span>{t.diagramFrame}</span><a href={publicAsset("/diagrams/sprint-03-postgresql.svg")} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-blue-200 transition hover:text-white">{t.diagramZoom}</a></figcaption><div className="p-3 md:p-5"><Image src={publicAsset("/diagrams/sprint-03-postgresql.svg")} alt={t.diagramAlt} width={3102} height={2082} unoptimized className="h-auto w-full" /></div></figure></div>
+        <section className="border-y border-slate-200 bg-white px-6 py-20">
+          <div className="mx-auto max-w-6xl"><p className="section-label">{t.environmentLabel}</p><h2 className="section-title">{t.environmentTitle}</h2><p className="mt-6 max-w-4xl text-lg leading-8 text-slate-600">{t.environmentText}</p><dl className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{t.environment.map(([name, value]) => <div key={name} className="rounded-2xl border border-slate-200 bg-[#F8FAFD] p-6 shadow-sm"><dt className="text-xs font-bold uppercase tracking-[0.14em] text-blue-600">{name}</dt><dd className="mt-3 font-semibold leading-7 text-slate-800">{value}</dd></div>)}</dl></div>
         </section>
 
         <section className="border-y border-slate-200 bg-[#F3F6FB] px-6 py-20"><div className="mx-auto max-w-6xl"><p className="section-label">{t.modesLabel}</p><h2 className="section-title">{t.modesTitle}</h2><div className="mt-10 grid gap-6 md:grid-cols-2">{t.modes.map((mode) => <article key={mode.name} className={`rounded-3xl border p-8 ${mode.color === "blue" ? "border-blue-200 bg-blue-50/70" : "border-violet-200 bg-violet-50/70"}`}><h3 className={`font-mono text-xl font-bold ${mode.color === "blue" ? "text-blue-900" : "text-violet-900"}`}>{mode.name}</h3><p className="mt-5 leading-8 text-slate-700">{mode.text}</p></article>)}</div></div></section>
